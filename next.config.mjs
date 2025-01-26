@@ -8,21 +8,23 @@ try {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  assetPrefix: '/H1yori233.github.io/',
+  basePath: '/H1yori233.github.io',
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
-  },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-  basePath: '/H1yori233.github.io',
 }
 
 mergeConfig(nextConfig, userConfig)
