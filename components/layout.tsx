@@ -28,8 +28,8 @@ interface LayoutProps {
 
 const navItems = [
   { path: '/', name: 'Home' },
-  { path: '/articles', name: 'Articles' },
-  { path: '/projects', name: 'Projects' },
+  { path: '/blog', name: 'Blog' },
+  { path: '/project', name: 'Project' },
   { path: '/about', name: 'About' }
 ]
 
