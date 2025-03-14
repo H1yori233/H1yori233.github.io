@@ -22,7 +22,7 @@ export default function AboutPage() {
         <section className="prose dark:prose-invert lg:prose-lg mx-auto px-4">
           <div className="bg-primary/5 rounded-2xl p-6 md:p-8 lg:p-10">
             <p className="text-lg md:text-xl leading-relaxed mb-6">
-              Hi there! I'm Kaiqin Kong, an incoming CS graduate student at UC San Diego (CS75).
+              Hi there! I'm Kaiqin Kong (孔楷钦), an incoming CS graduate student at UC San Diego (CS75).
               Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.
               I'm passionate about combining technical expertise with creative design to build innovative solutions.
             </p>

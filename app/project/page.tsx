@@ -3,24 +3,10 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Layout } from '@/components/layout'
 import { Input } from '@/components/ui/input'
-// import { ProjectCard } from '@/components/projects'
-// import { TagFilter } from '@/components/TagFilter'
+import { ProjectCard } from '@/components/projects'
+import { TagFilter } from '@/components/tag-filter'
 import { motion } from 'framer-motion'
-// import { Project, loadContent } from '@/lib/utils'
-
-// 临时类型定义
-interface Project {
-  title: string;
-  description: string;
-  slug: string;
-  tags: string[];
-}
-
-// 临时函数定义
-const loadContent = async <T,>(type: string): Promise<T[]> => {
-  // TODO: 实现加载逻辑
-  return [] as T[];
-}
+import { Project } from '@/lib/utils'
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -28,7 +14,21 @@ export default function ProjectsPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
   useEffect(() => {
-    loadContent<Project>('projects').then(setProjects)
+    const loadProjects = async () => {
+      const projectModules = await Promise.all([
+        import('@/data/projects/dice-throne'),
+        import('@/data/projects/kidtalk'),
+        import('@/data/projects/pop-up-midi')
+      ])
+      
+      const loadedProjects = projectModules
+        .map(module => module.default)
+        .filter(project => project.enable)
+      
+      setProjects(loadedProjects)
+    }
+    
+    loadProjects()
   }, [])
 
   // Collect all unique tags
@@ -78,11 +78,11 @@ export default function ProjectsPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="max-w-xl w-full"
           />
-          {/* <TagFilter 
+          <TagFilter 
             tags={allTags}
             selectedTags={selectedTags}
             onTagClick={handleTagClick}
-          /> */}
+          />
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           {filteredProjects.map((project, i) => (
@@ -92,7 +92,7 @@ export default function ProjectsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              {/* <ProjectCard project={project} /> */}
+              <ProjectCard project={project} />
             </motion.div>
           ))}
         </div>
