@@ -1,19 +1,6 @@
 import { Project } from '@/lib/utils'
 import { Book, Zap, Music, Volume2, Battery, CircuitBoard, Code, Box, Cpu } from 'lucide-react'
 
-// 创建一个简单的卡片组件
-const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 ${className}`}>
-    {children}
-  </div>
-)
-
-const CardContent = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`p-6 ${className}`}>
-    {children}
-  </div>
-)
-
 const project: Project = {
   slug: 'pop-up-midi',
   title: 'Pop Up MID!',

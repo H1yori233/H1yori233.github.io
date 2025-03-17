@@ -69,7 +69,7 @@ function AnimatedNumber({ value }: { value: number }) {
 }
 
 const project: Project = {
-  slug: 'kid-talk',
+  slug: 'kidtalk',
   title: 'KidTalk',
   description: 'A course project exploring AI-powered educational tools for sibling interaction, developed as part of the Human-Computer Interaction course.',
   tags: ['Educational Technology', 'AI', 'UX Design', 'Family Learning'],

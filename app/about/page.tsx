@@ -6,12 +6,47 @@ import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const skills = [
   { category: "Programming", items: ["C++", "C#", "TypeScript", "Python", "ShaderLab"] },
   { category: "Frameworks", items: ["React", "Next.js",] },
   { category: "Design", items: ["Figma", "Adobe Photoshop"] },
   { category: "Other", items: ["Git", "Linux", "Unity"] },
+]
+
+const education = [
+  {
+    period: "Sep 2025 - Dec 2026 (Expected)",
+    institution: "UC San Diego",
+    degree: "Master of Science in Computer Science and Engineering",
+    logo: "/images/UCSanDiegoLogo-BlueGold.png"
+  },
+  {
+    period: "Sep 2020 - Jun 2024",
+    institution: "Zhejiang University",
+    degree: "Bachelor of Engineering in Industrial Design",
+    thesis: "Indoor emergency evacuation strategy simulation game based on social force model",
+    logo: "/images/浙江大学-logo-2048px.png"
+  }
+]
+
+const experience = [
+  {
+    period: "Jun 2024 - Jun 2025",
+    position: "Research Assistant Intern",
+    organization: "International Design Institute of Zhejiang University",
+    supervisor: "Wei, Xiang",
+    logo: "/images/IDI.png"
+    // logo: "/images/UCSanDiegoLogo-BlueGold.png"
+  },
+  {
+    period: "Sep 2023 - Feb 2024",
+    position: "Teaching Assistant for Computer Game Programming",
+    organization: "Zhejiang University",
+    supervisor: "Weidong, Geng",
+    logo: "/images/浙江大学-logo-2048px.png"
+  }
 ]
 
 export default function AboutPage() {
@@ -52,6 +87,91 @@ export default function AboutPage() {
                           {skill}
                         </span>
                       ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="px-4">
+          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Education</h2>
+          <div className="space-y-6">
+            {education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                      <div className="flex-shrink-0 w-24 h-24 relative">
+                        <Image 
+                          src={edu.logo} 
+                          alt={`${edu.institution} Logo`} 
+                          fill
+                          style={{ objectFit: 'contain' }}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold mb-2">{edu.institution}
+                          <span className="float-right text-sm text-muted-foreground">{edu.period}</span>
+                        </h3>
+                        <p className="text-lg text-muted-foreground mb-2">{edu.degree}</p>
+                        {edu.thesis && (
+                          <div className="text-sm mt-4">
+                            <p className="mb-1"><span className="font-medium">Thesis: </span>{edu.thesis}</p>
+                            {edu.institution === "Zhejiang University" && (
+                              <p><span className="font-medium">Supervisor: </span>Weidong, Geng</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section className="px-4">
+          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Experience</h2>
+          <div className="space-y-6">
+            {experience.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                      <div className="flex-shrink-0 w-24 h-24 relative">
+                        <Image 
+                          src={exp.logo} 
+                          alt={`${exp.organization} Logo`} 
+                          fill
+                          style={{ objectFit: 'contain' }}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold mb-2">{exp.organization}
+                          <span className="float-right text-sm text-muted-foreground">{exp.period}</span>
+                        </h3>
+                        <p className="text-lg text-muted-foreground mb-2">{exp.position}</p>
+                        {exp.supervisor && (
+                          <p className="text-sm mt-4">
+                            <span className="font-medium">{exp.position.includes("Teaching Assistant") ? "Lecturer" : "Supervisor"}: </span>{exp.supervisor}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

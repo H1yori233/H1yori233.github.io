@@ -69,7 +69,7 @@ export default function ProjectsPage() {
       title="Project"
       description="Here are some of the projects I've worked on. Feel free to explore and learn more about each one."
     >
-      <div className="space-y-6">
+      <div className="space-y-6 mb-12">
         <div className="flex flex-col items-center gap-4">
           <Input
             type="text"
