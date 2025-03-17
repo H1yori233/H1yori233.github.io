@@ -13,23 +13,23 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
-  useEffect(() => {
-    const loadProjects = async () => {
-      const projectModules = await Promise.all([
-        import('@/data/projects/dice-throne'),
-        import('@/data/projects/kidtalk'),
-        import('@/data/projects/pop-up-midi')
-      ])
+  // useEffect(() => {
+  //   const loadProjects = async () => {
+  //     const projectModules = await Promise.all([
+  //       import('@/data/projects/dice-throne'),
+  //       import('@/data/projects/kidtalk'),
+  //       import('@/data/projects/pop-up-midi')
+  //     ])
       
-      const loadedProjects = projectModules
-        .map(module => module.default)
-        .filter(project => project.enable)
+  //     const loadedProjects = projectModules
+  //       .map(module => module.default)
+  //       .filter(project => project.enable)
       
-      setProjects(loadedProjects)
-    }
+  //     setProjects(loadedProjects)
+  //   }
     
-    loadProjects()
-  }, [])
+  //   loadProjects()
+  // }, [])
 
   // Collect all unique tags
   const allTags = useMemo(() => {
