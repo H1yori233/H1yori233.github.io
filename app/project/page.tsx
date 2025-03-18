@@ -1,35 +1,40 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { Layout } from '@/components/layout'
 import { Input } from '@/components/ui/input'
-import { ProjectCard } from '@/components/projects'
+import { ProjectCard, Project } from '@/components/projects'
 import { TagFilter } from '@/components/tag-filter'
 import { motion } from 'framer-motion'
-import { Project } from '@/lib/utils'
+import { cn } from '@/lib/utils'
+
+// 示例项目数据
+const sampleProjects: Project[] = [
+  {
+    title: "项目示例1",
+    description: "这是一个示例项目的描述",
+    slug: "sample-project-1",
+    tags: ["React", "TypeScript"]
+  },
+  {
+    title: "项目示例2",
+    description: "另一个示例项目",
+    slug: "sample-project-2",
+    tags: ["Next.js", "UI/UX"]
+  }
+];
+
+// 动画配置
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [projects, setProjects] = useState<Project[]>([])
   const [selectedTags, setSelectedTags] = useState<string[]>([])
-
-  // useEffect(() => {
-  //   const loadProjects = async () => {
-  //     const projectModules = await Promise.all([
-  //       import('@/data/projects/dice-throne'),
-  //       import('@/data/projects/kidtalk'),
-  //       import('@/data/projects/pop-up-midi')
-  //     ])
-      
-  //     const loadedProjects = projectModules
-  //       .map(module => module.default)
-  //       .filter(project => project.enable)
-      
-  //     setProjects(loadedProjects)
-  //   }
-    
-  //   loadProjects()
-  // }, [])
+  const projects = sampleProjects;
 
   // Collect all unique tags
   const allTags = useMemo(() => {

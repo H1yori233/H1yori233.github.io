@@ -1,7 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export interface Project {
   title: string
@@ -13,9 +14,9 @@ export interface Project {
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-card to-card/80 border-2 hover:border-primary/50 hover:translate-y-[-5px] shadow-md flex flex-col">
+    <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-card to-card/80 border-2 hover:border-primary/50 hover:-translate-y-1 shadow-md flex flex-col">
       <CardContent className="p-0 flex flex-col h-full">
-        <div className="border-b border-border/40 bg-muted/30 p-4">
+        <div className="border-b border-[hsl(var(--border))]/40 bg-muted/30 p-4">
           <h3 className="text-xl font-bold tracking-tight">{project.title}</h3>
         </div>
         <div className="p-5 flex flex-col flex-grow">
@@ -39,24 +40,10 @@ export function ProjectCard({ project }: { project: Project }) {
           
           {/* 按钮区域 - 固定位置 */}
           <div className="mt-auto">
-            <Button asChild variant="default" className="w-full group hover:shadow-md transition-all">
+            <Button asChild variant="default" className="w-full group hover:shadow-md">
               <Link href={`/project/${project.slug}`} className="flex items-center justify-center gap-1">
                 Learn More
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>

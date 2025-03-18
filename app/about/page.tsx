@@ -114,6 +114,8 @@ export default function AboutPage() {
                           src={edu.logo} 
                           alt={`${edu.institution} Logo`} 
                           fill
+                          priority={index === 0}
+                          sizes="(max-width: 96px) 100vw, 96px"
                           style={{ objectFit: 'contain' }}
                         />
                       </div>
@@ -158,6 +160,8 @@ export default function AboutPage() {
                           src={exp.logo} 
                           alt={`${exp.organization} Logo`} 
                           fill
+                          priority={index === 0}
+                          sizes="(max-width: 96px) 100vw, 96px"
                           style={{ objectFit: 'contain' }}
                         />
                       </div>
