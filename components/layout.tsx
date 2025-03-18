@@ -72,7 +72,7 @@ export function Layout({
       style={themeStyles}
     >
       {!customNav && (
-        <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-[hsl(var(--border))]/50" style={{backgroundColor: 'hsl(var(--background) / 0.8)'}}>
+        <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b bg-background/80">
           <div className="flex justify-center">
             <div className={contentWrapperClasses}>
               <div className="flex h-16 items-center justify-between">
@@ -85,16 +85,16 @@ export function Layout({
                       key={item.path}
                       href={item.path}
                       className={cn(
-                        "relative transition-colors hover:opacity-80",
+                        "relative transition-colors hover:text-foreground/80",
                         pathname === item.path 
-                          ? "text-[hsl(var(--foreground))]" 
-                          : "text-[hsl(var(--foreground)_/_0.6)]"
+                          ? "text-foreground" 
+                          : "text-foreground/60"
                       )}
                     >
                       {pathname === item.path && (
                         <motion.span
                           layoutId="underline"
-                          className="absolute left-0 top-full block h-px w-full bg-[hsl(var(--foreground))]"
+                          className="absolute left-0 top-full block h-px w-full bg-foreground"
                         />
                       )}
                       {item.name}
@@ -121,7 +121,7 @@ export function Layout({
               </h1>
             )}
             {description && (
-              <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 {description}
               </p>
             )}

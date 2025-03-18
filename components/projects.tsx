@@ -16,7 +16,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-card to-card/80 border-2 hover:border-primary/50 hover:-translate-y-1 shadow-md flex flex-col">
       <CardContent className="p-0 flex flex-col h-full">
-        <div className="border-b border-[hsl(var(--border))]/40 bg-muted/30 p-4">
+        <div className="border-b border-border/40 bg-muted/30 p-4">
           <h3 className="text-xl font-bold tracking-tight">{project.title}</h3>
         </div>
         <div className="p-5 flex flex-col flex-grow">
