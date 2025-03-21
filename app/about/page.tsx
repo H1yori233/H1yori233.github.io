@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Terminal, TypingAnimation, AnimatedSpan } from '@/components/magicui/terminal'
 
 const skills = [
   { category: "Programming", items: ["C++", "C#", "TypeScript", "Python", "ShaderLab"] },
@@ -55,13 +56,37 @@ export default function AboutPage() {
       <div className="max-w-5xl mx-auto space-y-16 py-8">
         {/* Introduction */}
         <section className="prose dark:prose-invert lg:prose-lg mx-auto px-4">
-          <div className="bg-primary/5 rounded-2xl p-6 md:p-8 lg:p-10">
-            <p className="text-lg md:text-xl leading-relaxed mb-6">
+          <Terminal className="max-w-full shadow-lg">
+            <AnimatedSpan delay={500}>
+              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ whoami
+            </AnimatedSpan>
+            
+            <TypingAnimation delay={1000} duration={30} className="text-emerald-400 font-semibold">
+              孔楷钦 (Kaiqin Kong)
+            </TypingAnimation>
+            
+            <AnimatedSpan delay={2500}>
+              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ cat about.md
+            </AnimatedSpan>
+            
+            <TypingAnimation delay={3000} duration={10} className="text-gray-300 leading-relaxed">
               Hi there! I'm Kaiqin Kong (孔楷钦), an incoming CS graduate student at UC San Diego (CS75).
               Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.
               I'm passionate about combining technical expertise with creative design to build innovative solutions.
-            </p>
-          </div>
+            </TypingAnimation>
+            
+            <AnimatedSpan delay={6000}>
+              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ ls skills/
+            </AnimatedSpan>
+            
+            <TypingAnimation delay={6500} duration={20} className="text-yellow-300">
+              C++  C#  TypeScript  Python  ShaderLab  React  Next.js  Figma  Unity
+            </TypingAnimation>
+
+            <AnimatedSpan delay={8000}>
+              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ <span className="animate-pulse">_</span>
+            </AnimatedSpan>
+          </Terminal>
         </section>
 
         {/* Skills */}
