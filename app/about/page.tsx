@@ -53,40 +53,53 @@ const experience = [
 export default function AboutPage() {
   return (
     <Layout title="About Me">
-      <div className="max-w-5xl mx-auto space-y-16 py-8">
+      <div className="max-w-6xl mx-auto space-y-16 py-8">
         {/* Introduction */}
         <section className="prose dark:prose-invert lg:prose-lg mx-auto px-4">
-          <Terminal className="max-w-full shadow-lg">
-            <AnimatedSpan delay={500}>
-              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ whoami
-            </AnimatedSpan>
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            <div className="flex-shrink-0 w-64 h-64 relative rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
+              <Image
+                src="/images/avatar.png"
+                alt="Kaiqin Kong"
+                fill
+                priority
+                sizes="(max-width: 768px) 192px, 192px"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             
-            <TypingAnimation delay={1000} duration={30} className="text-emerald-400 font-semibold">
-              孔楷钦 (Kaiqin Kong)
-            </TypingAnimation>
-            
-            <AnimatedSpan delay={2500}>
-              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ cat about.md
-            </AnimatedSpan>
-            
-            <TypingAnimation delay={3000} duration={10} className="text-gray-300 leading-relaxed">
-              Hi there! I'm Kaiqin Kong (孔楷钦), an incoming CS graduate student at UC San Diego (CS75).
-              Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.
-              I'm passionate about combining technical expertise with creative design to build innovative solutions.
-            </TypingAnimation>
-            
-            <AnimatedSpan delay={6000}>
-              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ ls skills/
-            </AnimatedSpan>
-            
-            <TypingAnimation delay={6500} duration={20} className="text-yellow-300">
-              C++  C#  TypeScript  Python  ShaderLab  React  Next.js  Figma  Unity
-            </TypingAnimation>
-
-            <AnimatedSpan delay={8000}>
-              <span className="text-green-500">kaichin@portfolio</span>:<span className="text-blue-500">~</span>$ <span className="animate-pulse">_</span>
-            </AnimatedSpan>
-          </Terminal>
+            <Terminal className="flex-1 shadow-lg mx-auto max-w-4xl">
+              <AnimatedSpan delay={200} className="block">
+                <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ whoami
+              </AnimatedSpan>
+              
+              <TypingAnimation delay={400} duration={15} className="text-emerald-400 font-semibold">
+                孔楷钦 (Kaiqin Kong)
+              </TypingAnimation>
+              
+              <AnimatedSpan delay={800} className="mt-4 block">
+                <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cat about.md
+              </AnimatedSpan>
+              
+              <div className="mt-2 space-y-0 whitespace-normal break-words">
+                <TypingAnimation delay={1000} duration={5} className="text-gray-800 leading-relaxed block">
+                  Hi there! I'm Kaiqin Kong (孔楷钦), an incoming CS graduate student at UC San Diego (CS75).
+                </TypingAnimation>
+                
+                <TypingAnimation delay={1500} duration={5} className="text-gray-800 leading-relaxed block">
+                  Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.
+                </TypingAnimation>
+                
+                <TypingAnimation delay={2000} duration={5} className="text-gray-800 leading-relaxed block">
+                  I'm passionate about combining technical expertise with creative design to build innovative solutions.
+                </TypingAnimation>
+              </div>
+              
+              <AnimatedSpan delay={2800} className="mt-4 block">
+                <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ <span className="animate-pulse">_</span>
+              </AnimatedSpan>
+            </Terminal>
+          </div>
         </section>
 
         {/* Skills */}
