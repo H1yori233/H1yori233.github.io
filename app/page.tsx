@@ -3,6 +3,8 @@
 import { Layout } from '@/components/layout'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { TextAnimate } from '@/components/magicui/text-animate'
+import { AuroraText } from '@/components/magicui/aurora-text'
 
 // 动画配置
 const fadeInUp = {
@@ -19,18 +21,34 @@ export default function Home() {
           {...fadeInUp}
           className="max-w-4xl"
         >
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl mb-6 flex items-center justify-center">
-            <span>Design</span>
-            <span className="relative mx-3 sm:mx-2 md:mx-3 lg:mx-4 font-light">
-              <span className={cn(
-                "absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent bg-[length:200%_auto]",
-                "animate-gradient"
-              )}>
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl flex items-center justify-center gap-1 md:gap-4">
+            <TextAnimate 
+              animation="blurInUp" 
+              duration={0.2} 
+              delay={0.1}
+              by="character"
+              className="font-bold mr-3"
+            >
+              Design
+            </TextAnimate>
+            <div className="animate-fadeIn opacity-0" 
+              style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+              <span className="pointer-events-none z-10 whitespace-pre-wrap 
+                bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] 
+                bg-clip-text text-center text-7xl font-medium leading-none tracking-tighter 
+                text-transparent">
                 X
               </span>
-              <span className="opacity-0">X</span>
-            </span>
-            <span>Technology</span>
+            </div>
+            <TextAnimate 
+              animation="blurInUp" 
+              duration={0.15} 
+              delay={0.5}
+              by="character"
+              className="font-bold ml-3"
+            >
+              Technology
+            </TextAnimate>
           </h1>
         </motion.div>
       </div>

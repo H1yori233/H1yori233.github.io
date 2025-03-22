@@ -68,7 +68,7 @@ export default function AboutPage() {
               />
             </div>
             
-            <Terminal className="flex-1 shadow-lg mx-auto max-w-4xl">
+            <Terminal className="flex-1 shadow-lg mx-auto max-w-4xl h-[280px]">
               <AnimatedSpan delay={200} className="block">
                 <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ whoami
               </AnimatedSpan>
@@ -81,7 +81,7 @@ export default function AboutPage() {
                 <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cat about.md
               </AnimatedSpan>
               
-              <div className="mt-2 space-y-0 whitespace-normal break-words">
+              <div className="whitespace-normal break-words">
                 <TypingAnimation delay={1000} duration={5} className="text-gray-800 leading-relaxed block">
                   Hi there! I'm Kaiqin Kong (孔楷钦), an incoming CS graduate student at UC San Diego (CS75).
                 </TypingAnimation>
