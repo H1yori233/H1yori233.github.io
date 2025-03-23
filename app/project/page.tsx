@@ -8,23 +8,23 @@ import { TagFilter } from '@/components/tag-filter'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-// 示例项目数据
+// Sample project data - corresponding to actual files in the content directory
 const sampleProjects: Project[] = [
   {
-    title: "项目示例1",
-    description: "这是一个示例项目的描述",
-    slug: "sample-project-1",
-    tags: ["React", "TypeScript"]
+    title: "Personal Blog Website",
+    description: "A personal static blog website built with Next.js and TypeScript",
+    slug: "project-1",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"]
   },
   {
-    title: "项目示例2",
-    description: "另一个示例项目",
-    slug: "sample-project-2",
-    tags: ["Next.js", "UI/UX"]
+    title: "Task Management App",
+    description: "A feature-rich task management application supporting multi-user collaboration and real-time updates",
+    slug: "project-2",
+    tags: ["React", "Redux", "Firebase", "Full-stack"]
   }
 ];
 
-// 动画配置
+// Animation configuration
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -71,7 +71,7 @@ export default function ProjectsPage() {
 
   return (
     <Layout
-      title="Project"
+      title="Projects"
       description="Here are some of the projects I've worked on. Feel free to explore and learn more about each one."
     >
       <div className="space-y-6 mb-12">
