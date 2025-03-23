@@ -12,7 +12,6 @@ import { ArrowRight } from 'lucide-react'
 // Blog article metadata type
 interface ArticleMetadata {
   title: string;
-  authors: string;
   slug: string;
   date: string;
   description: string;
@@ -22,20 +21,11 @@ interface ArticleMetadata {
 // Sample data - corresponding to actual files in the content directory
 const sampleArticles: ArticleMetadata[] = [
   {
-    title: 'My First Blog Post',
-    authors: 'H1yori233',
-    slug: 'first-post',
-    date: '2024-06-20',
-    description: 'An introduction to building static blogs with Next.js',
-    tags: ['Next.js', 'React', 'Frontend Development']
-  },
-  {
-    title: 'Advanced Features of Static Blogs',
-    authors: 'H1yori233',
-    slug: 'second-post',
-    date: '2024-06-21',
-    description: 'Exploring advanced features and best practices for building static blogs with Next.js',
-    tags: ['Next.js', 'SSG', 'Performance Optimization']
+    title: 'Useful Websites Collection',
+    slug: 'useful-websites',
+    date: '2024-06-25',
+    description: 'A collection of useful websites for development and design',
+    tags: ['Design', 'Development Tools', 'Inspiration']
   }
 ];
 
@@ -48,7 +38,6 @@ export default function ArticlesPage() {
   const filteredArticles = useMemo(() => {
     return articles.filter(article => {
       return article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-             article.authors.toLowerCase().includes(searchQuery.toLowerCase()) ||
              (article.tags && article.tags.some(tag => 
                 tag.toLowerCase().includes(searchQuery.toLowerCase())
              )) ||
@@ -95,8 +84,6 @@ export default function ArticlesPage() {
                   <div className="p-5 flex flex-col flex-grow">
                     <div className="flex gap-2 text-sm text-muted-foreground mb-2">
                       <time>{article.date}</time>
-                      <span>·</span>
-                      <span>{article.authors}</span>
                     </div>
                     <div className="flex-grow overflow-hidden mb-4">
                       <p className="text-sm text-muted-foreground line-clamp-3">
