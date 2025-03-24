@@ -21,6 +21,12 @@ const sampleProjects: Project[] = [
     description: "A feature-rich task management application supporting multi-user collaboration and real-time updates",
     slug: "project-2",
     tags: ["React", "Redux", "Firebase", "Full-stack"]
+  },
+  {
+    title: "InnoWeaver",
+    description: "A full-stack web application research project at International Design Institute of Zhejiang University, featuring user management, document data management, and LLM-powered content generation",
+    slug: "innoweaver",
+    tags: ["FastAPI", "MongoDB", "NextJS", "TypeScript", "LLM"]
   }
 ];
 
