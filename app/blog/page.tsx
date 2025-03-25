@@ -21,9 +21,16 @@ interface ArticleMetadata {
 // Sample data - corresponding to actual files in the content directory
 const sampleArticles: ArticleMetadata[] = [
   {
+    title: 'OpenGL Recap',
+    slug: 'opengl-recap',
+    date: '2025-03-25',
+    description: 'A basic recap of OpenGL',
+    tags: ['OpenGL', 'C++', 'Graphics']
+  },
+  {
     title: 'Useful Websites Collection',
     slug: 'useful-websites',
-    date: '2024-06-25',
+    date: '2025-03-23',
     description: 'A collection of useful websites for development and design',
     tags: ['Design', 'Development Tools', 'Inspiration']
   }
