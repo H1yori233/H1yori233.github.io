@@ -7,7 +7,6 @@ import { CollapsibleCodeBlock } from '@/components/magicui/collapsible-code-bloc
 // Export blog metadata
 export const metadata = {
   title: 'OpenGL Recap',
-  date: '2025-03-25',
   tags: ['OpenGL', 'C++', 'Graphics'],
   description: 'A basic recap of OpenGL',
 };
@@ -149,11 +148,33 @@ int main()
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Basic Triangle Example</h2>
           <p className="mb-4">This is a sample code demonstrating how to draw a basic triangle using OpenGL. It includes the complete process of initialization, shader setup, buffer management, and rendering loop.</p>
-          
+
+          <div className="mt-4 flex justify-center">
+            <figure className="flex flex-col items-center">
+              <img
+                src="https://pica.zhimg.com/v2-10b0501e08f34ea61123e57c3ffa318c_1440w.jpg"
+                alt="OpenGL Pipeline"
+                className="rounded-lg border border-gray-700 shadow-lg max-w-full h-auto"
+              />
+              <figcaption className="text-sm text-gray-400 mt-2">
+                OpenGL Pipeline
+                <span className="ml-2">-</span>
+                <a
+                  href="https://zhuanlan.zhihu.com/p/56693625"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-1 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  [1]
+                </a>
+              </figcaption>
+            </figure>
+          </div>
+
           <div className="rounded-xl p-2 bg-gradient-to-b from-gray-900 to-black shadow-lg">
-            <CollapsibleCodeBlock 
-              code={openglCode} 
-              language="cpp" 
+            <CollapsibleCodeBlock
+              code={openglCode}
+              language="cpp"
               title="OpenGL Basic Triangle Example"
               defaultCollapsed={true}
               className="border-gray-700 bg-transparent"
@@ -161,6 +182,60 @@ int main()
               lightTheme="one-dark-pro"
             />
           </div>
+        </section>
+
+        <section className="mb-8">
+          <div className="mt-4 flex justify-center">
+            <figure className="flex flex-col items-center">
+              <img
+                src="https://geekdaxue.co/uploads/projects/Learn-OpenGL-CN/docs/img/01/04/vertex_array_objects.png"
+                alt="VAO and VBO"
+                className="rounded-lg border border-gray-700 shadow-lg max-w-full h-auto"
+              />
+              <figcaption className="text-sm text-gray-400 mt-2">
+                VAO and VBO
+              </figcaption>
+            </figure>
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            <figure className="flex flex-col items-center">
+              <img
+                src="https://i-blog.csdnimg.cn/blog_migrate/41466bf5b446d6698d56ba995b3b574f.png"
+                alt="VAO and VBO"
+                className="rounded-lg border border-gray-700 shadow-lg max-w-full h-auto"
+              />
+              <figcaption className="text-sm text-gray-400 mt-2">
+                VAO and VBO
+                <span className="ml-2">-</span>
+                <a
+                  href="https://blog.csdn.net/danjuan123/article/details/79420585"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-1 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  [2]
+                </a>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-bold mb-4">Reference</h2>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              <span className="text-gray-400 mr-1">[1]</span>
+              <a
+                href="https://zhuanlan.zhihu.com/p/56693625"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-400 transition-colors"
+              >
+                20分钟让你了解OpenGL——OpenGL全流程详细解读
+              </a>
+            </li>
+          </ul>
         </section>
       </article>
     </Layout>

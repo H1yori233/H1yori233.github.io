@@ -8,12 +8,13 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { TagFilter } from '@/components/tag-filter'
+import { cn } from '@/lib/utils'
 
 // Blog article metadata type
 interface ArticleMetadata {
   title: string;
   slug: string;
-  date: string;
   description: string;
   tags?: string[];
 }
@@ -23,14 +24,12 @@ const sampleArticles: ArticleMetadata[] = [
   {
     title: 'OpenGL Recap',
     slug: 'opengl-recap',
-    date: '2025-03-25',
     description: 'A basic recap of OpenGL',
     tags: ['OpenGL', 'C++', 'Graphics']
   },
   {
     title: 'Useful Websites Collection',
     slug: 'useful-websites',
-    date: '2025-03-23',
     description: 'A collection of useful websites for development and design',
     tags: ['Design', 'Development Tools', 'Inspiration']
   }
@@ -40,17 +39,40 @@ export default function ArticlesPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [articles, setArticles] = useState<ArticleMetadata[]>(sampleArticles)
   const [loading, setLoading] = useState(false)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
-  // Filter articles based on search query
+  // Collect all unique tags
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>()
+    articles.forEach(article => {
+      article.tags?.forEach(tag => tagSet.add(tag))
+    })
+    return Array.from(tagSet).sort()
+  }, [articles])
+
+  // Handle tag selection
+  const handleTagClick = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    )
+  }
+
+  // Filter articles based on search query and selected tags
   const filteredArticles = useMemo(() => {
     return articles.filter(article => {
-      return article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-             (article.tags && article.tags.some(tag => 
-                tag.toLowerCase().includes(searchQuery.toLowerCase())
-             )) ||
-             article.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = 
+        article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        article.description.toLowerCase().includes(searchQuery.toLowerCase())
+
+      const matchesTags = 
+        selectedTags.length === 0 || 
+        (article.tags && selectedTags.every(tag => article.tags!.includes(tag)))
+
+      return matchesSearch && matchesTags
     })
-  }, [articles, searchQuery])
+  }, [articles, searchQuery, selectedTags])
 
   if (loading) {
     return (
@@ -74,6 +96,11 @@ export default function ArticlesPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="max-w-xl w-full"
           />
+          <TagFilter 
+            tags={allTags}
+            selectedTags={selectedTags}
+            onTagClick={handleTagClick}
+          />
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           {filteredArticles.map((article, i) => (
@@ -89,9 +116,6 @@ export default function ArticlesPage() {
                     <h3 className="text-xl font-bold tracking-tight">{article.title}</h3>
                   </div>
                   <div className="p-5 flex flex-col flex-grow">
-                    <div className="flex gap-2 text-sm text-muted-foreground mb-2">
-                      <time>{article.date}</time>
-                    </div>
                     <div className="flex-grow overflow-hidden mb-4">
                       <p className="text-sm text-muted-foreground line-clamp-3">
                         {article.description}

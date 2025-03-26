@@ -20,7 +20,6 @@ interface WebsiteCategory {
 // Export blog metadata
 export const metadata = {
     title: 'Useful Websites Collection',
-    date: '2025-03-23',
     tags: ['Design', 'Development Tools', 'Inspiration'],
     description: 'A collection of useful websites for development and design',
 };

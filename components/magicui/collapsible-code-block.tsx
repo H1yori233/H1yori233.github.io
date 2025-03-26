@@ -34,28 +34,26 @@ export function CollapsibleCodeBlock({
   const { theme } = useTheme();
 
   useEffect(() => {
-    if (!isCollapsed) {
-      async function loadHighlightedCode() {
-        try {
-          const { codeToHtml } = await import("shiki");
-          const highlighted = await codeToHtml(code, {
-            lang: language,
-            themes: {
-              light: lightTheme,
-              dark: darkTheme,
-            },
-            defaultColor: theme === "dark" ? "dark" : "light",
-          });
-          setHighlightedCode(highlighted);
-        } catch (error) {
-          console.error("Error highlighting code:", error);
-          setHighlightedCode(`<pre>${code}</pre>`);
-        }
+    async function loadHighlightedCode() {
+      try {
+        const { codeToHtml } = await import("shiki");
+        const highlighted = await codeToHtml(code, {
+          lang: language,
+          themes: {
+            light: lightTheme,
+            dark: darkTheme,
+          },
+          defaultColor: theme === "dark" ? "dark" : "light",
+        });
+        setHighlightedCode(highlighted);
+      } catch (error) {
+        console.error("Error highlighting code:", error);
+        setHighlightedCode(`<pre>${code}</pre>`);
       }
-
-      loadHighlightedCode();
     }
-  }, [code, language, lightTheme, darkTheme, theme, isCollapsed]);
+
+    loadHighlightedCode();
+  }, [code, language, lightTheme, darkTheme, theme]);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code);
@@ -133,7 +131,7 @@ export function CollapsibleCodeBlock({
                   dangerouslySetInnerHTML={{ __html: highlightedCode }}
                 />
               ) : (
-                <pre className="overflow-x-auto rounded-b-lg bg-background p-4 font-mono">
+                <pre className={`overflow-x-auto rounded-b-lg p-4 font-mono ${theme === "dark" ? "bg-background dark" : "bg-background light"}`}>
                   {code}
                 </pre>
               )}
