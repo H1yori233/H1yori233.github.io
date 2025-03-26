@@ -32,6 +32,12 @@ const sampleArticles: ArticleMetadata[] = [
     slug: 'useful-websites',
     description: 'A collection of useful websites for development and design',
     tags: ['Design', 'Development Tools', 'Inspiration']
+  },
+  {
+    title: 'Useful Shell Commands',
+    slug: 'useful-shell-commands',
+    description: 'A collection of useful shell commands for different operating systems',
+    tags: ['Shell', 'Command Line', 'Windows', 'Linux', 'macOS']
   }
 ];
 

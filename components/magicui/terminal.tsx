@@ -100,7 +100,7 @@ export const Terminal = ({ children, className }: TerminalProps) => {
   return (
     <div
       className={cn(
-        "z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background",
+        "z-0 h-full w-full rounded-xl border border-border bg-background overflow-hidden",
         className,
       )}
     >
@@ -111,9 +111,9 @@ export const Terminal = ({ children, className }: TerminalProps) => {
           <div className="h-2 w-2 rounded-full bg-green-500"></div>
         </div>
       </div>
-      <pre className="p-4">
-        <code className="grid gap-y-1 overflow-auto">{children}</code>
-      </pre>
+      <div className="p-4 overflow-y-auto max-h-[calc(100%-3rem)]">
+        <code className="grid gap-y-1 whitespace-pre-wrap break-words">{children}</code>
+      </div>
     </div>
   );
 };
