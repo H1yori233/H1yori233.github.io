@@ -31,7 +31,7 @@ const ProjectContent = ({ slug }: { slug: string }) => {
       notFound();
     }),
     {
-      loading: () => <div className="text-center py-10">正在加载项目内容...</div>,
+      loading: () => <div className="text-center py-10">Loading project content...</div>,
       ssr: true, // 服务器端渲染
     }
   );

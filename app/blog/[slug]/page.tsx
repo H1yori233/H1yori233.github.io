@@ -31,7 +31,7 @@ const BlogContent = ({ slug }: { slug: string }) => {
       notFound();
     }),
     {
-      loading: () => <div className="text-center py-10">正在加载博客内容...</div>,
+      loading: () => <div className="text-center py-10">Loading blog content...</div>,
       ssr: true, // 服务器端渲染
     }
   );

@@ -22,6 +22,12 @@ interface ArticleMetadata {
 // Sample data - corresponding to actual files in the content directory
 const sampleArticles: ArticleMetadata[] = [
   {
+    title: 'Reconstructing World Position from Depth Texture',
+    slug: 'reconstruct-world-position',
+    description: 'How to accurately reconstruct world-space positions from depth textures in real-time rendering',
+    tags: ['OpenGL', 'GLSL', 'Graphics', 'Depth', 'Reconstruction']
+  },
+  {
     title: 'OpenGL Recap',
     slug: 'opengl-recap',
     description: 'A basic recap of OpenGL',
