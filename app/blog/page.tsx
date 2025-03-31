@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import { TagFilter } from '@/components/tag-filter'
 import { cn } from '@/lib/utils'
+import { ViewCounter } from '@/components/ViewCounter'
 
 // Blog article metadata type
 interface ArticleMetadata {
@@ -161,6 +162,14 @@ export default function ArticlesPage() {
             </motion.div>
           ))}
         </div>
+      </div>
+      <div className="mt-10 flex justify-end pr-4">
+        <ViewCounter 
+          pageId="blog-page" 
+          label="Blog Views" 
+          rightColor="4f46e5" 
+          className="bg-muted/30 rounded-xl"
+        />
       </div>
     </Layout>
   )

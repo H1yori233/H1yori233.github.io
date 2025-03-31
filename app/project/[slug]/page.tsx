@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
 import dynamic from 'next/dynamic';
+import { ContentWrapper } from '@/components/ContentWrapper';
 
 // 获取所有项目路径
 export async function generateStaticParams() {
@@ -36,7 +37,11 @@ const ProjectContent = ({ slug }: { slug: string }) => {
     }
   );
 
-  return <ProjectComponent />;
+  return (
+    <ContentWrapper type="project" slug={slug}>
+      <ProjectComponent />
+    </ContentWrapper>
+  );
 };
 
 // 项目详情页面

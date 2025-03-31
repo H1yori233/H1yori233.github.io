@@ -8,6 +8,7 @@ import { Github, Linkedin, Mail } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Terminal, TypingAnimation, AnimatedSpan } from '@/components/magicui/terminal'
+import { ViewCounter } from '@/components/ViewCounter'
 
 const skills = [
   { category: "Programming", items: ["C++", "C#", "TypeScript", "Python", "ShaderLab"] },
@@ -270,6 +271,14 @@ export default function AboutPage() {
             </Button>
           </div>
         </section>
+      </div>
+      <div className="mt-10 flex justify-end pr-4">
+        <ViewCounter 
+          pageId="about-page" 
+          label="Page Views" 
+          rightColor="4f46e5" 
+          className="bg-muted/30 rounded-xl"
+        />
       </div>
     </Layout>
   )

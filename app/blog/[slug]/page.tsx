@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
 import dynamic from 'next/dynamic';
+import { ContentWrapper } from '@/components/ContentWrapper';
 
 // 获取所有博客路径
 export async function generateStaticParams() {
@@ -36,7 +37,11 @@ const BlogContent = ({ slug }: { slug: string }) => {
     }
   );
 
-  return <BlogComponent />;
+  return (
+    <ContentWrapper type="blog" slug={slug}>
+      <BlogComponent />
+    </ContentWrapper>
+  );
 };
 
 // 博客文章页面

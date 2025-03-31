@@ -7,6 +7,7 @@ import { ProjectCard, Project } from '@/components/projects'
 import { TagFilter } from '@/components/tag-filter'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { ViewCounter } from '@/components/ViewCounter'
 
 // Sample project data - corresponding to actual files in the content directory
 const sampleProjects: Project[] = [
@@ -101,6 +102,14 @@ export default function ProjectsPage() {
             </motion.div>
           ))}
         </div>
+      </div>
+      <div className="mt-10 flex justify-end pr-4">
+        <ViewCounter 
+          pageId="project-page" 
+          label="Project Views" 
+          rightColor="4f46e5" 
+          className="bg-muted/30 rounded-xl"
+        />
       </div>
     </Layout>
   )
