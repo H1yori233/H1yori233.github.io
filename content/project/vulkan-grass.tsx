@@ -5,16 +5,15 @@ import { Button } from '@/components/ui/button';
 
 // Export project metadata
 export const metadata = {
-  title: 'Personal Blog Website',
-  date: '2024-06-20',
-  description: 'A personal static blog website built with Next.js and TypeScript',
-  demoUrl: 'https://h1yori233.github.io',
-  githubUrl: 'https://github.com/H1yori233/H1yori233.github.io',
-  image: '/images/projects/blog-website.png', // Example image path
+  title: 'Vulkan Grass Rendering',
+  date: '2023-12-15',
+  description: 'CIS5650 Project5 - Real-time grass rendering system implemented with Vulkan',
+  githubUrl: 'https://github.com/yourusername/vulkan-grass',
+  image: '/images/projects/vulkan-grass.png',
 };
 
 // Default export for project content component
-export default function ProjectOne() {
+export default function VulkanGrass() {
   return (
     <Layout title={metadata.title}>
       <article className="max-w-3xl mx-auto">
@@ -27,11 +26,6 @@ export default function ProjectOne() {
         </div>
         
         <div className="flex gap-4 mb-8">
-          <Button asChild variant="default">
-            <a href={metadata.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
-              View Demo <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </Button>
           <Button asChild variant="outline">
             <a href={metadata.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
               GitHub <ArrowUpRight className="h-4 w-4" />

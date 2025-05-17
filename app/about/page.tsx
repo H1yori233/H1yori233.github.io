@@ -4,52 +4,162 @@ import { Layout } from '@/components/layout'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { MdEmail } from 'react-icons/md'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Terminal, TypingAnimation, AnimatedSpan } from '@/components/magicui/terminal'
-import { ViewCounter } from '@/components/ViewCounter'
+import { useEffect, useRef, useState } from 'react'
+import maplibregl from 'maplibre-gl'
+import 'maplibre-gl/dist/maplibre-gl.css'
 
-const skills = [
-  { category: "Programming", items: ["C++", "C#", "TypeScript", "Python", "ShaderLab"] },
-  { category: "Frameworks", items: ["React", "Next.js",] },
-  { category: "Design", items: ["Figma", "Adobe Photoshop"] },
-  { category: "Other", items: ["Git", "Linux", "Unity"] },
-]
+function MapLibreMap() {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<maplibregl.Map | null>(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
-const education = [
-  {
-    period: "Sep 2025 - Dec 2026 (Expected)",
-    institution: "UC San Diego",
-    degree: "Master of Science in Computer Science and Engineering",
-    logo: "/images/UCSanDiegoLogo-BlueGold.png"
-  },
-  {
-    period: "Sep 2020 - Jun 2024",
-    institution: "Zhejiang University",
-    degree: "Bachelor of Engineering in Industrial Design",
-    thesis: "Indoor emergency evacuation strategy simulation game based on social force model",
-    logo: "/images/浙江大学-logo-2048px.png"
-  }
-]
+  useEffect(() => {
+    if (map.current) return; // Return if map is already initialized
+    if (!mapContainer.current) return; // Ensure container element exists
 
-const experience = [
-  {
-    period: "Jun 2024 - Jun 2025",
-    position: "Research Assistant Intern",
-    organization: "International Design Institute of Zhejiang University",
-    supervisor: "Wei, Xiang",
-    logo: "/images/IDI.png"
-    // logo: "/images/UCSanDiegoLogo-BlueGold.png"
-  },
-  {
-    period: "Sep 2023 - Feb 2024",
-    position: "Teaching Assistant for Computer Game Programming",
-    organization: "Zhejiang University",
-    supervisor: "Weidong, Geng",
-    logo: "/images/浙江大学-logo-2048px.png"
-  }
-]
+    // Initialize map
+    try {
+      map.current = new maplibregl.Map({
+        container: mapContainer.current,
+        style: {
+          version: 8,
+          sources: {
+            'osm': {
+              type: 'raster',
+              tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+              tileSize: 256,
+              attribution: '© OpenStreetMap Contributors'
+            }
+          },
+          layers: [
+            {
+              id: 'osm-tiles',
+              type: 'raster',
+              source: 'osm',
+              minzoom: 0,
+              maxzoom: 10
+            }
+          ]
+        },
+        center: [180, 30], // World view centered to show both Asia and North America
+        zoom: 1.8,
+        dragRotate: false, // Disable rotation for simpler interaction
+        touchZoomRotate: false // Disable pinch rotation
+      });
+
+      // Add markers
+      map.current.on('load', () => {
+        setMapLoaded(true);
+        
+        if (!map.current) return;
+        
+        // Create custom marker elements with labels
+        const createMarkerElement = (color: string, label: string) => {
+          const el = document.createElement('div');
+          el.className = 'marker-container';
+          el.style.display = 'flex';
+          el.style.flexDirection = 'column';
+          el.style.alignItems = 'center';
+          
+          const pin = document.createElement('div');
+          pin.className = 'marker-pin';
+          pin.style.width = '24px';
+          pin.style.height = '24px';
+          pin.style.borderRadius = '50%';
+          pin.style.backgroundColor = color;
+          pin.style.border = '2px solid white';
+          pin.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+          
+          const text = document.createElement('div');
+          text.className = 'marker-text';
+          text.textContent = label;
+          text.style.marginTop = '6px';
+          text.style.color = '#000';
+          text.style.padding = '2px 6px';
+          text.style.borderRadius = '4px';
+          text.style.fontSize = '12px';
+          text.style.fontWeight = 'bold';
+          text.style.whiteSpace = 'nowrap';
+          
+          el.appendChild(pin);
+          el.appendChild(text);
+          
+          return el;
+        };
+        
+        // Add Zhejiang Province marker with label
+        const zhejiangMarker = new maplibregl.Marker({
+          element: createMarkerElement('#4285F4', 'Zhejiang')
+        })
+          .setLngLat([120.0843, 30.3114])
+          .addTo(map.current);
+          
+        // Add popup for Zhejiang
+        const zhejiangPopup = new maplibregl.Popup({ offset: 25 })
+          .setHTML('<h3 style="margin:0;font-weight:bold">Zhejiang Province</h3><p style="margin:5px 0 0">My current location - Hangzhou</p>');
+          
+        zhejiangMarker.setPopup(zhejiangPopup);
+        
+        // Add Yunnan Province marker with label
+        const yunnanMarker = new maplibregl.Marker({
+          element: createMarkerElement('#EA4335', 'Yunnan')
+        })
+          .setLngLat([102.7100, 25.0500])
+          .addTo(map.current);
+          
+        // Add popup for Yunnan
+        const yunnanPopup = new maplibregl.Popup({ offset: 25 })
+          .setHTML('<h3 style="margin:0;font-weight:bold">Yunnan Province</h3><p style="margin:5px 0 0">Beautiful landscapes and diverse cultures</p>');
+          
+        yunnanMarker.setPopup(yunnanPopup);
+        
+        // Add California marker with label
+        const californiaMarker = new maplibregl.Marker({
+          element: createMarkerElement('#FBBC04', 'California')
+        })
+          .setLngLat([-119.4179, 36.7783])
+          .addTo(map.current);
+          
+        // Add popup for California
+        const californiaPopup = new maplibregl.Popup({ offset: 25 })
+          .setHTML('<h3 style="margin:0;font-weight:bold">California, USA</h3><p style="margin:5px 0 0">UC San Diego - My future study location</p>');
+          
+        californiaMarker.setPopup(californiaPopup);
+
+        // Disable map zoom when scrolling
+        map.current.scrollZoom.disable();
+      });
+    } catch (error) {
+      console.error("Error initializing map:", error);
+    }
+
+    // Cleanup function
+    return () => {
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, []);
+
+  return (
+    <div className="space-y-4">
+      <div 
+        ref={mapContainer} 
+        className="w-full h-[400px] rounded-lg overflow-hidden shadow-xl bg-gray-100"
+        aria-label="Interactive map"
+      />
+      {!mapLoaded && (
+        <p className="text-center text-muted-foreground">Map is loading... If it doesn't appear, please check your internet connection.</p>
+      )}
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -57,19 +167,32 @@ export default function AboutPage() {
       <div className="max-w-6xl mx-auto space-y-16 py-8">
         {/* Introduction */}
         <section className="prose dark:prose-invert lg:prose-lg mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            <div className="flex-shrink-0 w-64 h-64 relative rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
-              <Image
-                src="/images/avatar.png"
-                alt="Kaiqin Kong"
-                fill
-                priority
-                sizes="(max-width: 768px) 192px, 192px"
-                style={{ objectFit: 'cover' }}
-              />
+          <div className="flex flex-col md:flex-row gap-4 items-start">
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex-shrink-0 w-64 h-64 relative rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
+                <Image
+                  src="/images/avatar.png"
+                  alt="Kaiqin Kong"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 192px, 192px"
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <div className="flex justify-center gap-5 mt-2">
+                <Link href="https://github.com" target="_blank" className="transition-transform hover:scale-110">
+                  <FaGithub className="h-6 w-6" style={{ color: '#333333' }} />
+                </Link>
+                <Link href="https://linkedin.com" target="_blank" className="transition-transform hover:scale-110">
+                  <FaLinkedin className="h-6 w-6" style={{ color: '#0077b5' }} />
+                </Link>
+                <Link href="mailto:example@email.com" className="transition-transform hover:scale-110">
+                  <MdEmail className="h-6 w-6" style={{ color: '#EA4335' }} />
+                </Link>
+              </div>
             </div>
             
-            <Terminal className="flex-1 shadow-lg mx-auto max-w-4xl h-[280px]">
+            <Terminal className="flex-1 shadow-lg mx-auto max-w-4xl h-[300px]">
               <AnimatedSpan delay={200} className="block">
                 <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ whoami
               </AnimatedSpan>
@@ -103,123 +226,86 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Skills */}
         <section className="px-4">
-          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Skills & Technologies</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {skills.map((skillGroup, index) => (
-              <motion.div
-                key={skillGroup.category}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="h-full">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4 text-primary">{skillGroup.category}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {skillGroup.items.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-3 py-1.5 bg-secondary text-secondary-foreground rounded-full text-sm font-medium"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Gallery</h2>
         </section>
 
-        {/* Education */}
+        {/* Gaming & Hobbies */}
         <section className="px-4">
-          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Education</h2>
-          <div className="space-y-6">
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="overflow-hidden">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                      <div className="flex-shrink-0 w-24 h-24 relative">
+        <h2 className="text-3xl font-bold tracking-tight text-center">Hobbies</h2>
+          <div className="bg-card rounded-xl overflow-hidden shadow-lg p-6 md:p-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="space-y-12"
+            >
+              <p className="text-lg text-center md:text-left">
+                In my free time, I enjoy listening to music and playing video games. I'm particularly passionate about gaming and esports.
+              </p>
+              
+              {/* Overwatch Section */}
+              <div>
+                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                  <div className="flex-1 space-y-3">
+                    <p>I'm an avid Overwatch fan and currently serve as the manager of the ZJU Overwatch discussion group. My journey with Overwatch esports began in 2016, and I've been passionately following the competitive scene ever since.</p>
+                    <p>I used to be a big fan of <span className="font-medium">Birdring</span> and the London Spitfire—especially during their championship run. After <span className="font-medium">Birdring</span>'s retirement, my favorite player became <span className="font-medium">Proper</span>, a phenomenal flex DPS whose mechanical skill and game sense never cease to impress me.</p>
+                    <div className="flex flex-wrap justify-start gap-4 pt-2">
+                      <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden shadow-md">
                         <Image 
-                          src={edu.logo} 
-                          alt={`${edu.institution} Logo`} 
+                          src="/images/others/london_spitfire.png" 
+                          alt="London Spitfire" 
                           fill
-                          priority={index === 0}
-                          sizes="(max-width: 96px) 100vw, 96px"
-                          style={{ objectFit: 'contain' }}
+                          style={{objectFit: 'cover'}}
+                          className="transition-transform hover:scale-105 duration-300"
                         />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2">{edu.institution}
-                          <span className="float-right text-sm text-muted-foreground">{edu.period}</span>
-                        </h3>
-                        <p className="text-lg text-muted-foreground mb-2">{edu.degree}</p>
-                        {edu.thesis && (
-                          <div className="text-sm mt-4">
-                            <p className="mb-1"><span className="font-medium">Thesis: </span>{edu.thesis}</p>
-                            {edu.institution === "Zhejiang University" && (
-                              <p><span className="font-medium">Supervisor: </span>Weidong, Geng</p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* Experience */}
-        <section className="px-4">
-          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Experience</h2>
-          <div className="space-y-6">
-            {experience.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="overflow-hidden">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                      <div className="flex-shrink-0 w-24 h-24 relative">
+                      <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden shadow-md">
                         <Image 
-                          src={exp.logo} 
-                          alt={`${exp.organization} Logo`} 
+                          src="/images/others/proper.png" 
+                          alt="Proper - Overwatch Player" 
                           fill
-                          priority={index === 0}
-                          sizes="(max-width: 96px) 100vw, 96px"
-                          style={{ objectFit: 'contain' }}
+                          style={{objectFit: 'cover'}}
+                          className="transition-transform hover:scale-105 duration-300"
                         />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2">{exp.organization}
-                          <span className="float-right text-sm text-muted-foreground">{exp.period}</span>
-                        </h3>
-                        <p className="text-lg text-muted-foreground mb-2">{exp.position}</p>
-                        {exp.supervisor && (
-                          <p className="text-sm mt-4">
-                            <span className="font-medium">{exp.position.includes("Teaching Assistant") ? "Lecturer" : "Supervisor"}: </span>{exp.supervisor}
-                          </p>
-                        )}
-                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                  </div>
+                  <div className="md:w-2/5 lg:w-1/3 flex justify-center items-center mt-4 md:mt-0">
+                    <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden shadow-md">
+                      <Image 
+                        src="/images/others/overwatch.png" 
+                        alt="Overwatch Game" 
+                        fill
+                        style={{objectFit: 'cover'}}
+                        className="transition-transform hover:scale-105 duration-300"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Indie Games Section */}
+              <div>
+                <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-8 items-start">
+                  <div className="flex-1 space-y-3">
+                    <p>Beyond competitive games, I have a soft spot for indie titles, especially roguelikes and card-based games. For instance, Slay the Spire and Into the Breach, both of which offer deep strategy and replayability.</p>
+                    <p>I'm currently exploring <span className="font-medium">ChronoArk</span>, a tactical RPG that blends roguelike progression with deck-building mechanics — right up my alley.</p>
+                  </div>
+                  <div className="md:w-2/5 lg:w-1/3 flex justify-center items-center mt-4 md:mt-0">
+                    <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden shadow-md">
+                      <Image 
+                        src="/images/others/chronoark.png" 
+                        alt="ChronoArk Game" 
+                        fill
+                        style={{objectFit: 'cover'}}
+                        className="transition-transform hover:scale-105 duration-300"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -247,38 +333,16 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Contact */}
-        <section className="px-4">
-          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Get in Touch</h2>
-          <div className="flex justify-center gap-4">
-            <Button variant="outline" size="lg" className="rounded-full" asChild>
-              <Link href="https://github.com" target="_blank">
-                <Github className="mr-2 h-5 w-5" />
-                <span>GitHub</span>
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" className="rounded-full" asChild>
-              <Link href="https://linkedin.com" target="_blank">
-                <Linkedin className="mr-2 h-5 w-5" />
-                <span>LinkedIn</span>
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" className="rounded-full" asChild>
-              <Link href="mailto:example@email.com">
-                <Mail className="mr-2 h-5 w-5" />
-                <span>Email</span>
-              </Link>
-            </Button>
+        {/* Location Map Section */}
+        <section className="px-4 mb-2">
+          <h2 className="text-3xl font-bold tracking-tight text-center">My Journey</h2>
+          <div className="bg-card rounded-xl overflow-hidden shadow-lg p-6">
+            <p className="text-lg text-center mb-6">
+              I come from a small county in Yunnan Province and am proud to be the first generation in my family to attend university. Thanks to China's college entrance examination system, I was able to earn my place at a university in Hangzhou through hard work and determination. Now, I have the opportunity to study and work in California.
+            </p>
+            <MapLibreMap />
           </div>
         </section>
-      </div>
-      <div className="mt-10 flex justify-end pr-4">
-        <ViewCounter 
-          pageId="about-page" 
-          label="Page Views" 
-          rightColor="4f46e5" 
-          className="bg-muted/30 rounded-xl"
-        />
       </div>
     </Layout>
   )

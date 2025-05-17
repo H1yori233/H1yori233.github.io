@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 
 // Export project metadata
 export const metadata = {
-  title: 'Personal Blog Website',
-  date: '2024-06-20',
-  description: 'A personal static blog website built with Next.js and TypeScript',
-  demoUrl: 'https://h1yori233.github.io',
-  githubUrl: 'https://github.com/H1yori233/H1yori233.github.io',
-  image: '/images/projects/blog-website.png', // Example image path
+  title: 'WebGPU Forward+ & Clustered Deferred Rendering',
+  date: '2023-11-20',
+  description: 'CIS5650 Project4 - Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU',
+  demoUrl: 'https://yourusername.github.io/webgpu-rendering',
+  githubUrl: 'https://github.com/yourusername/webgpu-rendering',
+  image: '/images/projects/webgpu-rendering.png',
 };
 
 // Default export for project content component
-export default function ProjectOne() {
+export default function WebGPURendering() {
   return (
     <Layout title={metadata.title}>
       <article className="max-w-3xl mx-auto">
@@ -38,7 +38,6 @@ export default function ProjectOne() {
             </a>
           </Button>
         </div>
-        
       </article>
     </Layout>
   );

@@ -4,10 +4,7 @@ import { useState, useMemo } from 'react'
 import { Layout } from '@/components/layout'
 import { Input } from '@/components/ui/input'
 import { ProjectCard, Project } from '@/components/projects'
-import { TagFilter } from '@/components/tag-filter'
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { ViewCounter } from '@/components/ViewCounter'
 
 // Sample project data - corresponding to actual files in the content directory
 const sampleProjects: Project[] = [
@@ -15,13 +12,43 @@ const sampleProjects: Project[] = [
     title: "Personal Blog Website",
     description: "A personal static blog website built with Next.js and TypeScript",
     slug: "project-1",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+    image: "/images/projects/blog-website.png"
   },
   {
     title: "InnoWeaver",
     description: "A full-stack web application research project at International Design Institute of Zhejiang University, featuring user management, document data management, and LLM-powered content generation",
     slug: "innoweaver",
-    tags: ["FastAPI", "MongoDB", "NextJS", "TypeScript", "LLM"]
+    image: "/images/projects/innoweaver.png"
+  },
+  {
+    title: "Lajolla",
+    description: "UCSD CSE 272 renderer",
+    slug: "lajolla",
+    image: "/images/projects/lajolla.png"
+  },
+  {
+    title: "Interactive CUDA Path Tracer",
+    description: "CIS5650 Project3 - A real-time interactive path tracer implemented with CUDA",
+    slug: "cuda-path-tracer",
+    image: "/images/projects/cuda-path-tracer.png"
+  },
+  {
+    title: "WebGPU Forward+ & Clustered Deferred Rendering",
+    description: "CIS5650 Project4 - Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
+    slug: "webgpu-rendering",
+    image: "/images/projects/webgpu-rendering.png"
+  },
+  {
+    title: "Vulkan Grass Rendering",
+    description: "CIS5650 Project5 - Real-time grass rendering system implemented with Vulkan",
+    slug: "vulkan-grass",
+    image: "/images/projects/vulkan-grass.png"
+  },
+  {
+    title: "Dice Throne",
+    description: "A digital version of the classical board game Dice Throne, developed with Unity",
+    slug: "dice-throne",
+    image: "/images/projects/dice-throne.png"
   }
 ];
 
@@ -34,41 +61,18 @@ const fadeInUp = {
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const projects = sampleProjects;
 
-  // Collect all unique tags
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>()
-    projects.forEach(project => {
-      project.tags.forEach(tag => tagSet.add(tag))
-    })
-    return Array.from(tagSet).sort()
-  }, [projects])
-
-  // Handle tag selection
-  const handleTagClick = (tag: string) => {
-    setSelectedTags(prev => 
-      prev.includes(tag) 
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag]
-    )
-  }
-
-  // Filter projects based on search query and selected tags
+  // Filter projects based on search query
   const filteredProjects = useMemo(() => {
     return projects.filter(project => {
       const matchesSearch = 
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase())
 
-      const matchesTags = 
-        selectedTags.length === 0 || 
-        selectedTags.every(tag => project.tags.includes(tag))
-
-      return matchesSearch && matchesTags
+      return matchesSearch
     })
-  }, [projects, searchQuery, selectedTags])
+  }, [projects, searchQuery])
 
   return (
     <Layout
@@ -84,13 +88,8 @@ export default function ProjectsPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="max-w-xl w-full"
           />
-          <TagFilter 
-            tags={allTags}
-            selectedTags={selectedTags}
-            onTagClick={handleTagClick}
-          />
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="flex flex-col gap-6">
           {filteredProjects.map((project, i) => (
             <motion.div
               key={project.slug}
@@ -102,14 +101,6 @@ export default function ProjectsPage() {
             </motion.div>
           ))}
         </div>
-      </div>
-      <div className="mt-10 flex justify-end pr-4">
-        <ViewCounter 
-          pageId="project-page" 
-          label="Project Views" 
-          rightColor="4f46e5" 
-          className="bg-muted/30 rounded-xl"
-        />
       </div>
     </Layout>
   )

@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 
 // Export project metadata
 export const metadata = {
-  title: 'Personal Blog Website',
-  date: '2024-06-20',
-  description: 'A personal static blog website built with Next.js and TypeScript',
-  demoUrl: 'https://h1yori233.github.io',
-  githubUrl: 'https://github.com/H1yori233/H1yori233.github.io',
-  image: '/images/projects/blog-website.png', // Example image path
+  title: 'Dice Throne',
+  date: '2023-08-10',
+  description: 'A digital version of the classical board game Dice Throne, developed with Unity',
+  demoUrl: 'https://yourusername.itch.io/dice-throne',
+  githubUrl: 'https://github.com/yourusername/dice-throne',
+  image: '/images/projects/dice-throne.png',
 };
 
 // Default export for project content component
-export default function ProjectOne() {
+export default function DiceThrone() {
   return (
     <Layout title={metadata.title}>
       <article className="max-w-3xl mx-auto">
@@ -29,7 +29,7 @@ export default function ProjectOne() {
         <div className="flex gap-4 mb-8">
           <Button asChild variant="default">
             <a href={metadata.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
-              View Demo <ArrowUpRight className="h-4 w-4" />
+              Play Game <ArrowUpRight className="h-4 w-4" />
             </a>
           </Button>
           <Button asChild variant="outline">
@@ -38,7 +38,6 @@ export default function ProjectOne() {
             </a>
           </Button>
         </div>
-        
       </article>
     </Layout>
   );

@@ -27,7 +27,6 @@ interface LayoutProps {
 
 const navItems = [
   { path: '/', name: 'Home' },
-  { path: '/blog', name: 'Blog' },
   { path: '/project', name: 'Project' },
   { path: '/about', name: 'About' }
 ]
