@@ -5,52 +5,7 @@ import { Layout } from '@/components/layout'
 import { Input } from '@/components/ui/input'
 import { ProjectCard, Project } from '@/components/projects'
 import { motion } from 'framer-motion'
-
-// Sample project data - corresponding to actual files in the content directory
-const sampleProjects: Project[] = [
-  {
-    title: "Personal Blog Website",
-    description: "A personal static blog website built with Next.js and TypeScript",
-    slug: "project-1",
-    image: "/images/projects/blog-website.png"
-  },
-  {
-    title: "InnoWeaver",
-    description: "A full-stack web application research project at International Design Institute of Zhejiang University, featuring user management, document data management, and LLM-powered content generation",
-    slug: "innoweaver",
-    image: "/images/projects/innoweaver.png"
-  },
-  {
-    title: "Lajolla",
-    description: "UCSD CSE 272 renderer",
-    slug: "lajolla",
-    image: "/images/projects/lajolla.png"
-  },
-  {
-    title: "Interactive CUDA Path Tracer",
-    description: "CIS5650 Project3 - A real-time interactive path tracer implemented with CUDA",
-    slug: "cuda-path-tracer",
-    image: "/images/projects/cuda-path-tracer.png"
-  },
-  {
-    title: "WebGPU Forward+ & Clustered Deferred Rendering",
-    description: "CIS5650 Project4 - Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
-    slug: "webgpu-rendering",
-    image: "/images/projects/webgpu-rendering.png"
-  },
-  {
-    title: "Vulkan Grass Rendering",
-    description: "CIS5650 Project5 - Real-time grass rendering system implemented with Vulkan",
-    slug: "vulkan-grass",
-    image: "/images/projects/vulkan-grass.png"
-  },
-  {
-    title: "Dice Throne",
-    description: "A digital version of the classical board game Dice Throne, developed with Unity",
-    slug: "dice-throne",
-    image: "/images/projects/dice-throne.png"
-  }
-];
+import { projectList } from './projectData'
 
 // Animation configuration
 const fadeInUp = {
@@ -61,7 +16,7 @@ const fadeInUp = {
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('')
-  const projects = sampleProjects;
+  const projects = projectList;
 
   // Filter projects based on search query
   const filteredProjects = useMemo(() => {

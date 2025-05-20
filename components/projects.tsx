@@ -16,15 +16,15 @@ export interface Project {
 
 export function ProjectCard({ project }: { project: Project }) {
   const [imgError, setImgError] = useState(false);
-  
+
   // 默认的替代图片
   const fallbackImage = "/images/project-placeholder.jpg";
-  
+
   return (
     <Card className="overflow-hidden border border-border shadow-md">
       <CardContent className="p-0 flex flex-row items-center">
         {/* 左侧图片区域 */}
-        <div className="w-1/2 h-64 relative">
+        <div className="w-2/5 h-64 relative">
           {project.image && !imgError ? (
             <Image
               src={project.image}
@@ -48,18 +48,20 @@ export function ProjectCard({ project }: { project: Project }) {
             </div>
           )}
         </div>
-        
+
         {/* 右侧内容区域 */}
-        <div className="p-6 w-1/2 flex flex-col h-full">
-          <Link 
-            href={`/project/${project.slug}`}
-            className="text-xl font-bold tracking-tight"
-          >
-            {project.title}
-          </Link>
-          <p className="text-sm text-muted-foreground mt-2 line-clamp-3">
-            {project.description}
-          </p>
+        <div className="p-6 w-3/5 flex flex-col h-full">
+          <div className="l-4">
+            <Link
+              href={`/project/${project.slug}`}
+              className="text-xl font-bold tracking-tight"
+            >
+              {project.title}
+            </Link>
+            <p className="text-sm text-muted-foreground mt-2 line-clamp-3">
+              {project.description}
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>
