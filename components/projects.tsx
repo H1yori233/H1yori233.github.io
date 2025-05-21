@@ -12,6 +12,7 @@ export interface Project {
   slug: string
   image?: string
   enable?: boolean
+  externalUrl?: string
 }
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -19,6 +20,10 @@ export function ProjectCard({ project }: { project: Project }) {
 
   // 默认的替代图片
   const fallbackImage = "/images/project-placeholder.jpg";
+  
+  // 根据是否存在 externalUrl 决定链接地址
+  const projectUrl = project.externalUrl ? project.externalUrl : `/project/${project.slug}`;
+  const isExternal = !!project.externalUrl; // 判断是否为外部链接
 
   return (
     <Card className="overflow-hidden border border-border shadow-md">
@@ -53,7 +58,9 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="p-6 w-3/5 flex flex-col h-full">
           <div className="l-4">
             <Link
-              href={`/project/${project.slug}`}
+              href={projectUrl}
+              target={isExternal ? "_blank" : "_self"}
+              rel={isExternal ? "noopener noreferrer" : ""}
               className="text-xl font-bold tracking-tight"
             >
               {project.title}

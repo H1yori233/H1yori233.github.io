@@ -18,18 +18,21 @@ export const projectList: Project[] = [
     title: "Interactive CUDA Path Tracer",
     description: "CIS5650 Project3 - A real-time interactive path tracer implemented with CUDA",
     slug: "cuda-path-tracer",
+    externalUrl: "https://github.com/H1yori233/Gart",
     image: "/images/projects/cuda-path-tracer.png"
   },
   {
     title: "WebGPU Forward+ & Clustered Deferred Rendering",
     description: "CIS5650 Project4 - Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
     slug: "webgpu-rendering",
+    externalUrl: "https://github.com/H1yori233/FLUX",
     image: "/images/projects/webgpu-rendering.png"
   },
   {
     title: "Vulkan Grass Rendering",
     description: "CIS5650 Project5 - Real-time grass rendering system implemented with Vulkan",
     slug: "vulkan-grass",
+    externalUrl: "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
     image: "/images/projects/vulkan-grass.png"
   },
   {
