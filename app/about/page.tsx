@@ -3,21 +3,70 @@
 import { Layout } from '@/components/layout'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaBehance } from 'react-icons/fa'
-import { MdEmail } from 'react-icons/md'
+import { MdEmail, MdLocationOn, MdSchool, MdWork } from 'react-icons/md'
+import { HiAcademicCap, HiHeart, HiMusicNote, HiGlobeAlt } from 'react-icons/hi'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Terminal, TypingAnimation, AnimatedSpan } from '@/components/magicui/terminal'
 import { useEffect, useRef, useState } from 'react'
 import { MapLibreMap } from './MapComponent'
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { 
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+}
+
 export default function AboutPage() {
   return (
-    <Layout title="About Me">
-      <div className="max-w-6xl mx-auto space-y-16 py-8">
-        {/* Introduction */}
-        <section className="prose dark:prose-invert lg:prose-lg mx-auto px-4">
+    <Layout 
+      title="About Me" 
+      description="Get to know me better - my background, interests, and journey."
+    >
+      <motion.div 
+        className="max-w-7xl mx-auto space-y-20 py-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Hero Section - Introduction */}
+        <motion.section 
+          className="prose dark:prose-invert lg:prose-lg mx-auto px-4"
+          variants={itemVariants}
+        >
           <div className="flex flex-col md:flex-row gap-4 items-start">
             <div className="flex flex-col items-center gap-3">
               <div className="flex-shrink-0 w-64 h-64 relative rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
@@ -37,7 +86,7 @@ export default function AboutPage() {
                 <Link href="https://linkedin.com" target="_blank" className="transition-transform hover:scale-110">
                   <FaLinkedin className="h-6 w-6" style={{ color: '#0077b5' }} />
                 </Link>
-                <Link href="k1kong@ucsd.edu" className="transition-transform hover:scale-110">
+                <Link href="mailto:k1kong@ucsd.edu" className="transition-transform hover:scale-110">
                   <MdEmail className="h-6 w-6" style={{ color: '#EA4335' }} />
                 </Link>
                 <Link href="https://www.behance.net/kaiqinkong" target="_blank" className="transition-transform hover:scale-110">
@@ -78,126 +127,150 @@ export default function AboutPage() {
               </AnimatedSpan>
             </Terminal>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="px-4">
-          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Gallery</h2>
-        </section>
+        {/* Hobbies Section */}
+        <motion.section 
+          className="px-4"
+          variants={itemVariants}
+        >
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <HiHeart className="w-8 h-8 text-primary" />
+              <h2 className="text-4xl font-bold tracking-tight">Hobbies & Interests</h2>
+            </div>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              In my free time, I enjoy listening to music and playing video games. I'm particularly passionate about gaming and esports.
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Gaming Section */}
+            <motion.div variants={cardVariants}>
+              <Card className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-0">
+                  <div className="relative h-48 overflow-hidden">
+                    <Image 
+                      src="/images/others/overwatch.png" 
+                      alt="Overwatch Game" 
+                      fill
+                      style={{objectFit: 'cover'}}
+                      className="transition-transform group-hover:scale-110 duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <Badge variant="secondary" className="bg-primary/90 text-primary-foreground">
+                        Gaming & Esports
+                      </Badge>
+                    </div>
+                  </div>
+                  <div className="p-6 space-y-4">
+                    <h3 className="text-xl font-semibold">Overwatch Enthusiast</h3>
+                    <p className="text-muted-foreground">
+                      I'm an avid Overwatch fan and currently serve as the manager of the ZJU Overwatch discussion group. 
+                      My journey with Overwatch esports began in 2016, and in-game I primarily play the flex role at around Diamond rank.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-        {/* Gaming & Hobbies */}
-        <section className="px-4">
-        <h2 className="text-3xl font-bold tracking-tight text-center">Hobbies</h2>
-          <div className="bg-card rounded-xl overflow-hidden shadow-lg p-6 md:p-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="space-y-12"
-            >
-              <p className="text-lg text-center md:text-left">
-                In my free time, I enjoy listening to music and playing video games. I'm particularly passionate about gaming and esports.
-              </p>
-              
-              {/* Overwatch Section */}
-              <div>
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-                  <div className="flex-1 space-y-3">
-                    <p>I'm an avid Overwatch fan and currently serve as the manager of the ZJU Overwatch discussion group. My journey with Overwatch esports began in 2016, and I've been passionately following the competitive scene ever since.</p>
-                    <p>I used to be a big fan of <span className="font-medium">Birdring</span> and the London Spitfire—especially during their championship run. After <span className="font-medium">Birdring</span>'s retirement, my favorite player became <span className="font-medium">Proper</span>, a phenomenal flex DPS whose mechanical skill and game sense never cease to impress me.</p>
-                    <div className="flex flex-wrap justify-start gap-4 pt-2">
-                      <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden shadow-md">
-                        <Image 
-                          src="/images/others/london_spitfire.png" 
-                          alt="London Spitfire" 
-                          fill
-                          style={{objectFit: 'cover'}}
-                          className="transition-transform hover:scale-105 duration-300"
-                        />
-                      </div>
-                      <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-lg overflow-hidden shadow-md">
-                        <Image 
-                          src="/images/others/proper.png" 
-                          alt="Proper - Overwatch Player" 
-                          fill
-                          style={{objectFit: 'cover'}}
-                          className="transition-transform hover:scale-105 duration-300"
-                        />
-                      </div>
+            {/* Indie Games Section */}
+            <motion.div variants={cardVariants}>
+              <Card className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-0">
+                  <div className="relative h-48 overflow-hidden">
+                    <Image 
+                      src="/images/others/chronoark.png" 
+                      alt="ChronoArk Game" 
+                      fill
+                      style={{objectFit: 'cover'}}
+                      className="transition-transform group-hover:scale-110 duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <Badge variant="secondary" className="bg-secondary/90 text-secondary-foreground">
+                        Indie Games
+                      </Badge>
                     </div>
                   </div>
-                  <div className="md:w-2/5 lg:w-1/3 flex justify-center items-center mt-4 md:mt-0">
-                    <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden shadow-md">
-                      <Image 
-                        src="/images/others/overwatch.png" 
-                        alt="Overwatch Game" 
-                        fill
-                        style={{objectFit: 'cover'}}
-                        className="transition-transform hover:scale-105 duration-300"
-                      />
-                    </div>
+                  <div className="p-6 space-y-4">
+                    <h3 className="text-xl font-semibold">Roguelike & Strategy</h3>
+                    <p className="text-muted-foreground">
+                      I have a soft spot for indie titles, especially roguelikes and card-based games like Slay the Spire and Into the Breach.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Currently exploring <span className="font-medium text-foreground">ChronoArk</span> - a tactical RPG that blends roguelike progression with deck-building mechanics.
+                    </p>
                   </div>
-                </div>
-              </div>
-              
-              {/* Indie Games Section */}
-              <div>
-                <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-8 items-start">
-                  <div className="flex-1 space-y-3">
-                    <p>Beyond competitive games, I have a soft spot for indie titles, especially roguelikes and card-based games. For instance, Slay the Spire and Into the Breach, both of which offer deep strategy and replayability.</p>
-                    <p>I'm currently exploring <span className="font-medium">ChronoArk</span>, a tactical RPG that blends roguelike progression with deck-building mechanics — right up my alley.</p>
-                  </div>
-                  <div className="md:w-2/5 lg:w-1/3 flex justify-center items-center mt-4 md:mt-0">
-                    <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden shadow-md">
-                      <Image 
-                        src="/images/others/chronoark.png" 
-                        alt="ChronoArk Game" 
-                        fill
-                        style={{objectFit: 'cover'}}
-                        className="transition-transform hover:scale-105 duration-300"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Music Section */}
-        <section className="px-4">
-          <h2 className="text-3xl font-bold tracking-tight mb-8 text-center">Music That Inspires Me</h2>
-          <div className="bg-card rounded-xl overflow-hidden shadow-lg">
-            <div className="aspect-video max-w-4xl mx-auto">
-              <iframe
-                src="https://open.spotify.com/embed/playlist/7gRzSkYJkMPCNilm32UG6Y?utm_source=generator"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="w-full h-full"
-              />
+        <motion.section 
+          className="px-4"
+          variants={itemVariants}
+        >
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <HiMusicNote className="w-8 h-8 text-primary" />
+              <h2 className="text-4xl font-bold tracking-tight">Music That Inspires Me</h2>
             </div>
-            <div className="p-6 bg-gradient-to-t from-background/80 to-transparent">
-              <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto">
-                This playlist has accompanied me through countless hours of programming and design. 
-                Each song carries a unique story and emotion.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Location Map Section */}
-        <section className="px-4 mb-2">
-          <h2 className="text-3xl font-bold tracking-tight text-center">My Journey</h2>
-          <div className="bg-card rounded-xl overflow-hidden shadow-lg p-6">
-            <p className="text-lg text-center mb-6">
-              I come from a small county in Yunnan Province and am proud to be the first generation in my family to attend university. Thanks to China's college entrance examination system, I was able to earn my place at a university in Hangzhou through hard work and determination. Now, I have the opportunity to study and work in California.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              This playlist has accompanied me through countless hours of programming and design. Each song carries a unique story and emotion.
             </p>
-            <MapLibreMap />
           </div>
-        </section>
-      </div>
+          
+          <motion.div variants={cardVariants}>
+            <Card className="overflow-hidden shadow-xl">
+              <CardContent className="p-0">
+                <div className="aspect-video max-w-5xl mx-auto">
+                  <iframe
+                    src="https://open.spotify.com/embed/playlist/7gRzSkYJkMPCNilm32UG6Y?utm_source=generator"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    className="w-full h-full"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.section>
+
+        {/* Journey Section */}
+        <motion.section 
+          className="px-4"
+          variants={itemVariants}
+        >
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <HiGlobeAlt className="w-8 h-8 text-primary" />
+              <h2 className="text-4xl font-bold tracking-tight">My Journey</h2>
+            </div>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              I come from a small county in Yunnan Province and am proud to be the first generation in my family to attend university. 
+              Thanks to China's college entrance examination system, I was able to earn my place at a university in Hangzhou through hard work and determination. 
+              Now, I have the opportunity to study and work in California.
+            </p>
+          </div>
+          
+          <motion.div variants={cardVariants}>
+            <Card className="overflow-hidden shadow-xl">
+              <CardContent className="p-6">
+                <div className="h-96 rounded-lg overflow-hidden">
+                  <MapLibreMap />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.section>
+      </motion.div>
     </Layout>
   )
 }
