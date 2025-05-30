@@ -112,7 +112,7 @@ export const Terminal = ({ children, className }: TerminalProps) => {
         </div>
       </div>
       <div className="p-4 overflow-y-auto max-h-[calc(100%-3rem)]">
-        <code className="grid gap-y-1 whitespace-pre-wrap break-words">{children}</code>
+        <code className="grid gap-y-1 whitespace-pre-wrap break-words font-mono">{children}</code>
       </div>
     </div>
   );

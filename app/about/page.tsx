@@ -7,12 +7,13 @@ import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaBehance } from 'react-icons/fa'
 import { MdEmail, MdLocationOn, MdSchool, MdWork } from 'react-icons/md'
-import { HiAcademicCap, HiHeart, HiMusicNote, HiGlobeAlt } from 'react-icons/hi'
+import { HiAcademicCap, HiHeart, HiMusicNote, HiGlobeAlt, HiCode } from 'react-icons/hi'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Terminal, TypingAnimation, AnimatedSpan } from '@/components/magicui/terminal'
 import { useEffect, useRef, useState } from 'react'
 import { MapLibreMap } from './MapComponent'
+import { TechStack } from '@/components/tech-stack'
 
 // Animation variants
 const containerVariants = {
@@ -127,6 +128,25 @@ export default function AboutPage() {
               </AnimatedSpan>
             </Terminal>
           </div>
+        </motion.section>
+
+        {/* Tech Stack Section */}
+        <motion.section 
+          className="px-4"
+          variants={itemVariants}
+        >
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <HiCode className="w-8 h-8 text-primary" />
+              <h2 className="text-4xl font-bold tracking-tight">Technical Skills</h2>
+            </div>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              My technical expertise spans across multiple domains, from low-level systems programming to modern web development, 
+              with a focus on graphics programming, game development, and AI applications.
+            </p>
+          </div>
+          
+          <TechStack />
         </motion.section>
 
         {/* Hobbies Section */}

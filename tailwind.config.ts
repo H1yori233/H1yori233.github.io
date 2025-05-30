@@ -10,6 +10,11 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-ibm-plex-sans)', 'system-ui', 'sans-serif'],
+  			mono: ['var(--font-ibm-plex-mono)', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+  			serif: ['var(--font-ibm-plex-serif)', 'Georgia', 'serif'],
+  		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',

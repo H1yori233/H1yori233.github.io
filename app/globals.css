@@ -1,6 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* IBM Plex 字体优化设置 */
+@layer base {
+  html {
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* 针对不同字体变体的优化 */
+  .font-mono {
+    font-feature-settings: "kern" 1, "liga" 0, "calt" 0;
+    font-variant-ligatures: none;
+  }
+  
+  .font-serif {
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "onum" 1;
+  }
+}
  
 @layer base {
   :root {
@@ -154,6 +174,22 @@
   /* 搜索栏聚焦效果 */
   .search-focus {
     @apply focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200;
+  }
+
+  /* IBM Plex 字体变体实用类 */
+  .font-plex-sans {
+    font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
+  }
+  
+  .font-plex-mono {
+    font-family: var(--font-ibm-plex-mono), Menlo, Monaco, Consolas, monospace;
+    font-feature-settings: "kern" 1, "liga" 0, "calt" 0;
+    font-variant-ligatures: none;
+  }
+  
+  .font-plex-serif {
+    font-family: var(--font-ibm-plex-serif), Georgia, serif;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "onum" 1;
   }
 }
 
