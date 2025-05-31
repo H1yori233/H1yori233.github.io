@@ -18,23 +18,15 @@ interface TechSkill {
 const techSkills: TechSkill[] = [
   {
     name: 'C/C++',
-    level: 85,
+    level: 90,
     category: 'Systems Programming',
     color: 'bg-blue-500',
     description: 'Low-level programming, memory management, performance optimization',
     icon: '⚡'
   },
   {
-    name: 'C#',
-    level: 75,
-    category: 'Application Development',
-    color: 'bg-purple-500',
-    description: 'Object-oriented programming, .NET framework',
-    icon: '🔷'
-  },
-  {
     name: 'Unity',
-    level: 80,
+    level: 95,
     category: 'Game Development',
     color: 'bg-gray-800',
     description: 'Game engine, 3D graphics, interactive applications',
@@ -42,7 +34,7 @@ const techSkills: TechSkill[] = [
   },
   {
     name: 'CUDA',
-    level: 70,
+    level: 80,
     category: 'GPU Computing',
     color: 'bg-green-500',
     description: 'Parallel computing, GPU acceleration, high-performance computing',
@@ -74,7 +66,7 @@ const techSkills: TechSkill[] = [
   },
   {
     name: 'Linux',
-    level: 80,
+    level: 70,
     category: 'Systems Programming',
     color: 'bg-orange-500',
     description: 'Unix/Linux systems, shell scripting, server administration',
@@ -90,7 +82,7 @@ const techSkills: TechSkill[] = [
   },
   {
     name: 'Figma',
-    level: 75,
+    level: 85,
     category: 'Design Tools',
     color: 'bg-pink-500',
     description: 'UI/UX design, prototyping, design systems, collaborative design',
@@ -98,7 +90,7 @@ const techSkills: TechSkill[] = [
   },
   {
     name: 'MongoDB',
-    level: 70,
+    level: 60,
     category: 'Database',
     color: 'bg-green-600',
     description: 'NoSQL database, document storage, data modeling',
@@ -106,7 +98,7 @@ const techSkills: TechSkill[] = [
   },
   {
     name: 'Docker',
-    level: 65,
+    level: 60,
     category: 'Development Tools',
     color: 'bg-blue-400',
     description: 'Containerization, deployment, microservices architecture',
