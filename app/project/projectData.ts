@@ -11,23 +11,23 @@ export const projectList: Project[] = [
   },
   {
     title: "Vulkan Grass Rendering",
-    description: "Upenn CIS5650 Project5 - Real-time grass rendering system implemented with Vulkan",
+    description: "Real-time grass rendering system implemented with Vulkan",
     slug: "vulkan-grass",
     externalUrl: "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
-    image: "/images/projects/vulkan-grass.png",
-    featured: false
+    image: "https://raw.githubusercontent.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering/main/img/grass_rendering.gif",
+    featured: true
   },
   {
     title: "WebGPU Forward+ & Clustered Deferred Rendering",
-    description: "Upenn CIS5650 Project4 - Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
+    description: "Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
     slug: "webgpu-rendering",
-    externalUrl: "https://github.com/H1yori233/FLUX",
-    image: "/images/projects/webgpu-rendering.png",
+    externalUrl: "https://github.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred",
+    image: "https://raw.githubusercontent.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred/main/img/demo.gif",
     featured: true
   },
   {
     title: "Interactive CUDA Path Tracer",
-    description: "Upenn CIS5650 Project3 - A real-time interactive path tracer implemented with CUDA",
+    description: "A real-time interactive path tracer implemented with CUDA",
     slug: "cuda-path-tracer",
     externalUrl: "https://github.com/H1yori233/Gart",
     image: "/images/projects/cuda-path-tracer.png",

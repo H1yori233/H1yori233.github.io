@@ -2,6 +2,7 @@ import { IBM_Plex_Sans, IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import './globals.css'
 import { Metadata } from 'next'
+import { SmoothCursor } from '@/components/ui/smooth-cursor'
 
 const ibmPlexSans = IBM_Plex_Sans({ 
   subsets: ['latin'],
@@ -96,6 +97,14 @@ export default function RootLayout({
           ibmPlexSerif.variable,
           ibmPlexSans.className
         )}>
+        <SmoothCursor 
+          springConfig={{
+            damping: 40,
+            stiffness: 350,
+            mass: 1,
+            restDelta: 0.001
+          }}
+        />
         {children}
       </body>
     </html>
