@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   cursor: none !important;
-}
+} */
 
 /* IBM Plex 字体优化设置 */
 @layer base {

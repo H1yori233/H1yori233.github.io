@@ -97,14 +97,14 @@ export default function RootLayout({
           ibmPlexSerif.variable,
           ibmPlexSans.className
         )}>
-        <SmoothCursor 
+        {/* <SmoothCursor 
           springConfig={{
             damping: 40,
             stiffness: 350,
             mass: 1,
             restDelta: 0.001
           }}
-        />
+        /> */}
         {children}
       </body>
     </html>

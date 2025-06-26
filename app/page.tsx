@@ -3,23 +3,15 @@
 import { Layout } from '@/components/layout'
 import { cn } from '@/lib/utils'
 import { TextScramble } from '@/components/magicui/text-scramble'
-import { RetroGrid } from '@/components/magicui/retro-grid'
+import ShapeBlur from '@/components/ui/shape-blur'
 
 export default function Home() {
   return (
     <Layout>
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] text-center relative">
-        <RetroGrid 
-          className="z-0"
-          cellSize={70}
-          opacity={0.4}
-          lightLineColor="#888888"
-          darkLineColor="#444444"
-          angle={60}
-        />
         <div className="max-w-4xl z-10 relative">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl flex items-center justify-center gap-1 md:gap-4">
-            <TextScramble 
+            <TextScramble
               text="Design"
               className="font-bold mr-3"
               charChangeCount={16}
@@ -33,7 +25,7 @@ export default function Home() {
               text-transparent">
               X
             </span>
-            <TextScramble 
+            <TextScramble
               text="Technology"
               className="font-bold ml-3"
               charChangeCount={20}

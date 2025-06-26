@@ -124,8 +124,18 @@ export default function AboutPage() {
               </div>
               
               <AnimatedSpan delay={2800} className="mt-4 block">
-                <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ <span className="animate-pulse">_</span>
+                <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cv
               </AnimatedSpan>
+              
+              <AnimatedSpan delay={3000} className="text-blue-400 underline cursor-pointer hover:text-blue-300 transition-colors block">
+                <Link href="/pdfs/cv.pdf" target="_blank" rel="noopener noreferrer">
+                  Kaichin's CV
+                </Link>
+              </AnimatedSpan>
+              
+              {/* <AnimatedSpan delay={3500} className="mt-4 block">
+                <span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ <span className="animate-pulse">_</span>
+              </AnimatedSpan> */}
             </Terminal>
           </div>
         </motion.section>
