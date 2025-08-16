@@ -17,12 +17,44 @@ interface TechSkill {
 
 const techSkills: TechSkill[] = [
   {
+    name: 'CUDA',
+    level: 85,
+    category: 'AI/ML Infrastructure',
+    color: 'bg-green-500',
+    description: 'GPU acceleration for LLM training and inference, parallel computing, memory optimization for large models',
+    icon: '🚀'
+  },
+  {
+    name: 'PyTorch',
+    level: 90,
+    category: 'AI/ML Infrastructure',
+    color: 'bg-orange-500',
+    description: 'Deep learning framework for LLM development, model training, distributed computing, and inference optimization',
+    icon: '🔥'
+  },
+  {
+    name: 'Triton',
+    level: 75,
+    category: 'AI/ML Infrastructure',
+    color: 'bg-blue-600',
+    description: 'GPU kernel development for optimized LLM operations, performance optimization',
+    icon: '⚡'
+  },
+  {
     name: 'C/C++',
     level: 90,
     category: 'Systems Programming',
     color: 'bg-blue-500',
     description: 'Low-level programming, memory management, performance optimization',
-    icon: '⚡'
+    icon: '💻'
+  },
+  {
+    name: 'Python',
+    level: 90,
+    category: 'AI/ML Infrastructure',
+    color: 'bg-yellow-500',
+    description: 'Machine learning, data analysis, automation, scripting for AI/ML workflows',
+    icon: '🐍'
   },
   {
     name: 'Unity',
@@ -33,76 +65,12 @@ const techSkills: TechSkill[] = [
     icon: '🎮'
   },
   {
-    name: 'CUDA',
-    level: 80,
-    category: 'GPU Computing',
-    color: 'bg-green-500',
-    description: 'Parallel computing, GPU acceleration, high-performance computing',
-    icon: '🚀'
-  },
-  {
-    name: 'Python',
-    level: 90,
-    category: 'Data Science & AI',
-    color: 'bg-yellow-500',
-    description: 'Machine learning, data analysis, automation, scripting',
-    icon: '🐍'
-  },
-  {
     name: 'Next.js',
     level: 85,
     category: 'Web Development',
     color: 'bg-black',
     description: 'React framework, full-stack development, modern web apps',
     icon: '⚛️'
-  },
-  {
-    name: 'Vulkan',
-    level: 65,
-    category: 'Graphics Programming',
-    color: 'bg-red-500',
-    description: 'Low-level graphics API, real-time rendering, GPU programming',
-    icon: '🔥'
-  },
-  {
-    name: 'Linux',
-    level: 70,
-    category: 'Systems Programming',
-    color: 'bg-orange-500',
-    description: 'Unix/Linux systems, shell scripting, server administration',
-    icon: '🐧'
-  },
-  {
-    name: 'Git',
-    level: 85,
-    category: 'Development Tools',
-    color: 'bg-orange-600',
-    description: 'Version control, collaborative development, branching strategies',
-    icon: '📝'
-  },
-  {
-    name: 'Figma',
-    level: 85,
-    category: 'Design Tools',
-    color: 'bg-pink-500',
-    description: 'UI/UX design, prototyping, design systems, collaborative design',
-    icon: '🎨'
-  },
-  {
-    name: 'MongoDB',
-    level: 60,
-    category: 'Database',
-    color: 'bg-green-600',
-    description: 'NoSQL database, document storage, data modeling',
-    icon: '🍃'
-  },
-  {
-    name: 'Docker',
-    level: 60,
-    category: 'Development Tools',
-    color: 'bg-blue-400',
-    description: 'Containerization, deployment, microservices architecture',
-    icon: '🐳'
   },
 ]
 
@@ -121,11 +89,11 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
+  visible: {
+    opacity: 1,
+    y: 0,
     scale: 1,
-    transition: { 
+    transition: {
       duration: 0.5,
       ease: "easeOut"
     }
@@ -136,12 +104,12 @@ export function TechStack() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
 
-  const filteredSkills = selectedCategory 
+  const filteredSkills = selectedCategory
     ? techSkills.filter(skill => skill.category === selectedCategory)
     : techSkills
 
   return (
-    <motion.div 
+    <motion.div
       className="space-y-8"
       variants={containerVariants}
       initial="hidden"
@@ -149,7 +117,7 @@ export function TechStack() {
     >
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2 justify-center">
-        <Badge 
+        <Badge
           variant={selectedCategory === null ? "default" : "outline"}
           className="cursor-pointer transition-all hover:scale-105"
           onClick={() => setSelectedCategory(null)}
@@ -169,8 +137,8 @@ export function TechStack() {
       </div>
 
       {/* Skills Grid */}
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         layout
       >
         {filteredSkills.map((skill, index) => (
@@ -178,7 +146,7 @@ export function TechStack() {
             key={skill.name}
             variants={itemVariants}
             layout
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
               transition: { duration: 0.2 }
             }}
@@ -207,14 +175,14 @@ export function TechStack() {
 
                 {/* Progress Bar */}
                 <div className="space-y-2">
-                  <Progress 
-                    value={hoveredSkill === skill.name ? skill.level : 0} 
+                  <Progress
+                    value={hoveredSkill === skill.name ? skill.level : 0}
                     className="h-2"
                   />
                   <motion.div
                     className={`h-2 rounded-full ${skill.color}`}
                     initial={{ width: 0 }}
-                    animate={{ 
+                    animate={{
                       width: hoveredSkill === skill.name ? `${skill.level}%` : '0%'
                     }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -233,11 +201,10 @@ export function TechStack() {
                     {[...Array(5)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className={`w-2 h-2 rounded-full ${
-                          i < Math.floor(skill.level / 20) 
-                            ? skill.color 
-                            : 'bg-gray-200 dark:bg-gray-700'
-                        }`}
+                        className={`w-2 h-2 rounded-full ${i < Math.floor(skill.level / 20)
+                          ? skill.color
+                          : 'bg-gray-200 dark:bg-gray-700'
+                          }`}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: i * 0.1 }}
@@ -252,7 +219,7 @@ export function TechStack() {
       </motion.div>
 
       {/* Summary Stats */}
-      <motion.div 
+      <motion.div
         className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
         variants={itemVariants}
       >
@@ -276,6 +243,16 @@ export function TechStack() {
           </div>
           <div className="text-sm text-muted-foreground">Expert Level</div>
         </Card>
+      </motion.div>
+
+      {/* Other Skills */}
+      <motion.div
+        className="text-center mt-8 pt-6 border-t border-border"
+        variants={itemVariants}
+      >
+        <p className="text-sm text-muted-foreground">
+          <span className="font-medium">Others:</span> Git, Linux, Figma, Docker, MongoDB, Vulkan, Blender, Photoshop, and various other tools and frameworks
+        </p>
       </motion.div>
     </motion.div>
   )
