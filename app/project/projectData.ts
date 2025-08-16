@@ -1,13 +1,20 @@
 import { Project } from '@/components/projects'
 
-// 项目数据配置
 export const projectList: Project[] = [
+  {
+    title: "LLM from Scratch",
+    description: "Stanford CS336 work",
+    slug: "llm-from-scratch",
+    externalUrl: "https://github.com/H1yori233/CS336",
+    image: "/images/projects/llm-from-scratch.png",
+    featured: true
+  },
   {
     title: "Lajolla",
     description: "UCSD CSE 272 renderer",
     slug: "lajolla",
     image: "/images/projects/lajolla.png",
-    featured: true
+    featured: false
   },
   {
     title: "Vulkan Grass Rendering",
