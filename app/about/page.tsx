@@ -1,6 +1,7 @@
 'use client'
 
 import { Layout } from '@/components/layout'
+import Head from 'next/head'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -34,8 +35,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
-      ease: "easeOut"
+      duration: 0.4
     }
   }
 }
@@ -46,18 +46,38 @@ const cardVariants = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.3,
-      ease: "easeOut"
+      duration: 0.3
     }
   }
 }
 
 export default function AboutPage() {
   return (
-    <Layout
-      title="About Me"
-      description="Get to know me better - my background, interests, and journey."
-    >
+    <>
+      <Head>
+        <title>About Me - Kaichin Kong</title>
+        <meta name="description" content="Learn more about Kaichin Kong - Computer Science graduate student at UC San Diego, former Industrial Design student at Zhejiang University, passionate about LLM infrastructure and gaming." />
+        <meta name="keywords" content="about me, Kaichin Kong, Kaiqin Kong, 孔楷钦, UC San Diego, Zhejiang University, computer science, industrial design, LLM infrastructure, gaming, esports" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="About Me - Kaichin Kong" />
+        <meta property="og:description" content="Learn more about Kaichin Kong - Computer Science graduate student at UC San Diego, former Industrial Design student at Zhejiang University, passionate about LLM infrastructure and gaming." />
+        <meta property="og:image" content="/images/avatar.png" />
+        <meta property="og:url" content="https://h1yori233.github.io/about" />
+        <meta property="og:type" content="profile" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Me - Kaichin Kong" />
+        <meta name="twitter:description" content="Learn more about Kaichin Kong - Computer Science graduate student at UC San Diego, former Industrial Design student at Zhejiang University, passionate about LLM infrastructure and gaming." />
+        <meta name="twitter:image" content="/images/avatar.png" />
+
+        <link rel="canonical" href="https://h1yori233.github.io/about" />
+      </Head>
+      <Layout
+        title="About Me"
+        description="Get to know me better - my background, interests, and journey."
+      >
       <motion.div
         className="max-w-7xl mx-auto space-y-20 py-8"
         variants={containerVariants}
@@ -278,7 +298,6 @@ export default function AboutPage() {
                       src="https://open.spotify.com/embed/playlist/7gRzSkYJkMPCNilm32UG6Y?utm_source=generator"
                       width="100%"
                       height="100%"
-                      frameBorder="0"
                       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                       loading="lazy"
                       className="w-full h-full"
@@ -331,6 +350,7 @@ export default function AboutPage() {
         </motion.section>
       </motion.div>
     </Layout>
+    </>
   )
 }
 
