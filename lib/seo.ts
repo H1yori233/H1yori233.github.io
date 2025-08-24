@@ -68,7 +68,6 @@ export function generateSEO(props: SEOProps = {}) {
       },
     },
     verification: {
-      // Add your verification codes here if needed
       // google: "your-google-verification-code",
     },
   }

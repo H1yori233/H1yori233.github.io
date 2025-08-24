@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
-// Export project metadata
 export const metadata = {
   title: 'InnoWeaver',
   date: '2025-03-24',
@@ -15,7 +14,6 @@ export const metadata = {
   image: '/images/projects/innoweaver.png',
 };
 
-// Default export for project content component
 export default function InnoWeaver() {
   return (
     <Layout title={metadata.title}>

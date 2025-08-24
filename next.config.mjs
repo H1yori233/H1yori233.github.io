@@ -22,28 +22,28 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   webpack: (config, { isServer }) => {
-    // 禁用 WebAssembly 相关功能
+    // Disable WebAssembly related features
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: false,
       syncWebAssembly: false,
     }
 
-    // 修改 webpack 的哈希方法
+    // Modify webpack hash method
     config.output = {
       ...config.output,
-      hashFunction: 'xxhash64',  // 使用替代的哈希函数
+      hashFunction: 'xxhash64',  // Use alternative hash function
       hashDigest: 'hex'
     }
 
     return config
   },
   experimental: {
-    // 完全禁用所有实验性功能
+    // Completely disable all experimental features
     webpackBuildWorker: false,
     parallelServerBuildTraces: false,
     parallelServerCompiles: false,
-    swcMinify: true, // 使用 SWC 进行压缩
+    swcMinify: true, // Use SWC for minification
   },
 }
 

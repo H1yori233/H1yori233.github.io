@@ -3,7 +3,6 @@ import { Layout } from '@/components/layout';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// Export project metadata
 export const metadata = {
   title: 'Lajolla',
   date: '2025-05-05',
@@ -13,7 +12,6 @@ export const metadata = {
   image: '/images/projects/blog-website.png', // Example image path
 };
 
-// Default export for project content component
 export default function Lajolla() {
   return (
     <Layout title={metadata.title}>

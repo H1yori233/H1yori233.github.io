@@ -5,18 +5,18 @@ import path from 'path';
 import dynamic from 'next/dynamic';
 import { ContentWrapper } from '@/components/ContentWrapper';
 
-// 获取所有项目路径
+// Get all project paths
 export async function generateStaticParams() {
   const projectDirectory = path.join(process.cwd(), 'content/project');
-  
-  // 确保目录存在
+
+  // Ensure directory exists
   if (!fs.existsSync(projectDirectory)) {
     return [];
   }
   
   const filenames = fs.readdirSync(projectDirectory);
-  
-  // 过滤出tsx文件并创建路径
+
+  // Filter tsx files and create paths
   return filenames
     .filter(filename => filename.endsWith('.tsx'))
     .map(filename => ({
@@ -24,16 +24,16 @@ export async function generateStaticParams() {
     }));
 }
 
-// 动态导入内容组件
+// Dynamically import content component
 const ProjectContent = ({ slug }: { slug: string }) => {
   const ProjectComponent = dynamic(
     () => import(`@/content/project/${slug}`).catch(() => {
-      // 找不到组件时，返回404
+      // Return 404 if component not found
       notFound();
     }),
     {
       loading: () => <div className="text-center py-10">Loading project content...</div>,
-      ssr: true, // 服务器端渲染
+      ssr: true, // Server-side rendering
     }
   );
 
@@ -44,11 +44,11 @@ const ProjectContent = ({ slug }: { slug: string }) => {
   );
 };
 
-// 项目详情页面
+// Project detail page
 export default function ProjectPost({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  
-  // 验证项目文件是否存在
+
+  // Verify project file exists
   const projectFilePath = path.join(process.cwd(), `content/project/${slug}.tsx`);
   if (!fs.existsSync(projectFilePath)) {
     notFound();

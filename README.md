@@ -2,7 +2,7 @@
 
 A modern portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. 
 
-🌐 **Live Site**: [h1yori233.github.io](https://h1yori233.github.io)
+**Live Site**: [h1yori233.github.io](https://h1yori233.github.io)
 
 ## Getting Started
 

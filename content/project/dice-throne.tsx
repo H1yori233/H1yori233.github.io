@@ -3,7 +3,6 @@ import { Layout } from '@/components/layout';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// Export project metadata
 export const metadata = {
   title: 'Dice Throne',
   date: '2023-08-10',
@@ -13,7 +12,6 @@ export const metadata = {
   image: '/images/projects/dice-throne.png',
 };
 
-// Default export for project content component
 export default function DiceThrone() {
   return (
     <Layout title={metadata.title}>

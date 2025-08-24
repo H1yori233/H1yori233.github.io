@@ -1,4 +1,4 @@
-import { Project } from '@/components/projects'
+import { Project } from "./projects";
 
 export const projectList: Project[] = [
   {
@@ -33,7 +33,7 @@ export const projectList: Project[] = [
     featured: true
   },
   {
-    title: "Interactive CUDA Path Tracer",
+    title: "CUDA Path Tracer",
     description: "A real-time interactive path tracer implemented with CUDA",
     slug: "cuda-path-tracer",
     externalUrl: "https://github.com/H1yori233/Gart",
@@ -42,14 +42,16 @@ export const projectList: Project[] = [
   },
   {
     title: "InnoWeaver",
-    description: "An LLM-powered innovation tool featuring an intelligent paper database for human-computer interaction research, designed to generate innovative design solutions and bridge the gap between academic research and industrial applications",
+    // AI-powered innovation platform bridging HCI research and practical design
+    description: "AI-powered innovation platform that bridges HCI research and practical design using LLMs and paper database",
     slug: "innoweaver",
     image: "/images/projects/innoweaver.png",
     featured: true
   },
   {
     title: "Pastor",
-    description: "A serious game for indoor escape simulation developed in Unity, based on the social force model. Features pathfinding with NavMesh, a map editor for level design, and rich visual effects.",
+    // Unity-based indoor escape simulation game with social force model
+    description: "Unity-based indoor escape simulation game with social force model",
     slug: "pastor",
     externalUrl: "https://www.behance.net/gallery/209969337/Pastor",
     image: "/images/projects/pastor.png",
@@ -87,4 +89,4 @@ export const projectList: Project[] = [
     image: "/images/projects/the-silver-key.png",
     featured: false
   }
-]; 
+];
