@@ -217,84 +217,146 @@ export default function HomePage() {
         <div className="section-padding">
           <div className="content-grid space-y-16">
 
-            {/* Profile Section */}
+            {/* Profile and Terminal Section */}
             <motion.section
-              className="text-center md:text-left"
+              className="relative overflow-hidden"
               variants={fadeInVariants}
               initial="hidden"
               animate="visible"
             >
-              <div className="mb-8 flex flex-col items-center md:flex-row md:items-center md:justify-center gap-8">
-                <div className="w-64 h-64 mb-6 md:mb-0 rounded-full overflow-hidden border border-border/60 flex-shrink-0">
-                  <Image
-                    src="/images/headshot_B&W.png"
-                    alt="Kaiqin Kong"
-                    width={160}
-                    height={160}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                </div>
-
-                <div className="flex flex-col items-center md:items-start">
-                  <h1 className="text-heading-2 font-light text-foreground mb-2">Kaiqin Kong</h1>
-                  <p className="text-heading-3 text-muted-foreground mb-4">孔楷钦</p>
-                  <div className="flex justify-center md:justify-start gap-4">
-                    <Link
-                      href="https://github.com/H1yori233"
-                      target="_blank"
-                      className="btn-ghost p-2 rounded-lg"
-                      aria-label="GitHub"
-                    >
-                      <FaGithub className="w-8 h-8" />
-                    </Link>
-                    <Link
-                      href="https://www.linkedin.com/in/kaiqin-kong/"
-                      target="_blank"
-                      className="btn-ghost p-2 rounded-lg"
-                      aria-label="LinkedIn"
-                    >
-                      <FaLinkedin className="w-8 h-8" />
-                    </Link>
-                    <Link
-                      href="mailto:k1kong@ucsd.edu"
-                      className="btn-ghost p-2 rounded-lg"
-                      aria-label="Email"
-                    >
-                      <MdEmail className="w-8 h-8" />
-                    </Link>
-                    <Link
-                      href="https://www.behance.net/kaiqinkong"
-                      target="_blank"
-                      className="btn-ghost p-2 rounded-lg"
-                      aria-label="Behance"
-                    >
-                      <FaBehance className="w-8 h-8" />
-                    </Link>
-                  </div>
-                </div>
+              {/* Background subtle grid pattern */}
+              <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px), linear-gradient(180deg, hsl(var(--border)) 1px, transparent 1px)`,
+                    backgroundSize: '40px 40px'
+                  }}
+                />
               </div>
-            </motion.section>
 
-            {/* Terminal Introduction */}
-            <motion.section
-              variants={fadeInVariants}
-              initial="hidden"
-              animate="visible"
-              className="w-full"
-            >
-              <Terminal className="w-full shadow-xl h-[320px] lg:h-[400px]">
-                <AnimatedSpan delay={200} className="block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ whoami</AnimatedSpan>
-                <TypingAnimation delay={400} duration={15} className="text-emerald-400 font-semibold">孔楷钦 (Kaiqin Kong)</TypingAnimation>
-                <AnimatedSpan delay={800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cat about.md</AnimatedSpan>
-                <div className="whitespace-normal break-words">
-                  <TypingAnimation delay={1000} duration={5} className="text-foreground leading-relaxed block">Hi there! I'm Kaiqin Kong (孔楷钦), an incoming CS graduate student at UC San Diego (CS75).</TypingAnimation>
-                  <TypingAnimation delay={1500} duration={5} className="text-foreground leading-relaxed block">Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.</TypingAnimation>
-                  <TypingAnimation delay={2000} duration={5} className="text-foreground leading-relaxed block">I'm interested in LLM infrastructure and ML systems, building scalable and optimized AI systems.</TypingAnimation>
-                </div>
-                <AnimatedSpan delay={2800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cv</AnimatedSpan>
-                <AnimatedSpan delay={3000} className="text-blue-400 underline cursor-pointer hover:text-blue-300 transition-colors block"><Link href="/pdfs/cv.pdf" target="_blank" rel="noopener noreferrer">Kaichin's CV</Link></AnimatedSpan>
-              </Terminal>
+              <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-8 items-start py-8">
+                {/* Left Column: Profile Image and Social Links */}
+                <motion.div
+                  className="lg:col-span-2 flex flex-col items-center justify-center h-[400px] space-y-6"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}
+                >
+                  {/* Profile Image */}
+                  <motion.div
+                    className="relative group"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: [0.33, 1, 0.68, 1] }}
+                  >
+                    <div className="w-64 h-64 rounded-2xl overflow-hidden border border-border/40 bg-gradient-to-br from-muted/30 to-muted/10 backdrop-blur-sm">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src="/images/headshot_B&W.png"
+                          alt="Kaiqin Kong"
+                          width={256}
+                          height={256}
+                          className="w-full h-full object-cover"
+                          priority
+                        />
+                        <Image
+                          src="/images/headshot.png"
+                          alt="Kaiqin Kong"
+                          width={256}
+                          height={256}
+                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subtle floating effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-400/5 via-rose-500/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      animate={{
+                        boxShadow: [
+                          "0 0 0 0px rgba(139, 92, 246, 0)",
+                          "0 0 0 8px rgba(139, 92, 246, 0.02)",
+                          "0 0 0 0px rgba(139, 92, 246, 0)"
+                        ]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </motion.div>
+
+                  {/* Name */}
+                  <motion.h1
+                    className="text-heading-2 font-light text-foreground tracking-tight text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    Kaiqin Kong
+                  </motion.h1>
+
+                  {/* Social Links */}
+                  <motion.div
+                    className="flex flex-wrap justify-center gap-3 max-w-xs mx-auto"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1.0 }}
+                  >
+                    {[
+                      { href: "https://github.com/H1yori233", icon: FaGithub, label: "GitHub" },
+                      { href: "https://www.linkedin.com/in/kaiqin-kong/", icon: FaLinkedin, label: "LinkedIn" },
+                      { href: "mailto:k1kong@ucsd.edu", icon: MdEmail, label: "Email" },
+                      { href: "https://www.behance.net/kaiqinkong", icon: FaBehance, label: "Behance" }
+                    ].map(({ href, icon: Icon, label }, index) => (
+                      <motion.div
+                        key={label}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: 1.1 + index * 0.1 }}
+                      >
+                        <Link
+                          href={href}
+                          target={href.startsWith('mailto:') ? undefined : "_blank"}
+                          rel={href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+                          className="group relative flex items-center justify-center p-3 rounded-xl bg-muted/40 hover:bg-muted/70 border border-border/50 hover:border-border transition-all duration-300 hover:scale-105 hover:shadow-md flex-shrink-0"
+                          aria-label={label}
+                        >
+                          <Icon className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors duration-300 flex-shrink-0" />
+
+                          {/* Tooltip */}
+                          <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                            {label}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+
+                {/* Right Column: Terminal */}
+                <motion.div
+                  className="lg:col-span-3 w-full"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: [0.33, 1, 0.68, 1] }}
+                >
+                  <Terminal className="w-full shadow-xl h-[400px]">
+                    <AnimatedSpan delay={200} className="block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ whoami</AnimatedSpan>
+                    <TypingAnimation delay={400} duration={15} className="text-emerald-400 font-semibold">Kaiqin Kong</TypingAnimation>
+                    <AnimatedSpan delay={800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cat about.md</AnimatedSpan>
+                    <div className="whitespace-normal break-words">
+                      <TypingAnimation delay={1000} duration={5} className="text-foreground leading-relaxed block">Hi there! I'm Kaiqin Kong, an incoming CS graduate student at UC San Diego (CS75).</TypingAnimation>
+                      <TypingAnimation delay={1500} duration={5} className="text-foreground leading-relaxed block">Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.</TypingAnimation>
+                      <TypingAnimation delay={2000} duration={5} className="text-foreground leading-relaxed block">I'm interested in LLM infrastructure and ML systems, building scalable and optimized AI systems.</TypingAnimation>
+                    </div>
+                    <AnimatedSpan delay={2800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cv</AnimatedSpan>
+                    <AnimatedSpan delay={3000} className="text-blue-400 underline cursor-pointer hover:text-blue-300 transition-colors block"><Link href="/pdfs/cv.pdf" target="_blank" rel="noopener noreferrer">Kaichin's CV</Link></AnimatedSpan>
+                  </Terminal>
+                </motion.div>
+              </div>
             </motion.section>
 
             {/* Technical Skills */}
@@ -429,24 +491,33 @@ export default function HomePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
+              className="full-width"
             >
-              <h2 className="text-heading-3 font-light text-foreground mb-6 border-t border-border pt-8">Journey</h2>
-              <div className="space-y-4 text-body text-muted-foreground leading-relaxed mb-4">
-                <p>I come from a small county in Yunnan Province and am proud to be the first generation in my family to attend university.</p>
-                <p>Thanks to China's college entrance examination system, I was able to earn my place at a university in Hangzhou through hard work and determination.</p>
-                <p>Now, I have the opportunity to study and work in California, continuing my journey in technology and design.</p>
+              <div className="content-grid">
+                <h2 className="text-heading-3 font-light text-foreground mb-6 border-t border-border pt-8">Journey</h2>
               </div>
-              <div className="aspect-video rounded-lg overflow-hidden border border-border mb-4">
-                <Suspense fallback={
-                  <div className="w-full h-full bg-muted flex items-center justify-center">
-                    <div className="text-center text-muted-foreground">
-                      <div className="w-8 h-8 mx-auto mb-2 border border-border rounded-full" />
-                      <p className="text-caption">Loading map...</p>
-                    </div>
+              <div className="full-width bg-muted/20 py-2">
+                <div className="content-grid">
+                  <div className="space-y-2 text-body text-muted-foreground leading-relaxed max-w-none">
+                    <p className="text-lg leading-relaxed">I come from a small county in Yunnan Province and am proud to be the first generation in my family to attend university.</p>
+                    <p className="text-lg leading-relaxed">Thanks to China's college entrance examination system, I was able to earn my place at a university in Hangzhou through hard work and determination.</p>
+                    <p className="text-lg leading-relaxed">Now, I have the opportunity to study and work in California, continuing my journey in technology and design.</p>
                   </div>
-                }>
-                  <MapLibreMap />
-                </Suspense>
+                </div>
+              </div>
+              <div className="content-grid mt-8">
+                <div className="aspect-video rounded-lg overflow-hidden border border-border mb-4">
+                  <Suspense fallback={
+                    <div className="w-full h-full bg-muted flex items-center justify-center">
+                      <div className="text-center text-muted-foreground">
+                        <div className="w-8 h-8 mx-auto mb-2 border border-border rounded-full" />
+                        <p className="text-caption">Loading map...</p>
+                      </div>
+                    </div>
+                  }>
+                    <MapLibreMap />
+                  </Suspense>
+                </div>
               </div>
             </motion.section>
 
