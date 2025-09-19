@@ -46,21 +46,21 @@ export function MapLibreMap() {
 
         // --- Locations Data ---
         const locations = [
-          { lngLat: [120.0843, 30.3114], popupHTML: '<h3>Zhejiang Province</h3><p>My current location - Hangzhou</p>' },
-          { lngLat: [102.7100, 25.0500], popupHTML: '<h3>Yunnan Province</h3><p>Beautiful landscapes and diverse cultures</p>' },
-          { lngLat: [-119.4179, 36.7783], popupHTML: '<h3>California, USA</h3><p>UC San Diego - My future study location</p>' }
+          { lngLat: [120.0843, 30.3114], popupHTML: '<div style="font-family: system-ui; padding: 4px 0;"><strong style="font-size: 14px; color: #111;">Hangzhou</strong><br><span style="font-size: 12px; color: #666;">Zhejiang University</span></div>' },
+          { lngLat: [102.7100, 25.0500], popupHTML: '<div style="font-family: system-ui; padding: 4px 0;"><strong style="font-size: 14px; color: #111;">Yunnan</strong><br><span style="font-size: 12px; color: #666;">Hometown</span></div>' },
+          { lngLat: [-119.4179, 36.7783], popupHTML: '<div style="font-family: system-ui; padding: 4px 0;"><strong style="font-size: 14px; color: #111;">California</strong><br><span style="font-size: 12px; color: #666;">UC San Diego</span></div>' }
         ];
 
         locations.forEach(loc => {
-          const popup = new maplibregl.Popup({ 
-            offset: 35, 
+          const popup = new maplibregl.Popup({
+            offset: 25,
             closeButton: false,
-            className: 'custom-popup'
+            className: 'minimal-popup'
           }).setHTML(loc.popupHTML);
 
           new maplibregl.Marker({
-            color: 'hsl(var(--primary))',
-            scale: 0.8,
+            color: '#374151',
+            scale: 0.7,
             draggable: false
           })
             .setLngLat(loc.lngLat as [number, number])
@@ -83,12 +83,11 @@ export function MapLibreMap() {
   }, [theme]); // Rerun effect if theme changes
 
   return (
-    <div 
-      ref={mapContainer} 
-      className="w-full h-[400px] rounded-lg overflow-hidden bg-muted"
-      aria-label="Interactive map"
-      // Add a key to force re-render on theme change to avoid style conflicts
-      key={theme} 
+    <div
+      ref={mapContainer}
+      className="w-full h-full rounded-lg overflow-hidden bg-gray-50 border border-gray-200"
+      aria-label="Interactive map showing journey from Yunnan to Hangzhou to California"
+      key={theme}
     />
   );
 }

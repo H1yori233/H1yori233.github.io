@@ -78,15 +78,15 @@ const EditorialSkillItem = ({ skill, isExpanded, onToggle }: EditorialSkillItemP
   >
     <button
       onClick={onToggle}
-      className="w-full py-6 flex justify-between items-center text-left hover:bg-gray-50 transition-colors px-0"
+      className="w-full py-4 flex justify-between items-center text-left hover:bg-gray-50 transition-colors"
     >
-      <div className="flex items-center gap-6">
-        <span className="text-gray-900 font-medium text-lg">{skill.name}</span>
-        <span className="text-xs text-gray-500 uppercase tracking-wider">{skill.category}</span>
-      </div>
       <div className="flex items-center gap-4">
+        <span className="text-gray-900 font-normal">{skill.name}</span>
+        <span className="text-xs text-gray-500 uppercase tracking-wide">{skill.category}</span>
+      </div>
+      <div className="flex items-center gap-3">
         <span className="text-gray-600 text-sm">{skill.level}%</span>
-        <span className={`text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+        <span className={`text-gray-400 transition-transform duration-200 text-sm ${isExpanded ? 'rotate-180' : ''}`}>
           ↓
         </span>
       </div>
@@ -101,18 +101,18 @@ const EditorialSkillItem = ({ skill, isExpanded, onToggle }: EditorialSkillItemP
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="overflow-hidden"
     >
-      <div className="pb-6">
-        <div className="flex items-center mb-4">
-          <div className="flex-1 bg-gray-100 h-1 rounded-full overflow-hidden">
+      <div className="pb-4">
+        <div className="mb-3">
+          <div className="bg-gray-100 h-1 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gray-900"
               initial={{ width: 0 }}
               animate={{ width: isExpanded ? `${skill.level}%` : 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             />
           </div>
         </div>
-        <p className="text-gray-600 text-sm leading-relaxed pl-0">
+        <p className="text-gray-600 text-sm leading-relaxed">
           {skill.description}
         </p>
       </div>
@@ -122,12 +122,12 @@ const EditorialSkillItem = ({ skill, isExpanded, onToggle }: EditorialSkillItemP
 
 // Category filter component
 const CategoryFilter = ({ categories, selected, onSelect }: CategoryFilterProps) => (
-  <div className="flex gap-1 justify-start mb-12 overflow-x-auto pb-2">
+  <div className="flex gap-1 mb-8 overflow-x-auto pb-2">
     {categories.map((category) => (
       <button
         key={category}
         onClick={() => onSelect(category)}
-        className={`px-3 py-1 text-sm whitespace-nowrap border transition-colors ${selected === category
+        className={`px-3 py-1 text-sm whitespace-nowrap border rounded transition-colors ${selected === category
           ? 'border-gray-900 text-gray-900'
           : 'border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-700'
           }`}
@@ -170,39 +170,37 @@ export function TechStack() {
     : techSkills.filter(skill => skill.category === selectedCategory)
 
   return (
-    <div className="mx-auto px-8">
-      <div className="border-t border-gray-100">
-        <h2 className="text-2xl font-light text-gray-900 mb-12">Technical Expertise</h2>
+    <div>
+      <h2 className="text-xl font-normal text-gray-900 mb-6 border-t border-gray-100 pt-8">Technical Skills</h2>
 
-        <CategoryFilter
-          categories={categories}
-          selected={selectedCategory}
-          onSelect={setSelectedCategory}
-        />
+      <CategoryFilter
+        categories={categories}
+        selected={selectedCategory}
+        onSelect={setSelectedCategory}
+      />
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-0"
-        >
-          {filteredSkills.map((skill, index) => (
-            <motion.div key={skill.name} variants={itemVariants}>
-              <EditorialSkillItem
-                skill={skill}
-                isExpanded={expandedSkill === skill.name}
-                onToggle={() => setExpandedSkill(expandedSkill === skill.name ? null : skill.name)}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-0"
+      >
+        {filteredSkills.map((skill, index) => (
+          <motion.div key={skill.name} variants={itemVariants}>
+            <EditorialSkillItem
+              skill={skill}
+              isExpanded={expandedSkill === skill.name}
+              onToggle={() => setExpandedSkill(expandedSkill === skill.name ? null : skill.name)}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
 
-        <div className="mt-12 pt-8 border-t border-gray-100">
-          <p className="text-sm text-gray-500">
-            Additional experience with Git, Linux, Docker, MongoDB, Vulkan,
-            Blender, and various development tools and frameworks.
-          </p>
-        </div>
+      <div className="mt-8 pt-6 border-t border-gray-100">
+        <p className="text-sm text-gray-500 leading-relaxed">
+          Additional experience with Git, Linux, Docker, MongoDB, Vulkan,
+          Blender, and various development tools.
+        </p>
       </div>
     </div>
   )
