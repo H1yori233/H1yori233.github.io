@@ -6,8 +6,7 @@ import { MdEmail } from 'react-icons/md'
 import { ChevronUp } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Suspense, useState, useMemo, useEffect } from 'react'
-import { MapLibreMap } from '@/components/MapComponent'
+import { useState, useMemo, useEffect } from 'react'
 import { TechStack } from '@/components/tech-stack'
 import { Terminal, AnimatedSpan, TypingAnimation } from '@/components/magicui/terminal'
 import { TextScramble } from '@/components/magicui/text-scramble'
@@ -480,41 +479,6 @@ export default function HomePage() {
               )}
             </motion.section>
 
-            {/* Location */}
-            <motion.section
-              variants={fadeInVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="full-width"
-            >
-              <div className="content-grid">
-                <h2 className="text-heading-3 font-light text-foreground mb-6 border-t border-border pt-8">Journey</h2>
-              </div>
-              <div className="full-width bg-muted/20 py-2">
-                <div className="content-grid">
-                  <div className="space-y-2 text-body text-muted-foreground leading-relaxed max-w-none">
-                    <p className="text-lg leading-relaxed">I come from a small county in Yunnan Province and am proud to be the first generation in my family to attend university.</p>
-                    <p className="text-lg leading-relaxed">Thanks to China's college entrance examination system, I was able to earn my place at a university in Hangzhou through hard work and determination.</p>
-                    <p className="text-lg leading-relaxed">Now, I have the opportunity to study and work in California, continuing my journey in technology and design.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="content-grid mt-8">
-                <div className="aspect-video rounded-lg overflow-hidden border border-border mb-4">
-                  <Suspense fallback={
-                    <div className="w-full h-full bg-muted flex items-center justify-center">
-                      <div className="text-center text-muted-foreground">
-                        <div className="w-8 h-8 mx-auto mb-2 border border-border rounded-full" />
-                        <p className="text-caption">Loading map...</p>
-                      </div>
-                    </div>
-                  }>
-                    <MapLibreMap />
-                  </Suspense>
-                </div>
-              </div>
-            </motion.section>
 
           </div>
         </div>
