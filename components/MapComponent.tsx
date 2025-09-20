@@ -29,10 +29,15 @@ export function MapLibreMap() {
         style: mapStyleUrl,
         // Center the map on the Pacific Ocean (longitude 180)
         center: [180, 35],
-        zoom: 1.0,
+        zoom: 2.0,
         dragRotate: false,
         touchZoomRotate: false,
         attributionControl: false, // Hide default attribution
+        dragPan: false,
+        scrollZoom: false,
+        boxZoom: false,
+        doubleClickZoom: false,
+        keyboard: false,
       });
 
       map.current.on('load', () => {
@@ -68,7 +73,6 @@ export function MapLibreMap() {
             .addTo(map.current!);
         });
 
-        map.current.scrollZoom.disable();
       });
     } catch (error) {
       console.error("Error initializing map:", error);

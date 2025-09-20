@@ -306,11 +306,11 @@ export default function HomePage() {
                     transition={{ duration: 0.6, delay: 1.0 }}
                   >
                     {[
-                      { href: "https://github.com/H1yori233", icon: FaGithub, label: "GitHub" },
-                      { href: "https://www.linkedin.com/in/kaiqin-kong/", icon: FaLinkedin, label: "LinkedIn" },
-                      { href: "mailto:k1kong@ucsd.edu", icon: MdEmail, label: "Email" },
-                      { href: "https://www.behance.net/kaiqinkong", icon: FaBehance, label: "Behance" }
-                    ].map(({ href, icon: Icon, label }, index) => (
+                      { href: "https://github.com/H1yori233", icon: FaGithub, label: "GitHub", color: "group-hover:text-gray-900 dark:group-hover:text-white" },
+                      { href: "https://www.linkedin.com/in/kaiqin-kong/", icon: FaLinkedin, label: "LinkedIn", color: "group-hover:text-blue-600" },
+                      { href: "mailto:k1kong@ucsd.edu", icon: MdEmail, label: "Email", color: "group-hover:text-red-500" },
+                      { href: "https://www.behance.net/kaiqinkong", icon: FaBehance, label: "Behance", color: "group-hover:text-blue-500" }
+                    ].map(({ href, icon: Icon, label, color }, index) => (
                       <motion.div
                         key={label}
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -324,12 +324,7 @@ export default function HomePage() {
                           className="group relative flex items-center justify-center p-3 rounded-xl bg-muted/40 hover:bg-muted/70 border border-border/50 hover:border-border transition-all duration-300 hover:scale-105 hover:shadow-md flex-shrink-0"
                           aria-label={label}
                         >
-                          <Icon className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors duration-300 flex-shrink-0" />
-
-                          {/* Tooltip */}
-                          <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                            {label}
-                          </span>
+                          <Icon className={`w-6 h-6 text-muted-foreground transition-colors duration-300 flex-shrink-0 ${color}`} />
                         </Link>
                       </motion.div>
                     ))}
