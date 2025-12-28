@@ -7,9 +7,7 @@ import { ChevronUp } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useMemo, useEffect } from 'react'
-import { TechStack } from '@/components/tech-stack'
 import { Terminal, AnimatedSpan, TypingAnimation } from '@/components/magicui/terminal'
-import { TextScramble } from '@/components/magicui/text-scramble'
 import { ProjectCard } from '@/components/project/projects'
 import { projectList } from '@/components/project/projectData'
 import { Star, Grid, List } from 'lucide-react'
@@ -126,94 +124,18 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-background">
+    <div className="relative min-h-screen flex flex-col bg-background overflow-hidden">
+      {/* Ambient Background - Visual Depth */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
+      </div>
       {/* Top Bar */}
       <TopBar />
 
       {/* Main Content */}
       <main className="flex-grow pt-20 w-full">
-        {/* Hero Section */}
-        <motion.section
-          className="h-[calc(100vh-12rem)] flex items-center justify-center relative overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* Background Grid - Subtle */}
-          <div className="absolute inset-0 opacity-[0.02]">
-            <div className="absolute inset-0"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
-                backgroundSize: '50px 50px'
-              }}
-            />
-          </div>
-
-          <motion.div
-            className="content-grid relative z-10"
-          >
-            <div className="text-center space-y-12 max-w-5xl mx-auto">
-              {/* Main Heading */}
-              <motion.div
-                className="space-y-6"
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-              >
-                <div className="text-display flex items-center justify-center flex-wrap gap-4 md:gap-8">
-                  <TextScramble
-                    text="Design"
-                    className="font-light tracking-tight"
-                    charChangeCount={16}
-                    charChangeSpeed={60}
-                    delay={100}
-                  />
-
-                  <motion.span
-                    className="relative"
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{
-                      duration: 1,
-                      delay: 0.5,
-                      ease: [0.33, 1, 0.68, 1]
-                    }}
-                  >
-                    <span className="pointer-events-none whitespace-pre-wrap
-                      bg-gradient-to-br from-amber-400 via-rose-500 to-purple-600
-                      bg-clip-text text-transparent font-medium">
-                      ×
-                    </span>
-
-                    {/* Subtle glow effect */}
-                    <motion.div
-                      className="absolute inset-0 blur-xl bg-gradient-to-br from-amber-400 via-rose-500 to-purple-600 opacity-20"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.2, 0.1, 0.2]
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  </motion.span>
-
-                  <TextScramble
-                    text="Technology"
-                    className="font-light tracking-tight"
-                    charChangeCount={20}
-                    charChangeSpeed={55}
-                    delay={300}
-                  />
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </motion.section>
-
-        <div className="section-padding">
+        <div className="pt-[var(--section-padding)] pb-8">
           <div className="content-grid space-y-16">
 
             {/* Profile and Terminal Section */}
@@ -234,10 +156,10 @@ export default function HomePage() {
                 />
               </div>
 
-              <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-8 items-start py-8">
+              <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-8 items-center py-20">
                 {/* Left Column: Profile Image and Social Links */}
                 <motion.div
-                  className="lg:col-span-2 flex flex-col items-center justify-center h-[400px] space-y-6"
+                  className="lg:col-span-2 flex flex-col items-center justify-center h-full min-h-[400px] space-y-8"
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}
@@ -252,19 +174,12 @@ export default function HomePage() {
                     <div className="w-64 h-64 rounded-2xl overflow-hidden border border-border/40 bg-gradient-to-br from-muted/30 to-muted/10 backdrop-blur-sm">
                       <div className="relative w-full h-full">
                         <Image
-                          src="/images/headshot_B&W.png"
+                          src="/images/avatar.png"
                           alt="Kaiqin Kong"
                           width={256}
                           height={256}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover grayscale contrast-125 brightness-110 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-300"
                           priority
-                        />
-                        <Image
-                          src="/images/headshot.png"
-                          alt="Kaiqin Kong"
-                          width={256}
-                          height={256}
-                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                         />
                       </div>
                     </div>
@@ -342,25 +257,15 @@ export default function HomePage() {
                     <TypingAnimation delay={400} duration={15} className="text-emerald-400 font-semibold">Kaiqin Kong</TypingAnimation>
                     <AnimatedSpan delay={800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cat about.md</AnimatedSpan>
                     <div className="whitespace-normal break-words">
-                      <TypingAnimation delay={1000} duration={5} className="text-foreground leading-relaxed block">Hi there! I'm Kaiqin Kong, an incoming CS graduate student at UC San Diego (CS75).</TypingAnimation>
+                      <TypingAnimation delay={1000} duration={5} className="text-foreground leading-relaxed block">Hi there! I'm Kaiqin Kong, a master student in Computer Science at UC San Diego.</TypingAnimation>
                       <TypingAnimation delay={1500} duration={5} className="text-foreground leading-relaxed block">Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.</TypingAnimation>
-                      <TypingAnimation delay={2000} duration={5} className="text-foreground leading-relaxed block">I'm interested in LLM infrastructure and ML systems, building scalable and optimized AI systems.</TypingAnimation>
+                      <TypingAnimation delay={2000} duration={5} className="text-foreground leading-relaxed block">I'm interested in Machine Learning Systems, currently working on fast video generation.</TypingAnimation>
                     </div>
                     <AnimatedSpan delay={2800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cv</AnimatedSpan>
                     <AnimatedSpan delay={3000} className="text-blue-400 underline cursor-pointer hover:text-blue-300 transition-colors block"><Link href="/pdfs/cv.pdf" target="_blank" rel="noopener noreferrer">Kaichin's CV</Link></AnimatedSpan>
                   </Terminal>
                 </motion.div>
               </div>
-            </motion.section>
-
-            {/* Technical Skills */}
-            <motion.section
-              variants={fadeInVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <TechStack />
             </motion.section>
 
             {/* Projects Section */}
@@ -479,6 +384,20 @@ export default function HomePage() {
               )}
             </motion.section>
 
+
+
+
+            {/* Footer / Last Updated */}
+            <motion.footer
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="py-6 border-t border-border/40 text-center"
+            >
+              <p className="text-xs text-muted-foreground/60 font-mono">
+                Last updated: December 2025
+              </p>
+            </motion.footer>
 
           </div>
         </div>
