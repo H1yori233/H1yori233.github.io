@@ -53,7 +53,7 @@ registerCommand({
         // Format output with color hints (directories in blue)
         const formatted = entries.map((name: string) => {
             const stat = shell.fs.stat(path === '.' ? name : `${path}/${name}`);
-            return stat?.type === 'directory' ? `\x1b[34m${name}/\x1b[0m` : name;
+            return stat?.type === 'directory' ? `${name}/` : name;
         });
         return { output: formatted.join('  ') };
     }

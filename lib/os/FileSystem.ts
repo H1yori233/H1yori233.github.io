@@ -100,10 +100,6 @@ export class FileSystem {
         return this.getPath(this._cwd);
     }
 
-    get cwdNode(): Directory {
-        return this._cwd;
-    }
-
     // Get the full path of a node
     private getPath(node: Inode): string {
         const parts: string[] = [];
@@ -200,7 +196,8 @@ export class FileSystem {
     addFile(dirPath: string, name: string, content: string): boolean {
         const dir = this.resolvePath(dirPath);
         if (!dir || dir.type !== 'directory') return false;
-        (dir as Directory).children.set(name, createFile(name, content, dir as Directory));
+        const file: File = { name, type: 'file', content, size: content.length, parent: dir as Directory };
+        (dir as Directory).children.set(name, file);
         return true;
     }
 

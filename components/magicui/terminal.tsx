@@ -32,7 +32,6 @@ export const Terminal = ({
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [input, setInput] = useState('');
   const [isBooting, setIsBooting] = useState(true);
-  const [lineIdCounter, setLineIdCounter] = useState(0);
 
   const shellRef = useRef<Shell | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,12 +41,6 @@ export const Terminal = ({
   useEffect(() => {
     shellRef.current = getShell();
   }, []);
-
-  // Get next line ID
-  const getNextId = useCallback(() => {
-    setLineIdCounter(prev => prev + 1);
-    return lineIdCounter;
-  }, [lineIdCounter]);
 
   // Add a line to terminal
   const addLine = useCallback((line: Omit<TerminalLine, 'id'>) => {
@@ -68,7 +61,6 @@ export const Terminal = ({
   // Boot sequence - run commands sequentially with typing effect
   const bootStartedRef = useRef(false);
 
-  // Boot sequence - run commands sequentially with typing effect
   useEffect(() => {
     if (!shellRef.current || bootStartedRef.current) return;
     bootStartedRef.current = true;
