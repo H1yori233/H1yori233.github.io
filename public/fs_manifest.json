@@ -1,0 +1,179 @@
+{
+  "root": {
+    "name": "fs",
+    "type": "directory",
+    "children": {
+      "home": {
+        "name": "home",
+        "type": "directory",
+        "children": {
+          "kaichin": {
+            "name": "kaichin",
+            "type": "directory",
+            "children": {
+              "about.md": {
+                "name": "about.md",
+                "type": "file",
+                "size": 269
+              },
+              "contact.txt": {
+                "name": "contact.txt",
+                "type": "file",
+                "size": 159
+              },
+              "projects": {
+                "name": "projects",
+                "type": "directory",
+                "children": {
+                  "cuda-path-tracer.md": {
+                    "name": "cuda-path-tracer.md",
+                    "type": "file",
+                    "size": 243,
+                    "metadata": {
+                      "title": "CUDA Path Tracer",
+                      "description": "A real-time interactive path tracer implemented with CUDA",
+                      "slug": "cuda-path-tracer",
+                      "image": "/images/projects/cuda-path-tracer.png",
+                      "externalUrl": "https://github.com/H1yori233/Gart",
+                      "featured": true
+                    }
+                  },
+                  "dice-throne.md": {
+                    "name": "dice-throne.md",
+                    "type": "file",
+                    "size": 287,
+                    "metadata": {
+                      "title": "Dice Throne",
+                      "description": "A digital version of the classical board game Dice Throne, developed with Unity",
+                      "slug": "dice-throne",
+                      "image": "/images/projects/dice-throne.png",
+                      "externalUrl": "https://www.behance.net/gallery/209969955/Dice-Throne-Digital-Edition",
+                      "featured": false
+                    }
+                  },
+                  "innoweaver.md": {
+                    "name": "innoweaver.md",
+                    "type": "file",
+                    "size": 242,
+                    "metadata": {
+                      "title": "InnoWeaver",
+                      "description": "AI-powered innovation platform that bridges HCI research and practical design using LLMs and paper database",
+                      "slug": "innoweaver",
+                      "image": "/images/projects/innoweaver.png",
+                      "externalUrl": "",
+                      "featured": true
+                    }
+                  },
+                  "kidtalk.md": {
+                    "name": "kidtalk.md",
+                    "type": "file",
+                    "size": 286,
+                    "metadata": {
+                      "title": "KidTalk",
+                      "description": "A digital human-assisted app designed to help children in two-child families with learning and personal growth",
+                      "slug": "kidtalk",
+                      "image": "/images/projects/kidtalk.png",
+                      "externalUrl": "https://www.behance.net/gallery/213724567/KidTalk",
+                      "featured": false
+                    }
+                  },
+                  "lajolla.md": {
+                    "name": "lajolla.md",
+                    "type": "file",
+                    "size": 148,
+                    "metadata": {
+                      "title": "Lajolla",
+                      "description": "UCSD CSE 272 renderer",
+                      "slug": "lajolla",
+                      "image": "/images/projects/lajolla.png",
+                      "externalUrl": "",
+                      "featured": false
+                    }
+                  },
+                  "llm-from-scratch.md": {
+                    "name": "llm-from-scratch.md",
+                    "type": "file",
+                    "size": 206,
+                    "metadata": {
+                      "title": "LLM from Scratch",
+                      "description": "Stanford CS336 work",
+                      "slug": "llm-from-scratch",
+                      "image": "/images/projects/llm-from-scratch.png",
+                      "externalUrl": "https://github.com/H1yori233/CS336",
+                      "featured": true
+                    }
+                  },
+                  "pastor.md": {
+                    "name": "pastor.md",
+                    "type": "file",
+                    "size": 237,
+                    "metadata": {
+                      "title": "Pastor",
+                      "description": "Unity-based indoor escape simulation game with social force model",
+                      "slug": "pastor",
+                      "image": "/images/projects/pastor.png",
+                      "externalUrl": "https://www.behance.net/gallery/209969337/Pastor",
+                      "featured": false
+                    }
+                  },
+                  "popup-mid.md": {
+                    "name": "popup-mid.md",
+                    "type": "file",
+                    "size": 292,
+                    "metadata": {
+                      "title": "POP UP MID",
+                      "description": "An interactive, low-cost music pop-up book that uses Kirigami structures to provide rich tactile feedback.",
+                      "slug": "popup-mid",
+                      "image": "/images/projects/popup-mid.png",
+                      "externalUrl": "https://www.behance.net/gallery/209971075/POP-UP-MID",
+                      "featured": false
+                    }
+                  },
+                  "the-silver-key.md": {
+                    "name": "the-silver-key.md",
+                    "type": "file",
+                    "size": 286,
+                    "metadata": {
+                      "title": "The Silver Key",
+                      "description": "A Cthulhu-themed roguelike card game with all art assets generated using AIGC tech",
+                      "slug": "the-silver-key",
+                      "image": "/images/projects/the-silver-key.png",
+                      "externalUrl": "https://www.behance.net/gallery/209983629/The-Silver-Key",
+                      "featured": false
+                    }
+                  },
+                  "vulkan-grass.md": {
+                    "name": "vulkan-grass.md",
+                    "type": "file",
+                    "size": 356,
+                    "metadata": {
+                      "title": "Vulkan Grass Rendering",
+                      "description": "Real-time grass rendering system implemented with Vulkan",
+                      "slug": "vulkan-grass",
+                      "image": "https://raw.githubusercontent.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering/main/img/grass_rendering.gif",
+                      "externalUrl": "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
+                      "featured": true
+                    }
+                  },
+                  "webgpu-rendering.md": {
+                    "name": "webgpu-rendering.md",
+                    "type": "file",
+                    "size": 404,
+                    "metadata": {
+                      "title": "WebGPU Forward+ & Clustered Deferred Rendering",
+                      "description": "Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
+                      "slug": "webgpu-rendering",
+                      "image": "https://raw.githubusercontent.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred/main/img/demo.gif",
+                      "externalUrl": "https://github.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred",
+                      "featured": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

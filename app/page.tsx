@@ -8,8 +8,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useMemo, useEffect } from 'react'
 import { Terminal, AnimatedSpan, TypingAnimation } from '@/components/magicui/terminal'
-import { ProjectCard } from '@/components/project/projects'
-import { projectList } from '@/components/project/projectData'
+import { ProjectCard, Project } from '@/components/project/projects'
+import { getAllProjects } from '@/lib/projectLoader'
 import { Star, Grid, List } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -107,10 +107,16 @@ export default function HomePage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [showFeaturedOnly, setShowFeaturedOnly] = useState(false)
   const [isScrollTopVisible, setIsScrollTopVisible] = useState(false)
+  const [projects, setProjects] = useState<Project[]>([])
+
+  // Load projects from Real FS
+  useEffect(() => {
+    getAllProjects().then(setProjects);
+  }, []);
 
   const filteredProjects = useMemo(() => {
-    return projectList.filter(project => !showFeaturedOnly || project.featured)
-  }, [showFeaturedOnly])
+    return projects.filter(project => !showFeaturedOnly || project.featured)
+  }, [projects, showFeaturedOnly])
 
   const featuredProjects = filteredProjects.filter(p => p.featured)
   const regularProjects = filteredProjects.filter(p => !p.featured)
@@ -245,25 +251,14 @@ export default function HomePage() {
                   </motion.div>
                 </motion.div>
 
-                {/* Right Column: Terminal */}
+                {/* Right Column: Interactive Terminal */}
                 <motion.div
                   className="lg:col-span-3 w-full"
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4, ease: [0.33, 1, 0.68, 1] }}
                 >
-                  <Terminal className="w-full shadow-xl h-[400px]">
-                    <AnimatedSpan delay={200} className="block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ whoami</AnimatedSpan>
-                    <TypingAnimation delay={400} duration={15} className="text-emerald-400 font-semibold">Kaiqin Kong</TypingAnimation>
-                    <AnimatedSpan delay={800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cat about.md</AnimatedSpan>
-                    <div className="whitespace-normal break-words">
-                      <TypingAnimation delay={1000} duration={5} className="text-foreground leading-relaxed block">Hi there! I'm Kaiqin Kong, a master student in Computer Science at UC San Diego.</TypingAnimation>
-                      <TypingAnimation delay={1500} duration={5} className="text-foreground leading-relaxed block">Prior to this, I obtained a Bachelor of Engineering in Industrial Design at Zhejiang University.</TypingAnimation>
-                      <TypingAnimation delay={2000} duration={5} className="text-foreground leading-relaxed block">I'm interested in Machine Learning Systems, currently working on fast video generation.</TypingAnimation>
-                    </div>
-                    <AnimatedSpan delay={2800} className="mt-4 block"><span className="text-green-500">kaichin</span>:<span className="text-blue-500">~</span>$ cv</AnimatedSpan>
-                    <AnimatedSpan delay={3000} className="text-blue-400 underline cursor-pointer hover:text-blue-300 transition-colors block"><Link href="/pdfs/cv.pdf" target="_blank" rel="noopener noreferrer">Kaichin's CV</Link></AnimatedSpan>
-                  </Terminal>
+                  <Terminal className="w-full shadow-xl h-[400px]" />
                 </motion.div>
               </div>
             </motion.section>
