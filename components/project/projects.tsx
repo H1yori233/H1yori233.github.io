@@ -85,7 +85,12 @@ export const ProjectCard = memo(function ProjectCard({
                     alt={project.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover grayscale contrast-125 brightness-110 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-300"
+                    className={cn(
+                      "transition-all duration-300 grayscale contrast-125 brightness-110 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100",
+                      project.image.endsWith('.svg')
+                        ? "object-contain p-4"
+                        : "object-cover"
+                    )}
                     onError={() => setImgError(true)}
                     priority={priority}
                   />
@@ -195,7 +200,12 @@ export const ProjectCard = memo(function ProjectCard({
                   alt={project.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover grayscale contrast-125 brightness-105 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-300"
+                  className={cn(
+                    "transition-all duration-300 grayscale contrast-125 brightness-105 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100",
+                    project.image.endsWith('.svg')
+                      ? "object-contain p-8"
+                      : "object-cover"
+                  )}
                   onError={() => setImgError(true)}
                   priority={priority}
                 />

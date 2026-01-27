@@ -12,7 +12,7 @@ if (!fs.existsSync(FS_ROOT)) {
 }
 
 function parseFrontmatter(content) {
-    const match = content.match(/^---\n([\s\S]*?)\n---/);
+    const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!match) return null;
 
     const frontmatter = match[1];

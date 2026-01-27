@@ -4,5 +4,5 @@ description: "AI-powered innovation platform that bridges HCI research and pract
 slug: "innoweaver"
 image: "/images/projects/innoweaver.png"
 externalUrl: ""
-featured: true
+featured: false
 ---

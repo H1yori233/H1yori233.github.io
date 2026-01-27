@@ -325,7 +325,7 @@ export default function HomePage() {
                       : "flex flex-col gap-4"
                   )}
                 >
-                  {featuredProjects.slice(0, 6).map((project) => (
+                  {featuredProjects.map((project) => (
                     <motion.div key={project.slug} variants={itemVariants}>
                       <ProjectCard project={project} viewMode={viewMode} />
                     </motion.div>
@@ -369,7 +369,7 @@ export default function HomePage() {
                         : "flex flex-col gap-4"
                     )}
                   >
-                    {regularProjects.slice(0, 6).map((project) => (
+                    {regularProjects.map((project) => (
                       <motion.div key={project.slug} variants={itemVariants}>
                         <ProjectCard project={project} viewMode={viewMode} />
                       </motion.div>
@@ -390,7 +390,7 @@ export default function HomePage() {
               className="py-6 border-t border-border/40 text-center"
             >
               <p className="text-xs text-muted-foreground/60 font-mono">
-                Last updated: December 2025
+                Last updated: January 2026
               </p>
             </motion.footer>
 

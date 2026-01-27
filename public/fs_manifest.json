@@ -35,7 +35,7 @@
                       "slug": "cuda-path-tracer",
                       "image": "/images/projects/cuda-path-tracer.png",
                       "externalUrl": "https://github.com/H1yori233/Gart",
-                      "featured": true
+                      "featured": false
                     }
                   },
                   "dice-throne.md": {
@@ -51,6 +51,19 @@
                       "featured": false
                     }
                   },
+                  "fastvideo.md": {
+                    "name": "fastvideo.md",
+                    "type": "file",
+                    "size": 324,
+                    "metadata": {
+                      "title": "FastVideo",
+                      "description": "FastVideo is a unified post-training and inference framework for accelerated video generation.",
+                      "slug": "fastvideo",
+                      "image": "https://raw.githubusercontent.com/hao-ai-lab/FastVideo/main/assets/logos/logo.svg",
+                      "externalUrl": "https://github.com/hao-ai-lab/FastVideo",
+                      "featured": true
+                    }
+                  },
                   "innoweaver.md": {
                     "name": "innoweaver.md",
                     "type": "file",
@@ -61,7 +74,7 @@
                       "slug": "innoweaver",
                       "image": "/images/projects/innoweaver.png",
                       "externalUrl": "",
-                      "featured": true
+                      "featured": false
                     }
                   },
                   "kidtalk.md": {
@@ -100,7 +113,7 @@
                       "slug": "llm-from-scratch",
                       "image": "/images/projects/llm-from-scratch.png",
                       "externalUrl": "https://github.com/H1yori233/CS336",
-                      "featured": true
+                      "featured": false
                     }
                   },
                   "pastor.md": {
@@ -152,7 +165,7 @@
                       "slug": "vulkan-grass",
                       "image": "https://raw.githubusercontent.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering/main/img/grass_rendering.gif",
                       "externalUrl": "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
-                      "featured": true
+                      "featured": false
                     }
                   },
                   "webgpu-rendering.md": {
@@ -165,7 +178,7 @@
                       "slug": "webgpu-rendering",
                       "image": "https://raw.githubusercontent.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred/main/img/demo.gif",
                       "externalUrl": "https://github.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred",
-                      "featured": true
+                      "featured": false
                     }
                   }
                 }
