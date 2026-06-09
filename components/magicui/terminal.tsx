@@ -271,7 +271,7 @@ export const Terminal = ({
           <div className="h-2 w-2 rounded-full bg-green-500"></div>
         </div>
         <span className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-muted-foreground select-none">
-          kaichin@web — zsh
+          kaiqin@web — zsh
         </span>
       </div>
 
@@ -335,7 +335,7 @@ const TerminalLineComponent = ({ line }: { line: TerminalLine }) => {
     return (
       <div className="flex items-start whitespace-pre-wrap break-words mb-1">
         <span className="whitespace-pre">
-          <PromptSpan prompt={line.prompt || 'kaichin:~$'} />
+          <PromptSpan prompt={line.prompt || 'kaiqin:~$'} />
         </span>
         <span className="text-foreground">{displayedText}</span>
       </div>

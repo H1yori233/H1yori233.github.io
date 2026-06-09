@@ -64,7 +64,7 @@ export class FileSystem {
             }
 
             // Set CWD to user home if exists, else root
-            const home = this.resolvePath('/home/kaichin');
+            const home = this.resolvePath('/home/kaiqin');
             if (home && home.type === 'directory') {
                 this._cwd = home as Directory;
             } else {
@@ -203,7 +203,7 @@ export class FileSystem {
 
     // Shorthand for home directory
     get homePath(): string {
-        return '/home/kaichin';
+        return '/home/kaiqin';
     }
 }
 

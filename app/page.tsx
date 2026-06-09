@@ -41,7 +41,7 @@ const TopBar = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              KAICHIN
+              KAIQIN
             </motion.span>
             <motion.div
               className="absolute -bottom-1 left-0 h-0.5 bg-foreground origin-left"

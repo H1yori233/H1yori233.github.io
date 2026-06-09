@@ -91,7 +91,7 @@ const projectList = [
     }
 ];
 
-const PROJECTS_DIR = path.join(process.cwd(), 'public/fs/home/kaichin/projects');
+const PROJECTS_DIR = path.join(process.cwd(), 'public/fs/home/kaiqin/projects');
 
 if (!fs.existsSync(PROJECTS_DIR)) {
     fs.mkdirSync(PROJECTS_DIR, { recursive: true });

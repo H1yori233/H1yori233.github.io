@@ -7,8 +7,8 @@
         "name": "home",
         "type": "directory",
         "children": {
-          "kaichin": {
-            "name": "kaichin",
+          "kaiqin": {
+            "name": "kaiqin",
             "type": "directory",
             "children": {
               "about.md": {
@@ -28,7 +28,7 @@
                   "cuda-path-tracer.md": {
                     "name": "cuda-path-tracer.md",
                     "type": "file",
-                    "size": 243,
+                    "size": 244,
                     "metadata": {
                       "title": "CUDA Path Tracer",
                       "description": "A real-time interactive path tracer implemented with CUDA",
@@ -67,7 +67,7 @@
                   "innoweaver.md": {
                     "name": "innoweaver.md",
                     "type": "file",
-                    "size": 242,
+                    "size": 243,
                     "metadata": {
                       "title": "InnoWeaver",
                       "description": "AI-powered innovation platform that bridges HCI research and practical design using LLMs and paper database",
@@ -113,7 +113,7 @@
                       "slug": "llm-from-scratch",
                       "image": "/images/projects/llm-from-scratch.png",
                       "externalUrl": "https://github.com/H1yori233/CS336",
-                      "featured": false
+                      "featured": true
                     }
                   },
                   "pastor.md": {
@@ -165,13 +165,13 @@
                       "slug": "vulkan-grass",
                       "image": "https://raw.githubusercontent.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering/main/img/grass_rendering.gif",
                       "externalUrl": "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
-                      "featured": false
+                      "featured": true
                     }
                   },
                   "webgpu-rendering.md": {
                     "name": "webgpu-rendering.md",
                     "type": "file",
-                    "size": 404,
+                    "size": 405,
                     "metadata": {
                       "title": "WebGPU Forward+ & Clustered Deferred Rendering",
                       "description": "Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
