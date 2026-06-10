@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, MotionConfig } from 'framer-motion'
@@ -59,7 +59,7 @@ function Folio({ n, title }: { n: string; title: string }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Living detail: the page knows what time it is for you             */
+/*  Living detail: the visitor's own clock                             */
 /* ------------------------------------------------------------------ */
 
 function useLocalTime() {
@@ -72,65 +72,30 @@ function useLocalTime() {
   return now
 }
 
-function greetingFor(hour: number): { hello: string; aside: string } {
-  if (hour >= 5 && hour < 12) return { hello: 'Good morning.', aside: 'Early start.' }
-  if (hour >= 12 && hour < 17) return { hello: 'Good afternoon.', aside: 'Hope the day is kind.' }
-  if (hour >= 17 && hour < 22) return { hello: 'Good evening.', aside: 'Settling in.' }
-  return { hello: "It's late.", aside: 'So am I, probably.' }
-}
-
 /* ------------------------------------------------------------------ */
-/*  Catalogue grouping                                                 */
+/*  Project list                                                       */
 /* ------------------------------------------------------------------ */
 
-const CATEGORY: Record<string, string> = {
-  'llm-from-scratch': 'Systems & Graphics',
-  'cuda-path-tracer': 'Systems & Graphics',
-  'vulkan-grass': 'Systems & Graphics',
-  'webgpu-rendering': 'Systems & Graphics',
-  lajolla: 'Systems & Graphics',
-  innoweaver: 'Design & Play',
-  kidtalk: 'Design & Play',
-  'popup-mid': 'Design & Play',
-  'dice-throne': 'Design & Play',
-  pastor: 'Design & Play',
-  'the-silver-key': 'Design & Play',
-}
-const GROUP_ORDER = ['Systems & Graphics', 'Design & Play']
-
-function CatalogueRow({ project }: { project: Project }) {
+function ProjectRow({ project }: { project: Project }) {
   const href = project.externalUrl || ''
   const linked = !!href
 
   const inner = (
     <>
-      <div className="relative h-16 w-24 flex-shrink-0 overflow-hidden bg-muted">
-        {project.image && (
-          <Image
-            src={project.image}
-            alt=""
-            fill
-            sizes="96px"
-            className="object-cover grayscale opacity-90 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03]"
-          />
-        )}
-      </div>
-      <div className="min-w-0 flex-1">
-        <h4 className="text-lg font-normal leading-snug tracking-tight">
-          {project.title}
-        </h4>
-        <p className="mt-0.5 truncate text-sm text-muted-foreground">
-          {project.description}
-        </p>
-      </div>
-      <span className="label flex-shrink-0 self-center text-muted-foreground/70 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-0.5">
+      <h4 className="text-lg font-normal leading-snug tracking-tight md:whitespace-nowrap">
+        {project.title}
+      </h4>
+      <p className="hidden flex-1 truncate text-sm text-muted-foreground md:block">
+        {project.description}
+      </p>
+      <span className="label ml-auto flex-shrink-0 self-center text-muted-foreground/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground">
         {linked ? '↗' : '·'}
       </span>
     </>
   )
 
   const base =
-    'group flex items-center gap-5 py-5 border-b border-border first:border-t'
+    'group flex items-baseline gap-5 border-b border-border py-4 first:border-t'
 
   return linked ? (
     <Link href={href} target="_blank" rel="noopener noreferrer" className={base}>
@@ -156,17 +121,6 @@ export default function HomePage() {
   const fastvideo = projects.find((p) => p.slug === 'fastvideo')
   const rest = projects.filter((p) => p.slug !== 'fastvideo')
 
-  const grouped = useMemo(() => {
-    const map = new Map<string, Project[]>()
-    for (const p of rest) {
-      const g = CATEGORY[p.slug] || 'Other'
-      if (!map.has(g)) map.set(g, [])
-      map.get(g)!.push(p)
-    }
-    return GROUP_ORDER.filter((g) => map.has(g)).map((g) => ({ group: g, items: map.get(g)! }))
-  }, [rest])
-
-  const greeting = now ? greetingFor(now.getHours()) : null
   const clock = now
     ? now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     : '--:--:--'
@@ -200,7 +154,7 @@ export default function HomePage() {
               </motion.p>
 
               <motion.h1
-                className="display text-[clamp(2.5rem,6vw,4.75rem)]"
+                className="display text-[clamp(2.5rem,6vw,5rem)]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
@@ -209,16 +163,6 @@ export default function HomePage() {
                 <br />
                 generation fast.
               </motion.h1>
-
-              <motion.p
-                className="measure mt-8 text-[clamp(1.05rem,2.2vw,1.35rem)] leading-relaxed text-foreground/80"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
-              >
-                An industrial designer who wandered into systems engineering
-                and stayed for the milliseconds.
-              </motion.p>
             </div>
 
             <motion.div
@@ -251,24 +195,20 @@ export default function HomePage() {
         <div className="grid gap-12 md:grid-cols-[1fr_minmax(0,16rem)] md:gap-16">
           <div>
             <Reveal>
-              <Folio n="01" title="On the work" />
+              <Folio n="01" title="About" />
             </Reveal>
 
             <Reveal delay={0.05}>
               <div className="measure mt-10 space-y-7 text-[clamp(1.25rem,2.6vw,1.6rem)] leading-[1.65] text-foreground/90">
                 <p>
-                  I started in industrial design — drawing objects you could pick
-                  up, weigh, turn over in your hands. These days I write systems
-                  software, and the thing I turn over is latency.
+                  Hi there! I&rsquo;m Kaiqin Kong, a master&rsquo;s student in
+                  Computer Science at UC San Diego. Prior to this, I obtained a
+                  Bachelor of Engineering in Industrial Design at Zhejiang
+                  University.
                 </p>
                 <p>
-                  The craft didn&rsquo;t change, only the material. A good tool
-                  still disappears the moment it works; my job is to keep chasing
-                  that vanishing — now measured in milliseconds, on the way to
-                  video that generates as fast as you can picture it.
-                </p>
-                <p className="italic text-muted-foreground">
-                  (I do still miss the foam models. A little.)
+                  I&rsquo;m interested in machine learning systems, currently
+                  working on fast video generation.
                 </p>
               </div>
             </Reveal>
@@ -323,16 +263,8 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={0.05}>
               <p className="measure mt-6 text-[clamp(1.15rem,2.4vw,1.5rem)] leading-relaxed text-foreground/85">
-                A unified framework for accelerated video generation —
-                post-training and inference under one roof.
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="measure mt-8 text-[clamp(1.4rem,3vw,2rem)] leading-snug">
-                The goal is plain:&nbsp;
-                <span className="italic">
-                  video that took minutes, returned in seconds.
-                </span>
+                A unified post-training and inference framework for
+                accelerated video generation.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -379,66 +311,32 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SELECTED WORK — the catalogue                               */}
+      {/*  PROJECTS — the list                                         */}
       {/* ============================================================ */}
       <section className="paper-grain relative content-grid py-[clamp(5rem,16vh,11rem)]">
         <Reveal>
-          <Folio n="03" title="Selected work" />
-        </Reveal>
-        <Reveal delay={0.05}>
-          <p className="measure mt-10 text-[clamp(1.15rem,2.4vw,1.45rem)] leading-relaxed text-foreground/80">
-            A few other things I&rsquo;ve made — renderers, a language model
-            built from scratch, some games, and a pop-up book that plays music.
-          </p>
+          <Folio n="03" title="Projects" />
         </Reveal>
 
-        <div className="mt-14 space-y-16">
-          {grouped.map(({ group, items }) => (
-            <Reveal key={group}>
-              <h3 className="label mb-3 text-muted-foreground">{group}</h3>
-              <div>
-                {items.map((p) => (
-                  <CatalogueRow key={p.slug} project={p} />
-                ))}
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={0.05}>
+          <div className="mt-10">
+            {rest.map((p) => (
+              <ProjectRow key={p.slug} project={p} />
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* ============================================================ */}
-      {/*  COLOPHON — where the book ends and the author says hello    */}
+      {/*  COLOPHON — contact, and the page's quiet sign-off           */}
       {/* ============================================================ */}
-      <section className="paper-grain relative content-grid pb-12 pt-[clamp(5rem,16vh,11rem)]">
+      <section className="paper-grain relative content-grid pb-12 pt-[clamp(4rem,12vh,8rem)]">
         <Reveal>
           <Folio n="04" title="Colophon" />
         </Reveal>
 
         <Reveal delay={0.05}>
-          <h2 className="display mt-10 text-[clamp(2.5rem,7vw,5rem)]">
-            {greeting ? greeting.hello : 'Hello.'}
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="measure mt-8 space-y-6 text-[clamp(1.15rem,2.5vw,1.5rem)] leading-relaxed text-foreground/85">
-            <p>
-              You&rsquo;ve reached the bottom of the page. Most people
-              don&rsquo;t — so, genuinely, thank you for reading.
-              {greeting && (
-                <span className="text-muted-foreground"> {greeting.aside}</span>
-              )}
-            </p>
-            <p>
-              I&rsquo;m in San Diego, usually up later than I should be,
-              usually building something. If any of this resonated, I&rsquo;d
-              like to hear from you.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.15}>
-          <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
             {[
               ['GitHub', 'https://github.com/H1yori233'],
               ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
@@ -460,8 +358,8 @@ export default function HomePage() {
         </Reveal>
 
         {/* living detail: the visitor's own clock, ticking */}
-        <Reveal delay={0.2}>
-          <div className="mt-20 flex flex-wrap items-end justify-between gap-6 border-t border-border pt-6">
+        <Reveal delay={0.1}>
+          <div className="mt-16 flex flex-wrap items-end justify-between gap-6 border-t border-border pt-6">
             <div>
               <div className="flex items-center gap-2">
                 <Seal />
