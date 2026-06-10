@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, MotionConfig } from 'framer-motion'
+import { FaGithub, FaLinkedin, FaBehance } from 'react-icons/fa'
+import { MdEmail } from 'react-icons/md'
 import RippleField from '@/components/hero/RippleField'
 import { Terminal } from '@/components/magicui/terminal'
 import { getAllProjects } from '@/lib/projectLoader'
@@ -224,94 +226,63 @@ export default function HomePage() {
             </span>
           </div>
 
-          {/* title + title block, with the working shell beside them */}
-          <div className="grid flex-1 items-center gap-12 py-12 lg:grid-cols-5 lg:gap-14">
-            <div className="lg:col-span-3">
-              <motion.h1
-                className="display text-[clamp(3rem,7vw,5.5rem)]"
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              >
-                Kaiqin Kong
-              </motion.h1>
-
-              <motion.p
-                className="mt-5 text-[clamp(1.25rem,2.4vw,1.6rem)] leading-snug text-foreground/85"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              >
-                Making video generation fast.
-              </motion.p>
-
-              {/* title block — a drawing's record card: photo cell + facts */}
-              <motion.div
-                className="mt-10 flex max-w-2xl border border-foreground/40 bg-background/70"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
-              >
-                <div className="group relative w-24 flex-shrink-0 border-r border-border bg-muted sm:w-32">
-                  <Image
-                    src="/images/avatar.png"
-                    alt="Kaiqin Kong"
-                    fill
-                    sizes="128px"
-                    className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0"
-                    priority
-                  />
-                </div>
-                <dl className="min-w-0 flex-1 divide-y divide-border">
-                  {[
-                    ['Now', 'M.S. Computer Science — UC San Diego'],
-                    ['Before', 'B.Eng. Industrial Design — Zhejiang University'],
-                    ['Focus', 'ML systems · fast video generation'],
-                  ].map(([k, v]) => (
-                    <div
-                      key={k}
-                      className="grid grid-cols-[4.5rem_1fr] items-baseline gap-3 px-4 py-2.5 sm:grid-cols-[5.5rem_1fr] sm:gap-4"
-                    >
-                      <dt className="label text-muted-foreground/70">{k}</dt>
-                      <dd className="font-mono text-[0.8rem] leading-relaxed text-foreground/85">
-                        {v}
-                      </dd>
-                    </div>
-                  ))}
-                  <div className="grid grid-cols-[4.5rem_1fr] items-baseline gap-3 px-4 py-2.5 sm:grid-cols-[5.5rem_1fr] sm:gap-4">
-                    <dt className="label text-muted-foreground/70">Contact</dt>
-                    <dd className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[0.8rem] leading-relaxed">
-                      {[
-                        ['GitHub', 'https://github.com/H1yori233'],
-                        ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
-                        ['Email', 'mailto:k1kong@ucsd.edu'],
-                        ['Behance', 'https://www.behance.net/kaiqinkong'],
-                      ].map(([label, href]) => (
-                        <Link
-                          key={label}
-                          href={href}
-                          target={href.startsWith('mailto:') ? undefined : '_blank'}
-                          rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                          className="text-foreground/85 underline decoration-border underline-offset-4 transition-colors hover:text-[hsl(var(--seal))] hover:decoration-[hsl(var(--seal))]"
-                        >
-                          {label}
-                        </Link>
-                      ))}
-                    </dd>
-                  </div>
-                </dl>
-              </motion.div>
-            </div>
-
+          {/* author column + working shell */}
+          <div className="grid flex-1 items-center gap-12 py-12 lg:grid-cols-5 lg:gap-16">
             <motion.div
               className="lg:col-span-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            >
+              <div className="group relative aspect-square w-44 overflow-hidden border border-foreground/40 bg-muted sm:w-52">
+                <Image
+                  src="/images/avatar.png"
+                  alt="Kaiqin Kong"
+                  fill
+                  sizes="208px"
+                  className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0"
+                  priority
+                />
+              </div>
+
+              <h1 className="display mt-6 text-[clamp(2.25rem,4vw,3rem)]">
+                Kaiqin Kong
+              </h1>
+              <p className="mt-2 text-[clamp(1rem,1.6vw,1.2rem)] leading-snug text-foreground/80">
+                Making video generation fast.
+              </p>
+
+              {/* social — squared cells, the document's register marks */}
+              <div className="mt-6 flex gap-2.5">
+                {[
+                  { href: 'https://github.com/H1yori233', icon: FaGithub, label: 'GitHub' },
+                  { href: 'https://www.linkedin.com/in/kaiqin-kong/', icon: FaLinkedin, label: 'LinkedIn' },
+                  { href: 'mailto:k1kong@ucsd.edu', icon: MdEmail, label: 'Email' },
+                  { href: 'https://www.behance.net/kaiqinkong', icon: FaBehance, label: 'Behance' },
+                ].map(({ href, icon: Icon, label }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    target={href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center border border-border text-muted-foreground transition-colors duration-300 hover:border-foreground/50 hover:text-foreground"
+                  >
+                    <Icon className="h-[18px] w-[18px]" />
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="lg:col-span-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.35 }}
             >
               <Terminal
-                className="h-[340px] shadow-sm lg:h-[420px]"
-                bootCommands={['whoami', 'cv']}
+                className="h-[360px] shadow-sm lg:h-[440px]"
+                bootCommands={['whoami', 'cat about.md', 'cv']}
               />
             </motion.div>
           </div>
