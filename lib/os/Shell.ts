@@ -31,7 +31,7 @@ export class Shell {
         const displayPath = cwd.startsWith(home)
             ? cwd.replace(home, '~')
             : cwd;
-        return `kaichin:${displayPath}$`;
+        return `kaiqin:${displayPath}$`;
     }
 
     // Parse a command line into pipeline segments

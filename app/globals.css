@@ -314,6 +314,25 @@
     background: hsl(var(--primary) / 0.1);
     color: hsl(var(--foreground));
   }
+
+  /* Thin scrollbar for the terminal window */
+  .terminal-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
 }
 
 /* Modern keyframe animations */

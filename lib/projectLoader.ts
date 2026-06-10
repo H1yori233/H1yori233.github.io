@@ -25,8 +25,8 @@ export async function getAllProjects(): Promise<Project[]> {
 
         const manifest: Manifest = await response.json();
 
-        // Navigate to projects directory: root -> children -> home -> kaichin -> projects
-        const projectsDir = manifest.root?.children?.['home']?.children?.['kaichin']?.children?.['projects'];
+        // Navigate to projects directory: root -> children -> home -> kaiqin -> projects
+        const projectsDir = manifest.root?.children?.['home']?.children?.['kaiqin']?.children?.['projects'];
 
         if (!projectsDir || !projectsDir.children) {
             console.warn('Projects directory not found in manifest');

@@ -26,11 +26,11 @@ const ibmPlexSerif = IBM_Plex_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kaichin's Website",
-    template: "%s | Kaichin's Website"
+    default: "Kaiqin's Website",
+    template: "%s | Kaiqin's Website"
   },
-  description: "Kaichin's Website",
-  keywords: ["Kaichin", "Kaiqin Kong", "Portfolio", "Computer Science", "Industrial Design", "UC San Diego", "UCSD"],
+  description: "Kaiqin's Website",
+  keywords: ["Kaiqin", "Kaiqin Kong", "Portfolio", "Computer Science", "Industrial Design", "UC San Diego", "UCSD"],
   authors: [{ name: "Kaiqin Kong" }],
   creator: "Kaiqin Kong",
   publisher: "Kaiqin Kong",
@@ -47,24 +47,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://h1yori233.github.io',
-    title: "Kaichin's Website",
-    description: "Kaichin's Website",
-    siteName: "Kaichin's Website",
+    title: "Kaiqin's Website",
+    description: "Kaiqin's Website",
+    siteName: "Kaiqin's Website",
     images: [
       {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: "Kaichin's Website",
+        alt: "Kaiqin's Website",
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Kaichin's Website",
-    description: "Kaichin's Website",
+    title: "Kaiqin's Website",
+    description: "Kaiqin's Website",
     images: ['/images/twitter-image.png'],
-    creator: '@kaichin',
+    creator: '@kaiqin',
   },
   robots: {
     index: true,
