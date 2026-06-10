@@ -25,37 +25,38 @@
   }
 
   :root {
-    /* ---- The warm world (daytime) ---- */
-    /* Warm paper — pulled away from cream, a touch of grey so it reads as
-       printed stock rather than the default AI off-white. */
-    --background: 39 23% 93%;
-    --foreground: 28 13% 14%;      /* warm ink, never pure black */
+    /* ---- The paper (one world, daytime throughout) ---- */
+    /* Printed-document white: warm, but desaturated — engineering paper,
+       not cream stationery. */
+    --background: 40 14% 95%;
+    --foreground: 30 10% 13%;      /* warm ink, never pure black */
 
-    --muted: 36 19% 88%;           /* a slightly deeper paper for quiet fills */
-    --muted-foreground: 32 9% 42%; /* warm grey-brown */
+    --muted: 40 12% 90%;           /* a slightly deeper paper for quiet fills */
+    --muted-foreground: 33 7% 40%; /* warm grey-brown */
 
-    --border: 34 16% 84%;          /* low-contrast hairline */
-    --input: 34 16% 84%;
-    --ring: 28 13% 14%;
+    --border: 38 10% 80%;          /* visible enough to rule a page */
+    --input: 38 10% 80%;
+    --ring: 30 10% 13%;
 
-    --card: 39 23% 93%;
-    --card-foreground: 28 13% 14%;
-    --popover: 39 23% 93%;
-    --popover-foreground: 28 13% 14%;
+    --card: 40 14% 95%;
+    --card-foreground: 30 10% 13%;
+    --popover: 40 14% 95%;
+    --popover-foreground: 30 10% 13%;
 
-    --primary: 28 13% 14%;
-    --primary-foreground: 39 23% 93%;
-    --secondary: 36 19% 88%;
-    --secondary-foreground: 28 13% 14%;
-    --accent: 36 19% 88%;
-    --accent-foreground: 28 13% 14%;
+    --primary: 30 10% 13%;
+    --primary-foreground: 40 14% 95%;
+    --secondary: 40 12% 90%;
+    --secondary-foreground: 30 10% 13%;
+    --accent: 40 12% 90%;
+    --accent-foreground: 30 10% 13%;
     --destructive: 6 60% 45%;
-    --destructive-foreground: 39 23% 93%;
+    --destructive-foreground: 40 14% 95%;
 
     /* The one personal mark — a cinnabar seal. Used as punctuation, never as fill. */
     --seal: 8 66% 46%;
 
-    --radius: 0.25rem;
+    /* Drawings have square corners. */
+    --radius: 0.125rem;
     --content-width: 1180px;
     --section-padding: clamp(2rem, 8vw, 8rem);
 

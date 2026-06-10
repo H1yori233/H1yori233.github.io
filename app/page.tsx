@@ -47,13 +47,18 @@ function Reveal({
   )
 }
 
-// A running head / folio, the way a book numbers its sections.
+// A section rule, the way a technical document opens its chapters:
+// a firm line, an index, a running head.
 function Folio({ n, title }: { n: string; title: string }) {
   return (
-    <div className="label flex items-center gap-3 text-muted-foreground">
-      <span>{n}</span>
-      <span className="h-px w-8 bg-current opacity-40" />
-      <span>{title}</span>
+    <div className="flex items-baseline justify-between border-t-2 border-foreground/80 pt-3">
+      <div className="label flex items-baseline gap-4">
+        <span className="text-foreground">{n}</span>
+        <span className="text-muted-foreground">{title}</span>
+      </div>
+      <span className="label hidden text-muted-foreground/60 sm:block">
+        K. Kong · 2026
+      </span>
     </div>
   )
 }
@@ -76,12 +81,15 @@ function useLocalTime() {
 /*  Project list                                                       */
 /* ------------------------------------------------------------------ */
 
-function ProjectRow({ project }: { project: Project }) {
+function ProjectRow({ project, index }: { project: Project; index: number }) {
   const href = project.externalUrl || ''
   const linked = !!href
 
   const inner = (
     <>
+      <span className="label w-7 flex-shrink-0 text-muted-foreground/50">
+        {String(index + 1).padStart(2, '0')}
+      </span>
       <h4 className="text-lg font-normal leading-snug tracking-tight md:whitespace-nowrap">
         {project.title}
       </h4>
@@ -175,40 +183,88 @@ export default function HomePage() {
     <MotionConfig reducedMotion="user">
     <main className="bg-background text-foreground">
       {/* ============================================================ */}
-      {/*  HERO — the breathing page                                   */}
+      {/*  HERO — the title page: name, title block, working shell     */}
       {/* ============================================================ */}
       <section className="paper-grain relative flex min-h-[100svh] flex-col overflow-hidden">
         <RippleField />
 
         <div className="content-grid relative z-10 flex flex-1 flex-col">
-          {/* top mark */}
-          <div className="flex items-center gap-2 pt-8">
-            <Seal />
-            <span className="label text-muted-foreground">Kaiqin Kong</span>
+          {/* document head */}
+          <div className="flex items-center justify-between border-b-2 border-foreground/80 pb-3 pt-8">
+            <div className="flex items-center gap-2">
+              <Seal />
+              <span className="label">Kaiqin Kong</span>
+            </div>
+            <span className="label text-muted-foreground/70">
+              Portfolio · Rev. 10
+            </span>
           </div>
 
-          {/* the statement, with the working shell beside it */}
-          <div className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-5 lg:gap-14">
+          {/* title + title block, with the working shell beside them */}
+          <div className="grid flex-1 items-center gap-12 py-12 lg:grid-cols-5 lg:gap-14">
             <div className="lg:col-span-3">
-              <motion.p
-                className="label mb-6 text-muted-foreground"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.1 }}
-              >
-                CS @ UC San Diego &nbsp;·&nbsp; formerly industrial design
-              </motion.p>
-
               <motion.h1
-                className="display text-[clamp(2.5rem,6vw,5rem)]"
+                className="display text-[clamp(3rem,7vw,5.5rem)]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               >
-                Making video
-                <br />
-                generation fast.
+                Kaiqin Kong
               </motion.h1>
+
+              <motion.p
+                className="mt-5 text-[clamp(1.25rem,2.4vw,1.6rem)] leading-snug text-foreground/85"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+              >
+                Making video generation fast.
+              </motion.p>
+
+              {/* title block — the way a drawing carries its facts */}
+              <motion.dl
+                className="mt-10 max-w-xl divide-y divide-border border border-foreground/40 bg-background/70"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+              >
+                {[
+                  ['Now', 'M.S. Computer Science — UC San Diego'],
+                  ['Before', 'B.Eng. Industrial Design — Zhejiang University'],
+                  ['Focus', 'ML systems · fast video generation'],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 px-4 py-2.5"
+                  >
+                    <dt className="label text-muted-foreground/70">{k}</dt>
+                    <dd className="font-mono text-[0.8rem] leading-relaxed text-foreground/85">
+                      {v}
+                    </dd>
+                  </div>
+                ))}
+                <div className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 px-4 py-2.5">
+                  <dt className="label text-muted-foreground/70">Contact</dt>
+                  <dd className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[0.8rem] leading-relaxed">
+                    {[
+                      ['GitHub', 'https://github.com/H1yori233'],
+                      ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
+                      ['Email', 'mailto:k1kong@ucsd.edu'],
+                      ['Behance', 'https://www.behance.net/kaiqinkong'],
+                    ].map(([label, href]) => (
+                      <Link
+                        key={label}
+                        href={href}
+                        target={href.startsWith('mailto:') ? undefined : '_blank'}
+                        rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                        className="text-foreground/85 underline decoration-border underline-offset-4 transition-colors hover:text-[hsl(var(--seal))] hover:decoration-[hsl(var(--seal))]"
+                      >
+                        {label}
+                      </Link>
+                    ))}
+                  </dd>
+                </div>
+              </motion.dl>
             </div>
 
             <motion.div
@@ -226,7 +282,7 @@ export default function HomePage() {
 
           {/* scroll cue */}
           <motion.div
-            className="label flex items-center gap-3 pb-10 text-muted-foreground/70"
+            className="label flex items-center gap-3 pb-8 text-muted-foreground/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
@@ -240,32 +296,30 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  THESIS — who, in his own voice                              */}
       {/* ============================================================ */}
-      <section className="paper-grain relative content-grid py-[clamp(5rem,16vh,11rem)]">
-        <div className="grid gap-12 md:grid-cols-[1fr_minmax(0,16rem)] md:gap-16">
-          <div>
-            <Reveal>
-              <Folio n="01" title="About" />
-            </Reveal>
+      <section className="paper-grain relative content-grid py-[clamp(4rem,10vh,7rem)]">
+        <Reveal>
+          <Folio n="01" title="About" />
+        </Reveal>
 
-            <Reveal delay={0.05}>
-              <div className="measure mt-10 space-y-7 text-[clamp(1.25rem,2.6vw,1.6rem)] leading-[1.65] text-foreground/90">
-                <p>
-                  Hi there! I&rsquo;m Kaiqin Kong, a master&rsquo;s student in
-                  Computer Science at UC San Diego. Prior to this, I obtained a
-                  Bachelor of Engineering in Industrial Design at Zhejiang
-                  University.
-                </p>
-                <p>
-                  I&rsquo;m interested in machine learning systems, currently
-                  working on fast video generation.
-                </p>
-              </div>
-            </Reveal>
-          </div>
+        <div className="mt-10 grid gap-10 md:grid-cols-[1fr_minmax(0,15rem)] md:gap-16">
+          <Reveal delay={0.05}>
+            <div className="measure space-y-6 text-[clamp(1.1rem,2vw,1.3rem)] leading-relaxed text-foreground/90">
+              <p>
+                Hi there! I&rsquo;m Kaiqin Kong, a master&rsquo;s student in
+                Computer Science at UC San Diego. Prior to this, I obtained a
+                Bachelor of Engineering in Industrial Design at Zhejiang
+                University.
+              </p>
+              <p>
+                I&rsquo;m interested in machine learning systems, currently
+                working on fast video generation.
+              </p>
+            </div>
+          </Reveal>
 
-          {/* margin column — the author's photo, then the engineer's hand */}
-          <Reveal delay={0.1} className="md:pt-16">
-            <figure className="group mb-10">
+          {/* margin figure — the author */}
+          <Reveal delay={0.1}>
+            <figure className="group">
               <div className="relative aspect-[4/5] w-full max-w-[15rem] overflow-hidden border border-border bg-muted">
                 <Image
                   src="/images/avatar.png"
@@ -279,20 +333,6 @@ export default function HomePage() {
                 Fig. 1 — The author
               </figcaption>
             </figure>
-            <dl className="space-y-6">
-              {[
-                ['Now', 'M.S. Computer Science\nUC San Diego'],
-                ['Before', 'B.Eng. Industrial Design\nZhejiang University'],
-                ['Chasing', 'ML Systems\nVideo generation'],
-              ].map(([k, v]) => (
-                <div key={k}>
-                  <dt className="label text-muted-foreground/70">{k}</dt>
-                  <dd className="mt-1 whitespace-pre-line font-mono text-sm leading-relaxed text-foreground/80">
-                    {v}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </Reveal>
         </div>
       </section>
@@ -300,7 +340,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  FASTVIDEO — the screening room; lights down for the work    */}
       {/* ============================================================ */}
-      <section className="nightfall relative content-grid py-[clamp(6rem,18vh,12rem)]">
+      <section className="nightfall relative content-grid py-[clamp(5rem,13vh,9rem)]">
         <Reveal>
           <Folio n="02" title="Screening room" />
         </Reveal>
@@ -340,11 +380,16 @@ export default function HomePage() {
 
           {fastvideo && (
             <Reveal delay={0.1}>
-              <FeaturedPlate
-                src={fastvideo.image}
-                href={fastvideo.externalUrl}
-                title="FastVideo"
-              />
+              <figure>
+                <FeaturedPlate
+                  src={fastvideo.image}
+                  href={fastvideo.externalUrl}
+                  title="FastVideo"
+                />
+                <figcaption className="label mt-3 text-muted-foreground/70">
+                  Fig. 2 — FastVideo
+                </figcaption>
+              </figure>
             </Reveal>
           )}
         </div>
@@ -353,15 +398,15 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  PROJECTS — the list                                         */}
       {/* ============================================================ */}
-      <section className="paper-grain relative content-grid py-[clamp(5rem,16vh,11rem)]">
+      <section className="paper-grain relative content-grid py-[clamp(4rem,10vh,7rem)]">
         <Reveal>
           <Folio n="03" title="Projects" />
         </Reveal>
 
         <Reveal delay={0.05}>
           <div className="mt-10">
-            {rest.map((p) => (
-              <ProjectRow key={p.slug} project={p} />
+            {rest.map((p, i) => (
+              <ProjectRow key={p.slug} project={p} index={i} />
             ))}
           </div>
         </Reveal>
@@ -370,36 +415,14 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  COLOPHON — contact, and the page's quiet sign-off           */}
       {/* ============================================================ */}
-      <section className="paper-grain relative content-grid pb-12 pt-[clamp(4rem,12vh,8rem)]">
+      <section className="paper-grain relative content-grid pb-10 pt-[clamp(3rem,8vh,5rem)]">
         <Reveal>
           <Folio n="04" title="Colophon" />
         </Reveal>
 
-        <Reveal delay={0.05}>
-          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
-            {[
-              ['GitHub', 'https://github.com/H1yori233'],
-              ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
-              ['Email', 'mailto:k1kong@ucsd.edu'],
-              ['Behance', 'https://www.behance.net/kaiqinkong'],
-            ].map(([label, href]) => (
-              <Link
-                key={label}
-                href={href}
-                target={href.startsWith('mailto:') ? undefined : '_blank'}
-                rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                className="label border-b border-foreground/30 pb-1 transition-colors hover:border-[hsl(var(--seal))] hover:text-[hsl(var(--seal))]"
-              >
-                {label}
-                <span className="ml-1.5 opacity-60">↗</span>
-              </Link>
-            ))}
-          </div>
-        </Reveal>
-
         {/* living detail: the visitor's own clock, ticking */}
-        <Reveal delay={0.1}>
-          <div className="mt-16 flex flex-wrap items-end justify-between gap-6 border-t border-border pt-6">
+        <Reveal delay={0.05}>
+          <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2">
                 <Seal />
