@@ -11,9 +11,11 @@ const config: Config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['var(--font-ibm-plex-sans)', 'system-ui', 'sans-serif'],
-				mono: ['var(--font-ibm-plex-mono)', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
-				serif: ['var(--font-ibm-plex-serif)', 'Georgia', 'serif'],
+				// The whole site speaks in an editorial serif by default;
+				// the mono is reserved for the engineer's annotations.
+				sans: ['var(--font-serif)', 'Georgia', 'Cambria', 'serif'],
+				serif: ['var(--font-serif)', 'Georgia', 'Cambria', 'serif'],
+				mono: ['var(--font-mono)', 'ui-monospace', 'Menlo', 'monospace'],
 			},
 
 			spacing: {

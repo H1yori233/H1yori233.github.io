@@ -1,35 +1,31 @@
-import { IBM_Plex_Sans, IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
+import { Newsreader, IBM_Plex_Mono } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import './globals.css'
 import { Metadata } from 'next'
 
-const ibmPlexSans = IBM_Plex_Sans({ 
+// The human voice — an editorial serif with optical sizing and a beautiful italic.
+const newsreader = Newsreader({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-ibm-plex-sans',
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
   display: 'swap',
 })
 
-const ibmPlexMono = IBM_Plex_Mono({ 
+// The engineer's hand — used for labels, years, numbers, the clock.
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-ibm-plex-mono',
-  display: 'swap',
-})
-
-const ibmPlexSerif = IBM_Plex_Serif({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-ibm-plex-serif',
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: "Kaiqin's Website",
-    template: "%s | Kaiqin's Website"
+    default: "Kaiqin Kong",
+    template: "%s — Kaiqin Kong"
   },
-  description: "Kaiqin's Website",
+  description: "Kaiqin Kong — an industrial designer turned systems engineer, making video generation fast.",
   keywords: ["Kaiqin", "Kaiqin Kong", "Portfolio", "Computer Science", "Industrial Design", "UC San Diego", "UCSD"],
   authors: [{ name: "Kaiqin Kong" }],
   creator: "Kaiqin Kong",
@@ -90,11 +86,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(
-          "min-h-screen font-sans antialiased",
-          ibmPlexSans.variable,
+          "min-h-screen antialiased",
+          newsreader.variable,
           ibmPlexMono.variable,
-          ibmPlexSerif.variable,
-          ibmPlexSans.className
         )}>
         {children}
       </body>
