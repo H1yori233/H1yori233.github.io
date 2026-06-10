@@ -221,50 +221,62 @@ export default function HomePage() {
                 Making video generation fast.
               </motion.p>
 
-              {/* title block — the way a drawing carries its facts */}
-              <motion.dl
-                className="mt-10 max-w-xl divide-y divide-border border border-foreground/40 bg-background/70"
+              {/* title block — a drawing's record card: photo cell + facts */}
+              <motion.div
+                className="mt-10 flex max-w-2xl border border-foreground/40 bg-background/70"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
               >
-                {[
-                  ['Now', 'M.S. Computer Science — UC San Diego'],
-                  ['Before', 'B.Eng. Industrial Design — Zhejiang University'],
-                  ['Focus', 'ML systems · fast video generation'],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 px-4 py-2.5"
-                  >
-                    <dt className="label text-muted-foreground/70">{k}</dt>
-                    <dd className="font-mono text-[0.8rem] leading-relaxed text-foreground/85">
-                      {v}
+                <div className="group relative w-24 flex-shrink-0 border-r border-border bg-muted sm:w-32">
+                  <Image
+                    src="/images/avatar.png"
+                    alt="Kaiqin Kong"
+                    fill
+                    sizes="128px"
+                    className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0"
+                    priority
+                  />
+                </div>
+                <dl className="min-w-0 flex-1 divide-y divide-border">
+                  {[
+                    ['Now', 'M.S. Computer Science — UC San Diego'],
+                    ['Before', 'B.Eng. Industrial Design — Zhejiang University'],
+                    ['Focus', 'ML systems · fast video generation'],
+                  ].map(([k, v]) => (
+                    <div
+                      key={k}
+                      className="grid grid-cols-[4.5rem_1fr] items-baseline gap-3 px-4 py-2.5 sm:grid-cols-[5.5rem_1fr] sm:gap-4"
+                    >
+                      <dt className="label text-muted-foreground/70">{k}</dt>
+                      <dd className="font-mono text-[0.8rem] leading-relaxed text-foreground/85">
+                        {v}
+                      </dd>
+                    </div>
+                  ))}
+                  <div className="grid grid-cols-[4.5rem_1fr] items-baseline gap-3 px-4 py-2.5 sm:grid-cols-[5.5rem_1fr] sm:gap-4">
+                    <dt className="label text-muted-foreground/70">Contact</dt>
+                    <dd className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[0.8rem] leading-relaxed">
+                      {[
+                        ['GitHub', 'https://github.com/H1yori233'],
+                        ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
+                        ['Email', 'mailto:k1kong@ucsd.edu'],
+                        ['Behance', 'https://www.behance.net/kaiqinkong'],
+                      ].map(([label, href]) => (
+                        <Link
+                          key={label}
+                          href={href}
+                          target={href.startsWith('mailto:') ? undefined : '_blank'}
+                          rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                          className="text-foreground/85 underline decoration-border underline-offset-4 transition-colors hover:text-[hsl(var(--seal))] hover:decoration-[hsl(var(--seal))]"
+                        >
+                          {label}
+                        </Link>
+                      ))}
                     </dd>
                   </div>
-                ))}
-                <div className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 px-4 py-2.5">
-                  <dt className="label text-muted-foreground/70">Contact</dt>
-                  <dd className="flex flex-wrap gap-x-5 gap-y-1 font-mono text-[0.8rem] leading-relaxed">
-                    {[
-                      ['GitHub', 'https://github.com/H1yori233'],
-                      ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
-                      ['Email', 'mailto:k1kong@ucsd.edu'],
-                      ['Behance', 'https://www.behance.net/kaiqinkong'],
-                    ].map(([label, href]) => (
-                      <Link
-                        key={label}
-                        href={href}
-                        target={href.startsWith('mailto:') ? undefined : '_blank'}
-                        rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                        className="text-foreground/85 underline decoration-border underline-offset-4 transition-colors hover:text-[hsl(var(--seal))] hover:decoration-[hsl(var(--seal))]"
-                      >
-                        {label}
-                      </Link>
-                    ))}
-                  </dd>
-                </div>
-              </motion.dl>
+                </dl>
+              </motion.div>
             </div>
 
             <motion.div
@@ -294,55 +306,11 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  THESIS — who, in his own voice                              */}
-      {/* ============================================================ */}
-      <section className="paper-grain relative content-grid py-[clamp(4rem,10vh,7rem)]">
-        <Reveal>
-          <Folio n="01" title="About" />
-        </Reveal>
-
-        <div className="mt-10 grid gap-10 md:grid-cols-[1fr_minmax(0,15rem)] md:gap-16">
-          <Reveal delay={0.05}>
-            <div className="measure space-y-6 text-[clamp(1.1rem,2vw,1.3rem)] leading-relaxed text-foreground/90">
-              <p>
-                Hi there! I&rsquo;m Kaiqin Kong, a master&rsquo;s student in
-                Computer Science at UC San Diego. Prior to this, I obtained a
-                Bachelor of Engineering in Industrial Design at Zhejiang
-                University.
-              </p>
-              <p>
-                I&rsquo;m interested in machine learning systems, currently
-                working on fast video generation.
-              </p>
-            </div>
-          </Reveal>
-
-          {/* margin figure — the author */}
-          <Reveal delay={0.1}>
-            <figure className="group">
-              <div className="relative aspect-[4/5] w-full max-w-[15rem] overflow-hidden border border-border bg-muted">
-                <Image
-                  src="/images/avatar.png"
-                  alt="Kaiqin Kong"
-                  fill
-                  sizes="240px"
-                  className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0"
-                />
-              </div>
-              <figcaption className="label mt-3 text-muted-foreground/70">
-                Fig. 1 — The author
-              </figcaption>
-            </figure>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ============================================================ */}
       {/*  FASTVIDEO — the screening room; lights down for the work    */}
       {/* ============================================================ */}
       <section className="nightfall relative content-grid py-[clamp(5rem,13vh,9rem)]">
         <Reveal>
-          <Folio n="02" title="Screening room" />
+          <Folio n="01" title="Screening room" />
         </Reveal>
 
         <div className="mt-12 grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20">
@@ -387,7 +355,7 @@ export default function HomePage() {
                   title="FastVideo"
                 />
                 <figcaption className="label mt-3 text-muted-foreground/70">
-                  Fig. 2 — FastVideo
+                  Fig. 1 — FastVideo
                 </figcaption>
               </figure>
             </Reveal>
@@ -400,7 +368,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section className="paper-grain relative content-grid py-[clamp(4rem,10vh,7rem)]">
         <Reveal>
-          <Folio n="03" title="Projects" />
+          <Folio n="02" title="Projects" />
         </Reveal>
 
         <Reveal delay={0.05}>
@@ -417,7 +385,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section className="paper-grain relative content-grid pb-10 pt-[clamp(3rem,8vh,5rem)]">
         <Reveal>
-          <Folio n="04" title="Colophon" />
+          <Folio n="03" title="Colophon" />
         </Reveal>
 
         {/* living detail: the visitor's own clock, ticking */}
