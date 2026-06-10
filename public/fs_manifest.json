@@ -158,12 +158,12 @@
                   "vulkan-grass.md": {
                     "name": "vulkan-grass.md",
                     "type": "file",
-                    "size": 356,
+                    "size": 276,
                     "metadata": {
                       "title": "Vulkan Grass Rendering",
                       "description": "Real-time grass rendering system implemented with Vulkan",
                       "slug": "vulkan-grass",
-                      "image": "https://raw.githubusercontent.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering/main/img/grass_rendering.gif",
+                      "image": "/images/projects/vulkan-grass.png",
                       "externalUrl": "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
                       "featured": true
                     }
@@ -171,12 +171,12 @@
                   "webgpu-rendering.md": {
                     "name": "webgpu-rendering.md",
                     "type": "file",
-                    "size": 405,
+                    "size": 338,
                     "metadata": {
                       "title": "WebGPU Forward+ & Clustered Deferred Rendering",
                       "description": "Implementation of Forward+ and Clustered Deferred rendering techniques using WebGPU",
                       "slug": "webgpu-rendering",
-                      "image": "https://raw.githubusercontent.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred/main/img/demo.gif",
+                      "image": "/images/projects/webgpu-rendering.png",
                       "externalUrl": "https://github.com/H1yori233/WebGPU-Forward-Plus-and-Clustered-Deferred",
                       "featured": false
                     }

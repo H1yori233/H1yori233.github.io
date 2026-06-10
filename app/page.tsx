@@ -81,36 +81,60 @@ function useLocalTime() {
 /*  Project list                                                       */
 /* ------------------------------------------------------------------ */
 
-function ProjectRow({ project, index }: { project: Project; index: number }) {
+// A catalogue plate: the work in grayscale until you look at it.
+function ProjectPlate({ project, index }: { project: Project; index: number }) {
   const href = project.externalUrl || ''
   const linked = !!href
+  const [err, setErr] = useState(false)
 
   const inner = (
     <>
-      <span className="label w-7 flex-shrink-0 text-muted-foreground/50">
-        {String(index + 1).padStart(2, '0')}
-      </span>
-      <h4 className="text-lg font-normal leading-snug tracking-tight md:whitespace-nowrap">
-        {project.title}
-      </h4>
-      <p className="hidden flex-1 truncate text-sm text-muted-foreground md:block">
+      <div className="relative aspect-[16/10] overflow-hidden border border-border bg-muted">
+        {project.image && !err ? (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            onError={() => setErr(true)}
+            className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.02] group-hover:grayscale-0"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <span className="display text-xl text-foreground/50">{project.title}</span>
+          </div>
+        )}
+      </div>
+      <div className="mt-3 flex items-baseline gap-3">
+        <span className="label flex-shrink-0 text-muted-foreground/50">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <h4 className="truncate text-base leading-snug tracking-tight">
+          {project.title}
+        </h4>
+        {linked && (
+          <span className="label ml-auto flex-shrink-0 text-muted-foreground/60 transition-colors duration-300 group-hover:text-foreground">
+            ↗
+          </span>
+        )}
+      </div>
+      <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
         {project.description}
       </p>
-      <span className="label ml-auto flex-shrink-0 self-center text-muted-foreground/70 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground">
-        {linked ? '↗' : '·'}
-      </span>
     </>
   )
 
-  const base =
-    'group flex items-baseline gap-5 border-b border-border py-4 first:border-t'
-
   return linked ? (
-    <Link href={href} target="_blank" rel="noopener noreferrer" className={base}>
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block"
+    >
       {inner}
     </Link>
   ) : (
-    <div className={`${base} cursor-default`}>{inner}</div>
+    <div className="group block cursor-default">{inner}</div>
   )
 }
 
@@ -306,11 +330,11 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  FASTVIDEO — the screening room; lights down for the work    */}
+      {/*  FASTVIDEO — the featured work                               */}
       {/* ============================================================ */}
-      <section className="nightfall relative content-grid py-[clamp(5rem,13vh,9rem)]">
+      <section className="paper-grain relative content-grid py-[clamp(4rem,10vh,7rem)]">
         <Reveal>
-          <Folio n="01" title="Screening room" />
+          <Folio n="01" title="Featured" />
         </Reveal>
 
         <div className="mt-12 grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20">
@@ -371,13 +395,13 @@ export default function HomePage() {
           <Folio n="02" title="Projects" />
         </Reveal>
 
-        <Reveal delay={0.05}>
-          <div className="mt-10">
-            {rest.map((p, i) => (
-              <ProjectRow key={p.slug} project={p} index={i} />
-            ))}
-          </div>
-        </Reveal>
+        <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((p, i) => (
+            <Reveal key={p.slug} delay={(i % 3) * 0.06}>
+              <ProjectPlate project={p} index={i} />
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* ============================================================ */}
