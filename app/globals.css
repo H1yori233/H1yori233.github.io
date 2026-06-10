@@ -4,7 +4,7 @@
 
 /*
   Kaiqin Kong — a personal exhibition.
-  One warm world throughout; a single fall of night at the very end.
+  One warm world, start to finish.
   Serif is the human voice; mono is the engineer's hand.
 */
 
@@ -54,12 +54,6 @@
 
     /* The one personal mark — a cinnabar seal. Used as punctuation, never as fill. */
     --seal: 8 66% 46%;
-
-    /* ---- Nightfall (used exactly once, the closing section) ---- */
-    --night: 220 22% 11%;          /* deep warm ink — night, not tech-black */
-    --night-foreground: 39 23% 92%;/* the same paper, read by lamplight */
-    --night-muted: 218 12% 58%;
-    --night-border: 220 14% 22%;
 
     --radius: 0.25rem;
     --content-width: 1180px;
@@ -158,6 +152,25 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
     border: 0;
+  }
+
+  /* Thin scrollbar for the terminal window. */
+  .terminal-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
   }
 }
 

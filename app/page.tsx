@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, MotionConfig } from 'framer-motion'
 import RippleField from '@/components/hero/RippleField'
+import { Terminal } from '@/components/magicui/terminal'
 import { getAllProjects } from '@/lib/projectLoader'
 import type { Project } from '@/components/project/projects'
 
@@ -186,37 +187,48 @@ export default function HomePage() {
             <span className="label text-muted-foreground">Kaiqin Kong</span>
           </div>
 
-          {/* the statement */}
-          <div className="flex flex-1 flex-col justify-center py-20">
-            <motion.p
-              className="label mb-6 text-muted-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.1 }}
-            >
-              CS @ UC San Diego &nbsp;·&nbsp; formerly industrial design
-            </motion.p>
+          {/* the statement, with the working shell beside it */}
+          <div className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-5 lg:gap-14">
+            <div className="lg:col-span-3">
+              <motion.p
+                className="label mb-6 text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.1 }}
+              >
+                CS @ UC San Diego &nbsp;·&nbsp; formerly industrial design
+              </motion.p>
 
-            <motion.h1
-              className="display text-[clamp(2.75rem,9vw,7rem)]"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            >
-              Making video
-              <br />
-              generation fast.
-            </motion.h1>
+              <motion.h1
+                className="display text-[clamp(2.5rem,6vw,4.75rem)]"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              >
+                Making video
+                <br />
+                generation fast.
+              </motion.h1>
 
-            <motion.p
-              className="measure mt-8 text-[clamp(1.05rem,2.2vw,1.4rem)] leading-relaxed text-foreground/80"
-              initial={{ opacity: 0, y: 16 }}
+              <motion.p
+                className="measure mt-8 text-[clamp(1.05rem,2.2vw,1.35rem)] leading-relaxed text-foreground/80"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+              >
+                An industrial designer who wandered into systems engineering
+                and stayed for the milliseconds.
+              </motion.p>
+            </div>
+
+            <motion.div
+              className="lg:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.45 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
             >
-              An industrial designer who wandered into systems engineering
-              and stayed for the milliseconds.
-            </motion.p>
+              <Terminal className="h-[340px] shadow-sm lg:h-[420px]" />
+            </motion.div>
           </div>
 
           {/* scroll cue */}
@@ -262,8 +274,22 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {/* margin notes — the engineer's hand */}
+          {/* margin column — the author's photo, then the engineer's hand */}
           <Reveal delay={0.1} className="md:pt-16">
+            <figure className="group mb-10">
+              <div className="relative aspect-[4/5] w-full max-w-[15rem] overflow-hidden border border-border bg-muted">
+                <Image
+                  src="/images/avatar.png"
+                  alt="Kaiqin Kong"
+                  fill
+                  sizes="240px"
+                  className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0"
+                />
+              </div>
+              <figcaption className="label mt-3 text-muted-foreground/70">
+                Fig. 1 — The author
+              </figcaption>
+            </figure>
             <dl className="space-y-6">
               {[
                 ['Now', 'M.S. Computer Science\nUC San Diego'],
@@ -381,101 +407,83 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  NIGHTFALL — the one inversion, the most personal            */}
+      {/*  COLOPHON — where the book ends and the author says hello    */}
       {/* ============================================================ */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          background: 'hsl(var(--night))',
-          color: 'hsl(var(--night-foreground))',
-        }}
-      >
-        <div className="content-grid py-[clamp(6rem,20vh,12rem)]">
-          <Reveal>
-            <p
-              className="label"
-              style={{ color: 'hsl(var(--night-muted))' }}
-            >
-              04 — After hours
+      <section className="paper-grain relative content-grid pb-12 pt-[clamp(5rem,16vh,11rem)]">
+        <Reveal>
+          <Folio n="04" title="Colophon" />
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <h2 className="display mt-10 text-[clamp(2.5rem,7vw,5rem)]">
+            {greeting ? greeting.hello : 'Hello.'}
+          </h2>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="measure mt-8 space-y-6 text-[clamp(1.15rem,2.5vw,1.5rem)] leading-relaxed text-foreground/85">
+            <p>
+              You&rsquo;ve reached the bottom of the page. Most people
+              don&rsquo;t — so, genuinely, thank you for reading.
+              {greeting && (
+                <span className="text-muted-foreground"> {greeting.aside}</span>
+              )}
             </p>
-          </Reveal>
+            <p>
+              I&rsquo;m in San Diego, usually up later than I should be,
+              usually building something. If any of this resonated, I&rsquo;d
+              like to hear from you.
+            </p>
+          </div>
+        </Reveal>
 
-          <Reveal delay={0.05}>
-            <h2 className="display mt-8 text-[clamp(2.5rem,7vw,5rem)]">
-              {greeting ? greeting.hello : 'Hello.'}
-            </h2>
-          </Reveal>
+        <Reveal delay={0.15}>
+          <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
+            {[
+              ['GitHub', 'https://github.com/H1yori233'],
+              ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
+              ['Email', 'mailto:k1kong@ucsd.edu'],
+              ['Behance', 'https://www.behance.net/kaiqinkong'],
+            ].map(([label, href]) => (
+              <Link
+                key={label}
+                href={href}
+                target={href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                className="label border-b border-foreground/30 pb-1 transition-colors hover:border-[hsl(var(--seal))] hover:text-[hsl(var(--seal))]"
+              >
+                {label}
+                <span className="ml-1.5 opacity-60">↗</span>
+              </Link>
+            ))}
+          </div>
+        </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="measure mt-8 space-y-6 text-[clamp(1.2rem,2.6vw,1.55rem)] leading-relaxed">
-              <p style={{ color: 'hsl(var(--night-foreground) / 0.88)' }}>
-                You&rsquo;ve reached the bottom of the page. Most people
-                don&rsquo;t — so, genuinely, thank you for reading.
-                {greeting && (
-                  <span style={{ color: 'hsl(var(--night-muted))' }}>
-                    {' '}
-                    {greeting.aside}
-                  </span>
-                )}
-              </p>
-              <p style={{ color: 'hsl(var(--night-foreground) / 0.88)' }}>
-                I&rsquo;m in San Diego, usually up later than I should be,
-                usually building something. If any of this resonated, I&rsquo;d
-                like to hear from you.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15}>
-            <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
-              {[
-                ['GitHub', 'https://github.com/H1yori233'],
-                ['LinkedIn', 'https://www.linkedin.com/in/kaiqin-kong/'],
-                ['Email', 'mailto:k1kong@ucsd.edu'],
-                ['Behance', 'https://www.behance.net/kaiqinkong'],
-              ].map(([label, href]) => (
-                <Link
-                  key={label}
-                  href={href}
-                  target={href.startsWith('mailto:') ? undefined : '_blank'}
-                  rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                  className="label border-b pb-1 transition-colors"
-                  style={{ borderColor: 'hsl(var(--night-border))' }}
-                >
-                  {label}
-                  <span className="ml-1.5 opacity-60">↗</span>
-                </Link>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* living detail: the visitor's own clock, ticking */}
-          <Reveal delay={0.2}>
-            <div
-              className="mt-20 flex items-end justify-between border-t pt-6"
-              style={{ borderColor: 'hsl(var(--night-border))' }}
-            >
+        {/* living detail: the visitor's own clock, ticking */}
+        <Reveal delay={0.2}>
+          <div className="mt-20 flex flex-wrap items-end justify-between gap-6 border-t border-border pt-6">
+            <div>
               <div className="flex items-center gap-2">
                 <Seal />
-                <span className="label" style={{ color: 'hsl(var(--night-muted))' }}>
+                <span className="label text-muted-foreground">
                   Kaiqin Kong · Updated June 2026
                 </span>
               </div>
-              <div className="text-right">
-                <div className="label" style={{ color: 'hsl(var(--night-muted))' }}>
-                  Your local time
-                </div>
-                <div
-                  className="mt-1 font-mono text-lg tabular-nums"
-                  style={{ color: 'hsl(var(--night-foreground) / 0.9)' }}
-                  suppressHydrationWarning
-                >
-                  {clock}
-                </div>
+              <p className="label mt-2 text-muted-foreground/60">
+                Set in Newsreader &amp; IBM Plex Mono · Typed, not tracked
+              </p>
+            </div>
+            <div className="text-right">
+              <div className="label text-muted-foreground/70">Your local time</div>
+              <div
+                className="mt-1 font-mono text-lg tabular-nums text-foreground/85"
+                suppressHydrationWarning
+              >
+                {clock}
               </div>
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </section>
     </main>
     </MotionConfig>

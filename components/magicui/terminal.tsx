@@ -27,12 +27,13 @@ interface TerminalProps {
 
 // ============ Theme-aware ANSI palette ============
 
+// Inks that sit comfortably on warm paper — moss and slate, not neon.
 const ansi = {
-  user: "text-emerald-600 dark:text-emerald-400",
-  path: "text-sky-600 dark:text-sky-400",
+  user: "text-emerald-800/90",
+  path: "text-sky-800/90",
   punct: "text-muted-foreground",
-  error: "text-red-600 dark:text-red-400",
-  link: "text-sky-600 dark:text-sky-400",
+  error: "text-red-800/90",
+  link: "text-sky-800/90",
 };
 
 // Prompt renderer shared by history lines and the live input row
@@ -258,17 +259,17 @@ export const Terminal = ({
   return (
     <div
       className={cn(
-        "z-0 h-full w-full rounded-xl border border-border bg-background overflow-hidden flex flex-col",
+        "z-0 h-full w-full rounded-lg border border-border bg-background overflow-hidden flex flex-col",
         className
       )}
       onClick={handleTerminalClick}
     >
       {/* Title bar */}
       <div className="relative flex items-center border-b border-border px-4 py-3 flex-shrink-0">
-        <div className="flex flex-row gap-x-2">
-          <div className="h-2 w-2 rounded-full bg-red-500"></div>
-          <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
-          <div className="h-2 w-2 rounded-full bg-green-500"></div>
+        <div className="flex flex-row gap-x-2 opacity-70">
+          <div className="h-2 w-2 rounded-full bg-red-400"></div>
+          <div className="h-2 w-2 rounded-full bg-yellow-400"></div>
+          <div className="h-2 w-2 rounded-full bg-green-400"></div>
         </div>
         <span className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-muted-foreground select-none">
           kaiqin@web — zsh
