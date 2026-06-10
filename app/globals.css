@@ -125,6 +125,20 @@
     font-weight: 500;
   }
 
+  /*
+    The screening room — the site's single color inversion.
+    Lights go down to show the video work; everything after returns to paper.
+    Overriding the tokens locally lets every class inside recolor itself.
+  */
+  .nightfall {
+    --foreground: 39 23% 92%;        /* the same paper, lit by the screen */
+    --muted-foreground: 33 10% 62%;
+    --border: 28 10% 22%;
+    --muted: 27 12% 13%;
+    background: hsl(26 14% 9%);      /* warm dark — a theater, not a void */
+    color: hsl(var(--foreground));
+  }
+
   /* Display serif — large, calm, optically set. */
   .display {
     font-family: var(--font-serif), Georgia, serif;

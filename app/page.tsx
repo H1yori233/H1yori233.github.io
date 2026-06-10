@@ -298,11 +298,11 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  FASTVIDEO — the headline; let the outcome speak             */}
+      {/*  FASTVIDEO — the screening room; lights down for the work    */}
       {/* ============================================================ */}
-      <section className="paper-grain relative content-grid py-[clamp(5rem,16vh,11rem)]">
+      <section className="nightfall relative content-grid py-[clamp(6rem,18vh,12rem)]">
         <Reveal>
-          <Folio n="02" title="The headline" />
+          <Folio n="02" title="Screening room" />
         </Reveal>
 
         <div className="mt-12 grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20">
