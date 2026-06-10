@@ -106,6 +106,52 @@ function ProjectRow({ project }: { project: Project }) {
   )
 }
 
+// The featured project's plate — shows the logo, falls back to a wordmark
+// if the remote asset can't be reached.
+function FeaturedPlate({
+  src,
+  href,
+  title,
+}: {
+  src?: string
+  href?: string
+  title: string
+}) {
+  const [err, setErr] = useState(false)
+  const isSvg = !!src && src.endsWith('.svg')
+
+  const body =
+    src && !err ? (
+      <Image
+        src={src}
+        alt={title}
+        fill
+        sizes="(max-width: 768px) 100vw, 45vw"
+        onError={() => setErr(true)}
+        className={
+          isSvg
+            ? 'object-contain p-10 transition-transform duration-700 ease-out group-hover:scale-[1.03] md:p-14'
+            : 'object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]'
+        }
+      />
+    ) : (
+      <div className="flex h-full w-full items-center justify-center">
+        <span className="display text-3xl text-foreground/60 md:text-4xl">{title}</span>
+      </div>
+    )
+
+  const cls =
+    'group relative block aspect-[16/10] w-full overflow-hidden border border-border bg-muted'
+
+  return href ? (
+    <Link href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+      {body}
+    </Link>
+  ) : (
+    <div className={cls}>{body}</div>
+  )
+}
+
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
@@ -171,7 +217,10 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
             >
-              <Terminal className="h-[340px] shadow-sm lg:h-[420px]" />
+              <Terminal
+                className="h-[340px] shadow-sm lg:h-[420px]"
+                bootCommands={['whoami', 'cv']}
+              />
             </motion.div>
           </div>
 
@@ -289,22 +338,13 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {fastvideo?.image && (
+          {fastvideo && (
             <Reveal delay={0.1}>
-              <Link
-                href={fastvideo.externalUrl || '#'}
-                target={fastvideo.externalUrl ? '_blank' : undefined}
-                rel="noopener noreferrer"
-                className="group relative block aspect-[4/3] w-full overflow-hidden border border-border bg-muted"
-              >
-                <Image
-                  src={fastvideo.image}
-                  alt="FastVideo"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 45vw"
-                  className="object-contain p-12 grayscale opacity-90 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:opacity-100"
-                />
-              </Link>
+              <FeaturedPlate
+                src={fastvideo.image}
+                href={fastvideo.externalUrl}
+                title="FastVideo"
+              />
             </Reveal>
           )}
         </div>
