@@ -5,7 +5,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useState, memo } from 'react'
-import { motion, cubicBezier } from 'framer-motion'
+import { motion, cubicBezier } from 'motion/react'
 
 export interface Project {
   title: string

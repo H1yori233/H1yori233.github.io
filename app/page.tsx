@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { FaGithub, FaLinkedin, FaBehance } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import Link from 'next/link'
@@ -213,7 +213,7 @@ export default function HomePage() {
               className="py-6 border-t border-border/40 text-center"
             >
               <p className="text-xs text-muted-foreground/60 font-mono">
-                Last updated: January 2026
+                Last updated: June 2026
               </p>
             </motion.footer>
 

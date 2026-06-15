@@ -35,6 +35,54 @@ const ansi = {
   link: "text-sky-600 dark:text-sky-400",
 };
 
+// Render clickable links inside plain text output. Supports both Markdown
+// links — [label](url) — and bare http(s) URLs. For bare URLs, trailing
+// sentence punctuation is kept out of the href.
+const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s)]+)/g;
+
+const LinkSpan = ({ href, label }: { href: string; label: string }) => (
+  <Link
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={cn(ansi.link, "underline underline-offset-2 hover:opacity-80 transition-opacity")}
+  >
+    {label}
+  </Link>
+);
+
+function linkify(text: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let key = 0;
+  LINK_RE.lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = LINK_RE.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(<span key={key++}>{text.slice(lastIndex, match.index)}</span>);
+    }
+    const isMarkdown = match[2] !== undefined;
+    if (isMarkdown) {
+      nodes.push(<LinkSpan key={key++} href={match[2]} label={match[1]} />);
+    } else {
+      const raw = match[3];
+      const trail = raw.match(/[.,;:!?]+$/)?.[0] ?? '';
+      const href = trail ? raw.slice(0, -trail.length) : raw;
+      nodes.push(
+        <span key={key++}>
+          <LinkSpan href={href} label={href} />
+          {trail}
+        </span>
+      );
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    nodes.push(<span key={key++}>{text.slice(lastIndex)}</span>);
+  }
+  return nodes;
+}
+
 // Prompt renderer shared by history lines and the live input row
 const PromptSpan = ({ prompt }: { prompt: string }) => {
   const [user, rest] = prompt.split(':');
@@ -383,7 +431,7 @@ const TerminalLineComponent = ({ line }: { line: TerminalLine }) => {
         line.isError ? ansi.error : "text-foreground"
       )}
     >
-      {line.content}
+      {linkify(line.content)}
     </motion.div>
   );
 };

@@ -14,7 +14,7 @@
               "about.md": {
                 "name": "about.md",
                 "type": "file",
-                "size": 269
+                "size": 450
               },
               "contact.txt": {
                 "name": "contact.txt",
@@ -106,14 +106,14 @@
                   "llm-from-scratch.md": {
                     "name": "llm-from-scratch.md",
                     "type": "file",
-                    "size": 206,
+                    "size": 207,
                     "metadata": {
                       "title": "LLM from Scratch",
                       "description": "Stanford CS336 work",
                       "slug": "llm-from-scratch",
                       "image": "/images/projects/llm-from-scratch.png",
                       "externalUrl": "https://github.com/H1yori233/CS336",
-                      "featured": true
+                      "featured": false
                     }
                   },
                   "pastor.md": {
@@ -158,14 +158,14 @@
                   "vulkan-grass.md": {
                     "name": "vulkan-grass.md",
                     "type": "file",
-                    "size": 356,
+                    "size": 357,
                     "metadata": {
                       "title": "Vulkan Grass Rendering",
                       "description": "Real-time grass rendering system implemented with Vulkan",
                       "slug": "vulkan-grass",
                       "image": "https://raw.githubusercontent.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering/main/img/grass_rendering.gif",
                       "externalUrl": "https://github.com/H1yori233/CIS-5650-Project5-Vulkan-Grass-Rendering",
-                      "featured": true
+                      "featured": false
                     }
                   },
                   "webgpu-rendering.md": {
