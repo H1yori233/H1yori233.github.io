@@ -73,12 +73,6 @@ const config: Config = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Brand gradient colors
-				brand: {
-					yellow: '#ffd319',
-					pink: '#ff2975',
-					purple: '#8c1eff',
-				}
 			},
 
 			borderRadius: {
@@ -128,8 +122,7 @@ const config: Config = {
 				'md': 'var(--shadow-md)',
 				'lg': 'var(--shadow-lg)',
 				'xl': 'var(--shadow-xl)',
-				'sophisticated': '0 10px 40px -10px rgb(0 0 0 / 0.1), 0 0 0 1px rgb(0 0 0 / 0.05)',
-				'glow': '0 0 20px rgb(255 211 25 / 0.3)',
+				'sophisticated': 'var(--shadow-md)',
 			},
 
 			backdropBlur: {
@@ -237,8 +230,6 @@ const config: Config = {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-				'brand-gradient': 'var(--gradient-primary)',
-				'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
 			},
 
 			// Animation delays
@@ -274,12 +265,6 @@ const config: Config = {
 					'background': 'hsl(var(--background) / 0.8)',
 					'border': '1px solid hsl(var(--border) / 0.5)',
 				},
-				'.text-gradient': {
-					'background': 'var(--gradient-primary)',
-					'background-clip': 'text',
-					'-webkit-background-clip': 'text',
-					'color': 'transparent',
-				},
 			})
 
 			// Add custom components
@@ -300,8 +285,6 @@ const config: Config = {
 					'cursor': 'pointer',
 					'&:hover': {
 						'background': 'hsl(var(--primary) / 0.9)',
-						'transform': 'translateY(-1px)',
-						'box-shadow': 'var(--shadow-lg)',
 					}
 				},
 				'.btn-ghost': {
@@ -327,10 +310,9 @@ const config: Config = {
 					'border': '1px solid hsl(var(--border))',
 					'border-radius': 'var(--radius)',
 					'box-shadow': 'var(--shadow-sm)',
-					'transition': 'all var(--duration-normal) var(--ease-out-cubic)',
+					'transition': 'border-color var(--duration-normal) var(--ease-out-cubic)',
 					'&:hover': {
-						'box-shadow': 'var(--shadow-md)',
-						'transform': 'translateY(-2px)',
+						'border-color': 'hsl(var(--foreground) / 0.25)',
 					}
 				}
 			})

@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { getShell, Shell } from "@/lib/os/Shell";
 import { getAllCommands } from "@/lib/os/commands";
@@ -25,14 +24,14 @@ interface TerminalProps {
   bootCommands?: string[];
 }
 
-// ============ Theme-aware ANSI palette ============
+// ============ Monochrome ink palette ============
 
 const ansi = {
-  user: "text-emerald-600 dark:text-emerald-400",
-  path: "text-sky-600 dark:text-sky-400",
+  user: "text-foreground font-medium",
+  path: "text-muted-foreground",
   punct: "text-muted-foreground",
-  error: "text-red-600 dark:text-red-400",
-  link: "text-sky-600 dark:text-sky-400",
+  error: "text-foreground",
+  link: "text-foreground",
 };
 
 // Render clickable links inside plain text output. Supports both Markdown
@@ -306,7 +305,7 @@ export const Terminal = ({
   return (
     <div
       className={cn(
-        "z-0 h-full w-full rounded-xl border border-border bg-background overflow-hidden flex flex-col",
+        "z-0 h-full w-full rounded-lg border border-border bg-card overflow-hidden flex flex-col",
         className
       )}
       onClick={handleTerminalClick}
@@ -314,9 +313,9 @@ export const Terminal = ({
       {/* Title bar */}
       <div className="relative flex items-center border-b border-border px-4 py-3 flex-shrink-0">
         <div className="flex flex-row gap-x-2">
-          <div className="h-2 w-2 rounded-full bg-red-500"></div>
-          <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
-          <div className="h-2 w-2 rounded-full bg-green-500"></div>
+          <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
+          <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
+          <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
         </div>
         <span className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-muted-foreground select-none">
           kaiqin@web — zsh
@@ -392,11 +391,7 @@ const TerminalLineComponent = ({ line }: { line: TerminalLine }) => {
 
   if (line.type === 'link') {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="mb-1"
-      >
+      <div className="mb-1">
         <Link
           href={line.href || '#'}
           target="_blank"
@@ -405,33 +400,27 @@ const TerminalLineComponent = ({ line }: { line: TerminalLine }) => {
         >
           {line.linkText}
         </Link>
-      </motion.div>
+      </div>
     );
   }
 
   if (line.type === 'hint') {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="whitespace-pre-wrap break-words text-muted-foreground mb-1"
-      >
+      <div className="whitespace-pre-wrap break-words text-muted-foreground mb-1">
         {line.content}
-      </motion.div>
+      </div>
     );
   }
 
   // Output
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <div
       className={cn(
         "whitespace-pre-wrap break-words mb-1",
         line.isError ? ansi.error : "text-foreground"
       )}
     >
       {linkify(line.content)}
-    </motion.div>
+    </div>
   );
 };

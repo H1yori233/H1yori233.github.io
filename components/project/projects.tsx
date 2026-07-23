@@ -5,7 +5,6 @@ import { ArrowRight, ExternalLink } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useState, memo } from 'react'
-import { motion, cubicBezier } from 'motion/react'
 
 export interface Project {
   title: string
@@ -15,20 +14,6 @@ export interface Project {
   enable?: boolean
   externalUrl?: string
   featured: boolean
-}
-
-const customEase = cubicBezier(0.33, 1, 0.68, 1)
-
-const cardVariants = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: customEase } },
-  hover: { y: -3, transition: { duration: 0.3, ease: customEase } }
-}
-
-const imageVariants = {
-  initial: { scale: 1.04, opacity: 0 },
-  animate: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: customEase } },
-  hover: { scale: 1.03, transition: { duration: 0.4, ease: customEase } }
 }
 
 export const ProjectCard = memo(function ProjectCard({
@@ -54,7 +39,7 @@ export const ProjectCard = memo(function ProjectCard({
         href={projectUrl}
         target={isExternal ? "_blank" : "_self"}
         rel={isExternal ? "noopener noreferrer" : ""}
-        className="group flex items-baseline gap-4 py-4 px-2 -mx-2 rounded-md hover:bg-muted/40 transition-colors duration-300"
+        className="group flex items-baseline gap-4 py-4 px-2 -mx-2 rounded-lg hover:bg-muted transition-colors duration-normal"
       >
         <h4 className="text-base font-normal tracking-tight text-foreground md:whitespace-nowrap">
           {project.title}
@@ -62,7 +47,7 @@ export const ProjectCard = memo(function ProjectCard({
         <p className="hidden md:block flex-1 text-sm text-muted-foreground truncate">
           {project.description}
         </p>
-        <span className="ml-auto flex-shrink-0 self-center text-muted-foreground/60 transition-all duration-300 group-hover:text-foreground group-hover:translate-x-0.5">
+        <span className="ml-auto flex-shrink-0 self-center text-muted-foreground transition-colors duration-normal group-hover:text-foreground">
           {isExternal
             ? <ExternalLink className="w-4 h-4" />
             : <ArrowRight className="w-4 h-4" />}
@@ -73,17 +58,8 @@ export const ProjectCard = memo(function ProjectCard({
 
   // Featured card
   return (
-    <motion.div
-      variants={cardVariants}
-      initial="initial"
-      animate="animate"
-      whileHover="hover"
-      className="group h-full"
-    >
-      <Card className={cn(
-        "overflow-hidden border border-border/60 transition-all duration-300 h-full flex flex-col",
-        "shadow-sm hover:shadow-lg hover:border-border"
-      )}>
+    <div className="group h-full">
+      <Card className="overflow-hidden border border-border hover:border-foreground/25 transition-colors duration-normal h-full flex flex-col">
         <CardContent className={cn(
           "p-0 flex flex-col h-full",
           wide && "md:flex-row md:items-stretch"
@@ -92,30 +68,28 @@ export const ProjectCard = memo(function ProjectCard({
             "relative h-56 md:h-64 overflow-hidden flex-shrink-0",
             wide && "md:w-1/2 md:h-auto md:min-h-[18rem]"
           )}>
-            <motion.div variants={imageVariants} className="w-full h-full relative">
-              {project.image && !imgError ? (
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className={cn(
-                    "transition-all duration-300 grayscale contrast-125 brightness-105 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100",
-                    project.image.endsWith('.svg')
-                      ? "object-contain p-8"
-                      : "object-cover"
-                  )}
-                  onError={() => setImgError(true)}
-                  priority={priority}
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-muted via-muted/80 to-muted/60 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-2xl bg-foreground/5 flex items-center justify-center">
-                    <div className="w-8 h-8 rounded-lg bg-foreground/10" />
-                  </div>
+            {project.image && !imgError ? (
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className={cn(
+                  "grayscale group-hover:grayscale-0 group-hover:saturate-[0.85] group-focus-within:grayscale-0 group-focus-within:saturate-[0.85] transition-[filter] duration-500 ease-out",
+                  project.image.endsWith('.svg')
+                    ? "object-contain p-8"
+                    : "object-cover"
+                )}
+                onError={() => setImgError(true)}
+                priority={priority}
+              />
+            ) : (
+              <div className="w-full h-full bg-muted flex items-center justify-center">
+                <div className="w-16 h-16 rounded-lg bg-foreground/5 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-foreground/10" />
                 </div>
-              )}
-            </motion.div>
+              </div>
+            )}
           </div>
 
           <div className={cn(
@@ -130,13 +104,13 @@ export const ProjectCard = memo(function ProjectCard({
                 className="group/link block"
               >
                 <h3 className={cn(
-                  "text-lg font-normal tracking-tight text-foreground group-hover/link:text-foreground/80 transition-colors duration-300 leading-snug",
+                  "text-lg font-normal tracking-tight text-foreground group-hover/link:text-muted-foreground transition-colors duration-normal leading-snug",
                   wide && "md:text-2xl"
                 )}>
                   <span className="flex items-start gap-2">
                     <span className="flex-1">{project.title}</span>
                     {isExternal && (
-                      <ExternalLink className="w-4 h-4 text-muted-foreground/60 flex-shrink-0 mt-0.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                      <ExternalLink className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
                     )}
                   </span>
                 </h3>
@@ -148,7 +122,7 @@ export const ProjectCard = memo(function ProjectCard({
             </div>
 
             <div className="mt-4 flex justify-end items-end h-4">
-              <span className="flex items-center gap-1.5 text-xs text-foreground/60 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+              <span className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors duration-normal group-hover:text-foreground">
                 <span>View</span>
                 <ArrowRight className="w-3 h-3" />
               </span>
@@ -156,6 +130,6 @@ export const ProjectCard = memo(function ProjectCard({
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   )
 });
