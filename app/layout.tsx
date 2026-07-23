@@ -1,5 +1,6 @@
 import { IBM_Plex_Sans, IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
 import { cn } from '@/lib/utils'
+import { CustomCursor } from '@/components/custom-cursor'
 import './globals.css'
 import { Metadata } from 'next'
 
@@ -97,8 +98,8 @@ export default function RootLayout({
           ibmPlexSans.className
         )}>
         {children}
+        <CustomCursor />
       </body>
     </html>
   )
 }
-

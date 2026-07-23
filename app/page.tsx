@@ -1,152 +1,58 @@
-'use client'
-
-import { FaGithub, FaLinkedin, FaBehance } from 'react-icons/fa'
-import { MdEmail } from 'react-icons/md'
-import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { Terminal } from '@/components/magicui/terminal'
-import { ProjectCard, Project } from '@/components/project/projects'
-import { getAllProjects } from '@/lib/projectLoader'
-import { cn } from '@/lib/utils'
 
-// Kept for later use; set to true to show the compact project list again.
-const SHOW_OTHER_PROJECTS = false
-
-// Top Bar Component (logo only)
-const TopBar = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sophisticated border-b">
-    <div className="content-grid">
-      <div className="flex h-20 items-center">
-        <Link
-          href="/"
-          className="text-heading-3 font-medium tracking-tight hover:text-muted-foreground transition-colors duration-normal"
-        >
-          KAIQIN
-        </Link>
-      </div>
-    </div>
-  </nav>
-)
+const socialLinks = [
+  { href: 'https://github.com/H1yori233', label: 'GitHub', external: true },
+  { href: 'https://www.linkedin.com/in/kaiqin-kong/', label: 'LinkedIn', external: true },
+  { href: 'mailto:k1kong@ucsd.edu', label: 'Email', external: false },
+]
 
 export default function HomePage() {
-  const [projects, setProjects] = useState<Project[]>([])
-
-  // Load projects from Real FS
-  useEffect(() => {
-    getAllProjects().then(setProjects);
-  }, []);
-
-  const featuredProjects = projects.filter(p => p.featured)
-  const regularProjects = projects.filter(p => !p.featured)
-
   return (
-    <div className="relative min-h-screen flex flex-col bg-background overflow-hidden">
-      {/* Top Bar */}
-      <TopBar />
+    <main className="flex min-h-screen items-center bg-background px-4 py-8 sm:px-8 sm:py-12 lg:px-12 lg:py-16">
+      <section className="mx-auto grid w-full max-w-2xl grid-cols-1 grid-rows-[auto_auto_auto_auto] gap-y-10 lg:max-w-[48rem] lg:grid-cols-[minmax(0,1.34fr)_minmax(15rem,1fr)] lg:grid-rows-[auto_auto_auto] lg:gap-x-[clamp(3rem,5vw,4.5rem)] lg:gap-y-7">
+        <h1 className="row-start-1 self-start text-[clamp(2.75rem,3.5vw,3.25rem)] font-light leading-[0.92] tracking-[-0.035em] text-foreground lg:col-start-1">
+          Kaiqin Kong
+        </h1>
 
-      {/* Main Content */}
-      <main className="flex-grow pt-20 w-full">
-        <div className="pt-[var(--section-padding)] pb-8">
-          <div className="content-grid space-y-16">
-
-            {/* Profile and Terminal Section */}
-            <section className="relative animate-fade-in">
-              <div className="relative grid grid-cols-1 lg:grid-cols-5 gap-8 items-center py-20">
-                {/* Left Column: Profile Image and Social Links */}
-                <div className="lg:col-span-2 flex flex-col items-center justify-center h-full min-h-[400px] space-y-8">
-                  {/* Profile Image */}
-                  <div className="w-64 h-64 rounded-lg overflow-hidden border border-border">
-                    <Image
-                      src="/images/avatar.png"
-                      alt="Kaiqin Kong"
-                      width={256}
-                      height={256}
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 hover:saturate-[0.85] transition-[filter] duration-500 ease-out"
-                      priority
-                    />
-                  </div>
-
-                  {/* Name */}
-                  <h1 className="text-heading-2 font-light text-foreground tracking-tight text-center">
-                    Kaiqin Kong
-                  </h1>
-
-                  {/* Social Links */}
-                  <div className="flex flex-wrap justify-center gap-3 max-w-xs mx-auto">
-                    {[
-                      { href: "https://github.com/H1yori233", icon: FaGithub, label: "GitHub" },
-                      { href: "https://www.linkedin.com/in/kaiqin-kong/", icon: FaLinkedin, label: "LinkedIn" },
-                      { href: "mailto:k1kong@ucsd.edu", icon: MdEmail, label: "Email" },
-                      { href: "https://www.behance.net/kaiqinkong", icon: FaBehance, label: "Behance" }
-                    ].map(({ href, icon: Icon, label }) => (
-                      <Link
-                        key={label}
-                        href={href}
-                        target={href.startsWith('mailto:') ? undefined : "_blank"}
-                        rel={href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
-                        className="flex items-center justify-center p-3 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-foreground/25 transition-colors duration-normal flex-shrink-0"
-                        aria-label={label}
-                      >
-                        <Icon className="w-6 h-6 flex-shrink-0" />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right Column: Interactive Terminal */}
-                <div className="lg:col-span-3 w-full">
-                  <Terminal className="w-full h-[400px]" />
-                </div>
-              </div>
-            </section>
-
-            {/* Projects Section */}
-            <section className="space-y-8">
-              <div className="border-t border-border pt-8">
-                <h2 className="text-heading-3 font-light text-foreground">Featured Projects</h2>
-              </div>
-
-              {/* Featured Projects */}
-              {featuredProjects.length > 0 && (
-                <div className={cn(
-                  "grid gap-8",
-                  featuredProjects.length === 1 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"
-                )}>
-                  {featuredProjects.map((project) => (
-                    <ProjectCard
-                      key={project.slug}
-                      project={project}
-                      variant="featured"
-                      wide={featuredProjects.length === 1}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Other Projects (hidden for now) */}
-              {SHOW_OTHER_PROJECTS && regularProjects.length > 0 && (
-                <>
-                  <h3 className="text-lg font-light text-foreground/80 mt-12 mb-2">Other Projects</h3>
-                  <div className="flex flex-col divide-y divide-border">
-                    {regularProjects.map((project) => (
-                      <ProjectCard key={project.slug} project={project} variant="compact" />
-                    ))}
-                  </div>
-                </>
-              )}
-            </section>
-
-            {/* Footer / Last Updated */}
-            <footer className="py-6 border-t border-border text-center">
-              <p className="text-xs text-muted-foreground/60 font-mono">
-                Last updated: June 2026
-              </p>
-            </footer>
-
-          </div>
+        <div className="row-start-3 min-w-0 lg:col-start-1 lg:row-start-2">
+          <Terminal
+            variant="plain"
+            bootCommands={['cat about.md', 'cv']}
+            className="h-[23rem] w-full sm:h-[22rem] lg:h-[21rem]"
+          />
         </div>
-      </main>
-    </div>
+
+        <nav
+          aria-label="Social links"
+          className="row-start-4 flex flex-wrap items-center gap-x-10 gap-y-4 font-mono text-sm lg:col-start-1 lg:row-start-3 lg:gap-x-10"
+        >
+          {socialLinks.map(({ href, label, external }) => (
+            <Link
+              key={label}
+              href={href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener noreferrer' : undefined}
+              className="text-foreground underline decoration-foreground/70 underline-offset-[0.45rem] transition-opacity duration-normal hover:opacity-60"
+            >
+              {label}
+              {external && <span aria-hidden="true"> ↗</span>}
+            </Link>
+          ))}
+        </nav>
+
+        <figure className="relative row-start-2 aspect-[4/5] w-full overflow-hidden bg-muted lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:aspect-[5/7] lg:self-start">
+          <Image
+            src="/images/avatar.png"
+            alt="Kaiqin Kong standing by the coast"
+            fill
+            sizes="(max-width: 1023px) 100vw, 44vw"
+            className="object-cover object-center grayscale transition-[filter] duration-500 ease-out hover:grayscale-0 hover:saturate-[0.85]"
+            priority
+          />
+        </figure>
+      </section>
+    </main>
   )
 }

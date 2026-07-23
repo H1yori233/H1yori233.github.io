@@ -22,6 +22,7 @@ interface TerminalLine {
 interface TerminalProps {
   className?: string;
   bootCommands?: string[];
+  variant?: 'window' | 'plain';
 }
 
 // ============ Monochrome ink palette ============
@@ -148,7 +149,8 @@ function completeInput(value: string, shell: Shell): string {
 
 export const Terminal = ({
   className,
-  bootCommands = ['whoami', 'cat about.md', 'cv']
+  bootCommands = ['whoami', 'cat about.md', 'cv'],
+  variant = 'window'
 }: TerminalProps) => {
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [input, setInput] = useState('');
@@ -304,28 +306,37 @@ export const Terminal = ({
 
   return (
     <div
+      data-cursor="native"
       className={cn(
-        "z-0 h-full w-full rounded-lg border border-border bg-card overflow-hidden flex flex-col",
+        "z-0 w-full flex flex-col",
+        variant === 'window' && "h-full overflow-hidden rounded-lg border border-border bg-card",
+        variant === 'plain' && "bg-transparent",
         className
       )}
       onClick={handleTerminalClick}
     >
-      {/* Title bar */}
-      <div className="relative flex items-center border-b border-border px-4 py-3 flex-shrink-0">
-        <div className="flex flex-row gap-x-2">
-          <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
-          <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
-          <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
+      {variant === 'window' && (
+        /* Title bar */
+        <div className="relative flex flex-shrink-0 items-center border-b border-border px-4 py-3">
+          <div className="flex flex-row gap-x-2">
+            <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
+            <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
+            <div className="h-2 w-2 rounded-full bg-muted-foreground/40"></div>
+          </div>
+          <span className="absolute left-1/2 -translate-x-1/2 select-none font-mono text-xs text-muted-foreground">
+            kaiqin@web — zsh
+          </span>
         </div>
-        <span className="absolute left-1/2 -translate-x-1/2 font-mono text-xs text-muted-foreground select-none">
-          kaiqin@web — zsh
-        </span>
-      </div>
+      )}
 
       {/* Terminal content */}
       <div
         ref={terminalRef}
-        className="p-4 overflow-y-auto flex-grow font-mono text-sm terminal-scrollbar"
+        className={cn(
+          "flex-grow font-mono",
+          variant === 'window' && "overflow-y-auto p-4 text-sm terminal-scrollbar",
+          variant === 'plain' && "overflow-y-auto p-0 text-[0.8125rem] leading-5 [scrollbar-width:none] [&_*]:text-[0.8125rem] [&_*]:leading-5 [&::-webkit-scrollbar]:hidden"
+        )}
       >
         {/* Rendered lines */}
         {lines.map((line) => (
