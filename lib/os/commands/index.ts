@@ -160,6 +160,6 @@ registerCommand({
     name: 'cv',
     description: 'Open my CV',
     execute: async (_args, _stdin, _shell) => {
-        return { output: '\x1b[LINK]/pdfs/cv.pdf|Kaiqin\'s CV\x1b[/LINK]' };
+        return { output: '\x1b[LINK]/cv.pdf|Kaiqin\'s CV\x1b[/LINK]' };
     }
 });
