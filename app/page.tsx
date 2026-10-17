@@ -48,7 +48,7 @@ export default function HomePage() {
             alt="Kaiqin Kong standing by the coast"
             fill
             sizes="(max-width: 1023px) 100vw, 44vw"
-            className="object-cover object-center grayscale transition-[filter] duration-500 ease-out hover:grayscale-0 hover:saturate-[0.85]"
+            className="object-cover object-center grayscale"
             priority
           />
         </figure>

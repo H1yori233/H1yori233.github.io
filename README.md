@@ -25,3 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+
+## Credits
+
+Background music is *Rendezvous* by [Mili](https://projectmili.com), played with [aplayer-ts](https://github.com/liuly0322/aplayer-ts) by [liuly0322](https://github.com/liuly0322).

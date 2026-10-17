@@ -465,3 +465,10 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Background music line: keep it from covering the last line of content. */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
