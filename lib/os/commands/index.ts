@@ -158,8 +158,15 @@ registerCommand({
 // cv - special command to show CV link
 registerCommand({
     name: 'cv',
-    description: 'Open my CV',
-    execute: async (_args, _stdin, _shell) => {
-        return { output: '\x1b[LINK]/cv.pdf|Kaiqin\'s CV\x1b[/LINK]' };
+    description: 'Open my CV (cv cn for Chinese)',
+    execute: async (args, _stdin, _shell) => {
+        const lang = (args[0] || '').toLowerCase().replace(/^-+/, '');
+        if (['cn', 'zh', 'chinese', '中文'].includes(lang)) {
+            return { output: '\x1b[LINK]/cv_cn.pdf|CV (中文)\x1b[/LINK]' };
+        }
+        if (lang && lang !== 'en') {
+            return { output: `cv: unknown option '${args[0]}'. Usage: cv [en|cn]`, error: true };
+        }
+        return { output: '\x1b[LINK]/cv.pdf|CV\x1b[/LINK]' };
     }
 });

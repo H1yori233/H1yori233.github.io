@@ -335,7 +335,7 @@ export const Terminal = ({
         className={cn(
           "flex-grow font-mono",
           variant === 'window' && "overflow-y-auto p-4 text-sm terminal-scrollbar",
-          variant === 'plain' && "overflow-y-auto p-0 text-[0.8125rem] leading-5 [scrollbar-width:none] [&_*]:text-[0.8125rem] [&_*]:leading-5 [&::-webkit-scrollbar]:hidden"
+          variant === 'plain' && "overflow-y-auto p-0 text-[0.8125rem] leading-[1.75] [scrollbar-width:none] [&_*]:text-[0.8125rem] [&_*]:leading-[1.75] [&::-webkit-scrollbar]:hidden"
         )}
       >
         {/* Rendered lines */}

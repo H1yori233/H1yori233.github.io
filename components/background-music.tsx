@@ -56,20 +56,8 @@ export function BackgroundMusic() {
       player.on("timeupdate", () => setTime(player.audio.currentTime));
       player.on("error", () => setFailed(true));
 
-      // Browsers block audible autoplay, so start on the first interaction.
-      const events = ["pointerdown", "keydown"] as const;
-      const startOnInteraction = (event: Event) => {
-        removeListeners();
-        if (rootRef.current?.contains(event.target as Node)) return;
-        player.play();
-      };
-      const removeListeners = () => {
-        events.forEach((name) => window.removeEventListener(name, startOnInteraction));
-      };
-      events.forEach((name) => window.addEventListener(name, startOnInteraction));
-
+      // Playback starts only when the visitor presses play.
       destroy = () => {
-        removeListeners();
         playerRef.current = null;
         player.destroy();
       };

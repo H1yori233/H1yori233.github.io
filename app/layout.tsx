@@ -1,7 +1,8 @@
 import { IBM_Plex_Sans, IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { CustomCursor } from '@/components/custom-cursor'
-import { BackgroundMusic } from '@/components/background-music'
+// Music player is hidden for now; re-enable by restoring this import and <BackgroundMusic /> below.
+// import { BackgroundMusic } from '@/components/background-music'
 import './globals.css'
 import { Metadata } from 'next'
 
@@ -99,7 +100,7 @@ export default function RootLayout({
           ibmPlexSans.className
         )}>
         {children}
-        <BackgroundMusic />
+        {/* <BackgroundMusic /> */}
         <CustomCursor />
       </body>
     </html>
